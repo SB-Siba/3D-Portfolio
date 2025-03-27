@@ -20,11 +20,13 @@ import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
+import python from "./tech/python.png";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
+import techavia from "./company/Techavia.png";
 
 import carrent from "./Hospital.jpeg";
 import jobit from "./Institute.jpeg";
@@ -56,7 +58,9 @@ export {
   shopify,
   starbucks,
   tesla,
+  techavia,
   carrent,
   jobit,
   tripguide,
+  python,
 };
