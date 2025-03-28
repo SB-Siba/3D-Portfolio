@@ -26,7 +26,7 @@ import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
-import techavia from "./company/Techavia.png";
+import techavia from "./company/techavia.png";
 
 import carrent from "./Hospital.jpeg";
 import jobit from "./Institute.jpeg";
