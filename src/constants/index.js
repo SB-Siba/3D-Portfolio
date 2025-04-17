@@ -98,7 +98,7 @@ import {
       company_name: "Techavia IT Solutions Pvt.Ltd",
       icon: techavia,
       iconBg: "#383E56",
-      date: "June 2024 - present",
+      date: "April 2024 - April 2025",
       points: [
         "Developing and maintaining backend applications using Python and Django.",
         "Building RESTful APIs for seamless integration with front-end applications.",
