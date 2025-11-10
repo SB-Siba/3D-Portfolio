@@ -1,66 +1,64 @@
+// FeedbacksDesign1.jsx
 import React from "react";
 import { motion } from "framer-motion";
-
-import { styles } from "../style";
-import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 import { testimonials } from "../constants";
+import { styles } from "../style";
 
-const FeedbackCard = ({
-  index,
-  testimonial,
-  name,
-  designation,
-  company,
-  image,
-}) => (
+const FeedbackCard = ({ testimonial, name, company, designation, image, index }) => (
   <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    className='bg-black-200 p-10 rounded-3xl xs:w-[320px] w-full'
+    variants={fadeIn("up", "spring", index * 0.2, 0.8)}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: false }}
+    className="bg-[#1d1836] p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl w-full sm:w-[300px] md:w-[320px] flex flex-col justify-between hover:scale-[1.03] transition-transform duration-500"
   >
-    <p className='text-white font-black text-[48px]'>"</p>
+    {/* Quote */}
+    <p className="text-[40px] text-purple-400 mb-2 sm:mb-4 leading-none">“</p>
 
-    <div className='mt-1'>
-      <p className='text-white tracking-wider text-[18px]'>{testimonial}</p>
+    {/* Testimonial Text */}
+    <p className="text-white text-[14px] sm:text-[15px] md:text-[16px] italic leading-relaxed text-center sm:text-left">
+      {testimonial}
+    </p>
 
-      <div className='mt-7 flex justify-between items-center gap-1'>
-        <div className='flex-1 flex flex-col'>
-          <p className='text-white font-medium text-[16px]'>
-            <span className='blue-text-gradient'>@</span> {name}
-          </p>
-          <p className='mt-1 text-secondary text-[12px]'>
-            {designation} of {company}
-          </p>
-        </div>
-
-        <img
-          src={image}
-          alt={`feedback_by-${name}`}
-          className='w-10 h-10 rounded-full object-cover'
-        />
-      </div>
+    {/* User Info */}
+    <div className="mt-6 flex flex-col items-center text-center">
+      <img
+        src={image}
+        alt={name}
+        className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-purple-400"
+      />
+      <p className="text-white font-semibold mt-3 text-[15px] sm:text-[16px]">@{name}</p>
+      <p className="text-gray-400 text-xs sm:text-sm mt-1">
+        {designation}, {company}
+      </p>
     </div>
   </motion.div>
 );
 
-const Feedbacks = () => {
-  return (
-    <div className={`mt-12 bg-black-100 rounded-[20px]`}>
-      <div
-        className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[300px]`}
-      >
-        <motion.div variants={textVariant()}>
-          <p className={styles.sectionSubText}>What others say</p>
-          <h2 className={styles.sectionHeadText}>Testimonials.</h2>
-        </motion.div>
-      </div>
-      <div className={`-mt-20 pb-14 ${styles.paddingX} flex flex-wrap gap-7`}>
-        {testimonials.map((testimonial, index) => (
-          <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
-        ))}
-      </div>
-    </div>
-  );
-};
+const FeedbacksDesign1 = () => (
+  <section className="py-14 sm:py-16 md:py-20 bg-black-100 px-4 sm:px-6 md:px-10">
+    {/* Section Header */}
+    <motion.div
+      variants={textVariant()}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false }}
+      className="text-center"
+    >
+      <p className={`${styles.sectionSubText}`}>What others say</p>
+      <h2 className={`${styles.sectionHeadText}`}>Testimonials</h2>
+    </motion.div>
 
-export default SectionWrapper(Feedbacks, "");
+    {/* Cards Grid */}
+    <div
+      className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center"
+    >
+      {testimonials.map((t, i) => (
+        <FeedbackCard key={i} {...t} index={i} />
+      ))}
+    </div>
+  </section>
+);
+
+export default FeedbacksDesign1;

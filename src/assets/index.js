@@ -21,6 +21,7 @@ import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 import python from "./tech/python.png";
+import website from "./tech/website.png";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
@@ -31,6 +32,8 @@ import techavia from "./company/techavia.png";
 import carrent from "./Hospital.jpeg";
 import jobit from "./Institute.jpeg";
 import tripguide from "./RTG.jpeg";
+import aviation from "./aviation.jpeg";
+import ecommerce from "./ecommerce.png";
 
 export {
   logo,
@@ -63,4 +66,7 @@ export {
   jobit,
   tripguide,
   python,
+  website,
+  aviation,
+  ecommerce,
 };

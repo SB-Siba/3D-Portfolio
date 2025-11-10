@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -21,8 +21,8 @@ const Computers = ({ isMobile }) => {
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.6 : 0.75} // Reduced scale for better mobile fit
-        position={isMobile ? [0, -3.2, -2.5] : [0, -3.25, -1.5]} // Adjusted position
+        scale={isMobile ? 0.4 : 0.75}
+        position={isMobile ? [0, -2.5, -1.5] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -30,13 +30,39 @@ const Computers = ({ isMobile }) => {
 };
 
 const ComputersCanvas = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false);
+  const controlsRef = useRef();
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    if (typeof window === 'undefined') return;
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // One-time rotation when component mounts
+  useEffect(() => {
+    if (controlsRef.current) {
+      // Do one rotation and stop
+      let angle = 0;
+      const animate = () => {
+        angle += 0.01;
+        controlsRef.current.setAzimuthalAngle(angle);
+        
+        if (angle < Math.PI * 2) {
+          requestAnimationFrame(animate);
+        }
+      };
+      animate();
+    }
   }, []);
 
   return (
@@ -44,14 +70,24 @@ const ComputersCanvas = () => {
       frameloop="demand"
       shadows
       dpr={[1, 2]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      camera={{ 
+        position: [20, 3, 5], 
+        fov: isMobile ? 20 : 25 
+      }}
       gl={{ preserveDrawingBuffer: true }}
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
+          ref={controlsRef}
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
+          enablePan={false}
+          autoRotate={false} // No continuous rotation
         />
         <Computers isMobile={isMobile} />
       </Suspense>

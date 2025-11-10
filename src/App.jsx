@@ -15,8 +15,8 @@ import {
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+      <div className="relative z-0 bg-primary w-full" style={{ overflowX: 'hidden' }}>
+        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center w-full">
           <Navbar />
           <Hero />
         </div>
@@ -25,11 +25,10 @@ const App = () => {
         <Tech />
         <Works />
         <Feedbacks />
-        <div className="relative z-0">
+        <div className="relative z-0 w-full">
           <Contact />
           <StarsCanvas />
         </div>
-        {/* Footer added here */}
         <Footer />
       </div>
     </BrowserRouter>
