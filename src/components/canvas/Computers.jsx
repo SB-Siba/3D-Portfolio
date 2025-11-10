@@ -1,78 +1,76 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
-import CanvasLoader from "../Loader";
+import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
-const AnimatedSphere = () => {
+const Computers = ({ isMobile }) => {
+  const computer = useGLTF("./desktop_pc/scene.gltf");
+
   return (
-    <Sphere visible args={[1, 100, 200]} scale={2}>
-      <MeshDistortMaterial
-        color="#915EFF"
-        attach="material"
-        distort={0.5}
-        speed={1.5}
-        roughness={0}
+    <mesh>
+      <hemisphereLight intensity={0.15} groundColor="black" />
+      <spotLight
+        position={[-20, 50, 10]}
+        angle={0.12}
+        penumbra={1}
+        intensity={1}
+        castShadow
+        shadow-mapSize={1024}
       />
-    </Sphere>
+      <pointLight intensity={1} />
+      <primitive
+        object={computer.scene}
+        scale={isMobile ? 0.5 : 0.75}
+        position={isMobile ? [0, -2.5, -1.5] : [0, -3.25, -1.5]}
+        rotation={[-0.01, -0.2, -0.1]}
+      />
+    </mesh>
   );
 };
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    try {
-      const mediaQuery = window.matchMedia("(max-width: 500px)");
-      setIsMobile(mediaQuery.matches);
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
 
-      const handleMediaQueryChange = (event) => {
-        setIsMobile(event.matches);
-      };
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
 
-      mediaQuery.addEventListener("change", handleMediaQueryChange);
-      return () => {
-        mediaQuery.removeEventListener("change", handleMediaQueryChange);
-      };
-    } catch (err) {
-      setError(err.message);
-    }
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
   }, []);
-
-  if (error) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-white">
-        Canvas Error: {error}
-      </div>
-    );
-  }
 
   return (
     <Canvas
+      frameloop="demand"
+      shadows
+      camera={{ 
+        position: [20, 3, 5], 
+        fov: isMobile ? 20 : 25 
+      }}
+      gl={{ preserveDrawingBuffer: true }}
       style={{
         width: '100%',
         height: '100%',
-        background: 'transparent',
-      }}
-      camera={{ 
-        position: [0, 0, 5], 
-        fov: 25 
-      }}
-      gl={{
-        antialias: true,
-        alpha: true,
       }}
     >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls 
-          enableZoom={false} 
-          autoRotate={true} 
-          autoRotateSpeed={3}
+      <Suspense fallback={null}> {/* No loader */}
+        <OrbitControls
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+          enablePan={false}
+          autoRotate={true}
+          autoRotateSpeed={2}
         />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <AnimatedSphere />
+        <Computers isMobile={isMobile} />
       </Suspense>
+
+      <Preload all />
     </Canvas>
   );
 };
