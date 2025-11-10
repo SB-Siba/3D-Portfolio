@@ -65,10 +65,9 @@ const Hero = () => {
   return (
     <>
       <style>{styleTag}</style>
-      <section className="relative w-full h-screen mx-auto bg-primary">
-        <div
-          className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5 z-10`}
-        >
+      <section className="relative w-full h-screen mx-auto bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+        {/* Debug: Remove absolute positioning temporarily */}
+        <div className={`max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5 pt-32`}>
           {/* Purple Dot with Line */}
           <div className="flex flex-col justify-center items-center mt-5">
             <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
@@ -92,22 +91,22 @@ const Hero = () => {
               <BlurIn>SIBANANDA</BlurIn>
             </h1>
 
-            <p className={`${styles.heroSubText} mt-1 text-white-100`}>
+            <p className={`${styles.heroSubText} mt-1 text-gray-300`}>
               I develop 3D visuals, user <br className="sm:block hidden" />
               interfaces and web applications
             </p>
           </div>
         </div>
 
-        {/* Canvas Container with Fallback */}
-        <div className="absolute inset-0 z-0">
+        {/* Canvas Container - Make it visible */}
+        <div className="absolute inset-0 w-full h-full">
           <ComputersCanvas />
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center z-10">
+        <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
           <a href="#about">
-            <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+            <div className="w-[35px] h-[64px] rounded-3xl border-4 border-gray-400 flex justify-center items-start p-2">
               <motion.div
                 animate={{ y: [0, 24, 0] }}
                 transition={{
@@ -115,7 +114,7 @@ const Hero = () => {
                   repeat: Infinity,
                   repeatType: "loop",
                 }}
-                className="w-3 h-3 rounded-full bg-secondary mb-1"
+                className="w-3 h-3 rounded-full bg-gray-400 mb-1"
               />
             </div>
           </a>
