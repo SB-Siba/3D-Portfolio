@@ -1,10 +1,10 @@
 import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile }) => {
+  // Use the useGLTF hook directly - it will handle loading
   const computer = useGLTF("./desktop_pc/scene.gltf");
 
   return (
@@ -21,8 +21,8 @@ const Computers = ({ isMobile }) => {
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.4 : 0.75}
-        position={isMobile ? [0, -2.5, -1.5] : [0, -3.25, -1.5]}
+        scale={isMobile ? 0.7 : 0.75}
+        position={isMobile ? [0, -3, -1.5] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -31,63 +31,46 @@ const Computers = ({ isMobile }) => {
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const controlsRef = useRef();
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    // Add a media query to check if the device is mobile
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
     
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    // Set the initial value
+    setIsMobile(mediaQuery.matches);
 
-  // One-time rotation when component mounts
-  useEffect(() => {
-    if (controlsRef.current) {
-      // Do one rotation and stop
-      let angle = 0;
-      const animate = () => {
-        angle += 0.01;
-        controlsRef.current.setAzimuthalAngle(angle);
-        
-        if (angle < Math.PI * 2) {
-          requestAnimationFrame(animate);
-        }
-      };
-      animate();
-    }
+    // Define a callback function to handle changes
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    // Add the callback function as a listener for changes
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    // Remove the listener when the component is unmounted
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
   }, []);
 
   return (
     <Canvas
       frameloop="demand"
       shadows
-      dpr={[1, 2]}
       camera={{ 
         position: [20, 3, 5], 
-        fov: isMobile ? 20 : 25 
+        fov: 25 
       }}
       gl={{ preserveDrawingBuffer: true }}
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
-          ref={controlsRef}
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
           enablePan={false}
-          autoRotate={false} // No continuous rotation
+          autoRotate={true}
+          autoRotateSpeed={2}
         />
         <Computers isMobile={isMobile} />
       </Suspense>
