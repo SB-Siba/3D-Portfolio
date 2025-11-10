@@ -1,81 +1,78 @@
-import React, { Suspense, useEffect, useState, useRef } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
-const Computers = ({ isMobile }) => {
-  // Use the useGLTF hook directly - it will handle loading
-  const computer = useGLTF("./desktop_pc/scene.gltf");
-
+const AnimatedSphere = () => {
   return (
-    <mesh>
-      <hemisphereLight intensity={0.15} groundColor="black" />
-      <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
-        penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
+    <Sphere visible args={[1, 100, 200]} scale={2}>
+      <MeshDistortMaterial
+        color="#915EFF"
+        attach="material"
+        distort={0.5}
+        speed={1.5}
+        roughness={0}
       />
-      <pointLight intensity={1} />
-      <primitive
-        object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -1.5] : [0, -3.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
-      />
-    </mesh>
+    </Sphere>
   );
 };
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Add a media query to check if the device is mobile
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
-    
-    // Set the initial value
-    setIsMobile(mediaQuery.matches);
+    try {
+      const mediaQuery = window.matchMedia("(max-width: 500px)");
+      setIsMobile(mediaQuery.matches);
 
-    // Define a callback function to handle changes
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
+      const handleMediaQueryChange = (event) => {
+        setIsMobile(event.matches);
+      };
 
-    // Add the callback function as a listener for changes
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-
-    // Remove the listener when the component is unmounted
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
+      mediaQuery.addEventListener("change", handleMediaQueryChange);
+      return () => {
+        mediaQuery.removeEventListener("change", handleMediaQueryChange);
+      };
+    } catch (err) {
+      setError(err.message);
+    }
   }, []);
+
+  if (error) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-white">
+        Canvas Error: {error}
+      </div>
+    );
+  }
 
   return (
     <Canvas
-      frameloop="demand"
-      shadows
+      style={{
+        width: '100%',
+        height: '100%',
+        background: 'transparent',
+      }}
       camera={{ 
-        position: [20, 3, 5], 
+        position: [0, 0, 5], 
         fov: 25 
       }}
-      gl={{ preserveDrawingBuffer: true }}
+      gl={{
+        antialias: true,
+        alpha: true,
+      }}
     >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-          enablePan={false}
-          autoRotate={true}
-          autoRotateSpeed={2}
+        <OrbitControls 
+          enableZoom={false} 
+          autoRotate={true} 
+          autoRotateSpeed={3}
         />
-        <Computers isMobile={isMobile} />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <AnimatedSphere />
       </Suspense>
-
-      <Preload all />
     </Canvas>
   );
 };
