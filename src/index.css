@@ -4,18 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ADD THESE LINES TO FIX SCROLLBARS */
-html, body {
-  width: 100%;
-  height: 100%;
+/* HIDE SCROLLBARS BUT ALLOW SCROLLING */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html,
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  overflow: -moz-scrollbars-none; /* Firefox */
+}
+
+/* Allow scrolling but keep scrollbar hidden */
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #root {
   width: 100%;
-  overflow-x: hidden;
 }
 
 * {
@@ -25,10 +44,6 @@ html, body {
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
   color-scheme: dark;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 /* Rest of your existing CSS remains the same */
