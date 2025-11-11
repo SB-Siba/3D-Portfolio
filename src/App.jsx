@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { 
   About, 
   Contact, 
@@ -12,8 +13,34 @@ import {
   Footer,
   Background3D 
 } from './components';
+import Pageloader from './components/Pageloader';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  // Fix for SSR - only render loader on client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  // Don't render anything during SSR
+  if (!isClient) {
+    return (
+      <div className="fixed inset-0 bg-slate-900 flex items-center justify-center">
+        <div className="text-cyan-400 text-lg">Loading...</div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return <Pageloader onLoadingComplete={handleLoadingComplete} />;
+  }
+
   return (
     <BrowserRouter>
       <div className="relative z-0 bg-primary">
