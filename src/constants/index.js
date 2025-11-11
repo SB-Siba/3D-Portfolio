@@ -183,7 +183,7 @@ const testimonials = [
 
 const projects = [
   {
-    name: "Pravati International",
+    name: "Hospital Job Management",
     description:
       "A platform for managing job recruitment and employee distribution. Admins can add users, clients, job posts, quotations, and invoices while assigning employees. Candidates can apply for jobs and track their status, while clients can view assigned employees.",
     tags: [
@@ -216,7 +216,7 @@ const projects = [
     source_code_link: "https://github.com/SB-Siba/job-management",
   },
   {
-    name: "REACT Institute",
+    name: "Institute Management System",
     description:
       "This Institute platform streamlines student, course, and certification management for admins and students. Admins can handle admissions, fees, courses, and certificates efficiently, while students access course details, support, and download approved certificates—all with a user-friendly experience.",
     tags: [
@@ -249,7 +249,7 @@ const projects = [
     source_code_link: "https://github.com/SB-Siba/institute_management",
   },
   {
-    name: "CHES",
+    name: "Horticulture System",
     description:
       "The CHES Bhubaneswar platform streamlines horticultural management for admins, rooftop gardeners, users, and vendors. Admins oversee users, vendors, and activities, while RTGs track plant growth and receive expert guidance. Users engage with green initiatives, and vendors manage their products. The Green Coin system rewards eco-friendly actions, creating a seamless and sustainable gardening ecosystem.",
     tags: [
