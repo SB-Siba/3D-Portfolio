@@ -13,14 +13,15 @@ import {
 import { styles } from "../style";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
+import { fadeIn, textVariant } from "../utils/motion"; // Add textVariant import
 
 const Contact = () => {
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const [hoveredCard, setHoveredCard] = useState(null);
 
-  const leftInView = useInView(leftRef, { once: false, amount: 0.3 });
-  const rightInView = useInView(rightRef, { once: false, amount: 0.3 });
+  const leftInView = useInView(leftRef, { once: true, amount: 0.3 });
+  const rightInView = useInView(rightRef, { once: true, amount: 0.3 });
 
   const contactCards = [
     {
@@ -73,7 +74,7 @@ const Contact = () => {
     },
     {
       icon: <FaGithub className="text-xl" />,
-      link: "https://github.com/your-github",
+      link: "https://github.com/SB-Siba",
       gradient: "from-gray-500 to-gray-700",
     },
     {
@@ -100,10 +101,10 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Enhanced Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
+          variants={textVariant()} // Now this will work
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
           className="text-center mb-16"
         >
           <motion.div
@@ -123,15 +124,17 @@ const Contact = () => {
           <motion.div
             className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-8"
             initial={{ width: 0 }}
-            animate={{ width: 96 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 1 }}
           />
 
           <motion.p
             className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
+            variants={fadeIn("", "", 0.3, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
           >
             Your vision + my code = digital magic. Let's create something 
             <span className="text-cyan-400"> extraordinary</span> together.
@@ -152,8 +155,8 @@ const Contact = () => {
                 <motion.a
                   key={index}
                   href={card.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={card.link.startsWith('http') ? "_blank" : undefined}
+                  rel={card.link.startsWith('http') ? "noopener noreferrer" : undefined}
                   initial={{ opacity: 0, y: 30 }}
                   animate={leftInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: card.delay, duration: 0.6 }}

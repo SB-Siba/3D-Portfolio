@@ -42,7 +42,7 @@ const FeedbackCard = ({
       variants={fadeIn("up", "spring", index * 0.2, 0.75)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.3 }} // Changed to once: true
       className="w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -212,7 +212,7 @@ const FeedbacksDesign1 = () => {
           variants={textVariant()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }}
           className="text-center mb-16"
         >
           <motion.div
@@ -230,26 +230,25 @@ const FeedbacksDesign1 = () => {
 
           {/* Animated underline */}
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full mb-8"
             initial={{ width: 0 }}
-            animate={{ width: 96 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 1 }}
           />
-        </motion.div>
 
-        {/* Description */}
-        <motion.div
-          variants={fadeIn("", "", 0.1, 1)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.25 }}
-          className="text-center mb-12 max-w-3xl mx-auto"
-        >
-          <p className="text-slate-300 text-lg leading-relaxed">
+          {/* Description */}
+          <motion.p
+            className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed"
+            variants={fadeIn("", "", 0.3, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+          >
             Don't just take my word for it. Here's what clients and colleagues have to say about 
             working with me. Their feedback drives me to deliver 
             <span className="text-purple-400"> exceptional results</span> every time.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Testimonials Grid */}
@@ -257,7 +256,7 @@ const FeedbacksDesign1 = () => {
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.1 }} // Changed to once: true
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="wait">
@@ -276,7 +275,7 @@ const FeedbacksDesign1 = () => {
           variants={fadeIn("up", "spring", 0.8, 1)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }} // Changed to once: true
           className="text-center mt-12"
         >
           <div className="inline-flex items-center gap-3 text-slate-400 text-sm">

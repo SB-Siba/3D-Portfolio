@@ -81,7 +81,7 @@ const Hero = () => {
   const [processProgress, setProcessProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Refs for scroll animations
+  // Refs for scroll animations - ALL with once: true
   const heroRef = useRef(null);
   const nameRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -90,14 +90,14 @@ const Hero = () => {
   const rightContentRef = useRef(null);
   const processRef = useRef(null);
   
-  // Check if elements are in view
-  const heroInView = useInView(heroRef, { once: false, amount: 0.1 });
-  const nameInView = useInView(nameRef, { once: false, amount: 0.1 });
-  const descriptionInView = useInView(descriptionRef, { once: false, amount: 0.1 });
-  const skillsInView = useInView(skillsRef, { once: false, amount: 0.1 });
-  const buttonsInView = useInView(buttonsRef, { once: false, amount: 0.1 });
-  const rightContentInView = useInView(rightContentRef, { once: false, amount: 0.1 });
-  const processInView = useInView(processRef, { once: false, amount: 0.2 });
+  // Check if elements are in view - ALL with once: true for one-time animations
+  const heroInView = useInView(heroRef, { once: true, amount: 0.1 });
+  const nameInView = useInView(nameRef, { once: true, amount: 0.1 });
+  const descriptionInView = useInView(descriptionRef, { once: true, amount: 0.1 });
+  const skillsInView = useInView(skillsRef, { once: true, amount: 0.1 });
+  const buttonsInView = useInView(buttonsRef, { once: true, amount: 0.1 });
+  const rightContentInView = useInView(rightContentRef, { once: true, amount: 0.1 });
+  const processInView = useInView(processRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
     const checkMobile = () => {

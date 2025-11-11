@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { 
   About, 
   Contact, 
@@ -12,8 +13,36 @@ import {
   Footer,
   Background3D 
 } from './components';
+import Pageloader from './components/Pageloader';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  // Optional: Preload critical assets
+  useEffect(() => {
+    // You can add any preloading logic here
+    const preloadImages = () => {
+      const images = [
+        // Add paths to critical images here if needed
+      ];
+      
+      images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+    
+    preloadImages();
+  }, []);
+
+  if (isLoading) {
+    return <Pageloader onLoadingComplete={handleLoadingComplete} />;
+  }
+
   return (
     <BrowserRouter>
       <div className="relative z-0 bg-primary">

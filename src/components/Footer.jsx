@@ -66,6 +66,7 @@ const Footer = () => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} // Added once: true
             transition={{ delay: 0.2 }}
             className="lg:col-span-2"
           >
@@ -98,6 +99,7 @@ const Footer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} // Added once: true
             transition={{ delay: 0.4 }}
           >
             <h4 className="text-white font-semibold mb-6 text-lg">Quick Links</h4>
@@ -124,6 +126,7 @@ const Footer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} // Added once: true
             transition={{ delay: 0.6 }}
           >
             <h4 className="text-white font-semibold mb-6 text-lg">Let's Connect</h4>
@@ -167,6 +170,7 @@ const Footer = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }} // Added once: true
           transition={{ delay: 0.8 }}
           className="border-t border-slate-700/50 pt-6 flex flex-col md:flex-row justify-between items-center gap-4"
         >

@@ -17,7 +17,7 @@ import { textVariant, fadeIn } from "../utils/motion";
 const ExperienceCard = ({ experience, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 }); // Changed to once: true
 
   return (
     <motion.div
@@ -202,7 +202,7 @@ const ExperienceCard = ({ experience, index }) => {
 // Enhanced Main Experience Section
 const Experience = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.1 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Changed to once: true
 
   return (
     <div ref={ref} className="relative min-h-screen py-20">
@@ -218,44 +218,39 @@ const Experience = () => {
         <motion.div
           variants={textVariant()}
           initial="hidden"
-          animate={isInView ? "show" : "hidden"}
-          className="text-center mb-16 relative"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          className="text-center mb-16"
         >
-          {/* Decorative Elements */}
-          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full"></div>
-          
           <motion.div
-            className="inline-flex items-center gap-4 mb-6"
+            className="inline-flex items-center gap-3 mb-4"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="w-3 h-3 bg-cyan-400 rounded-full animate-ping"></div>
-            <p className={`${styles.sectionSubText} text-cyan-300 font-semibold`}>
-              My Professional Journey
-            </p>
-            <div className="w-3 h-3 bg-cyan-400 rounded-full animate-ping delay-700"></div>
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <p className={`${styles.sectionSubText} text-cyan-300`}>My Professional Journey</p>
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
           </motion.div>
           
-          <motion.h2 
-            className={`${styles.sectionHeadText} mb-6`}
-            whileHover={{ scale: 1.02 }}
-          >
+          <h2 className={`${styles.sectionHeadText} mb-6`}>
             Work <span className="text-cyan-400">Experience</span>
-          </motion.h2>
+          </h2>
 
-          {/* Animated Underline */}
+          {/* Animated underline */}
           <motion.div
-            className="w-32 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-8"
+            className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-8"
             initial={{ width: 0 }}
-            animate={{ width: 128 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 1 }}
           />
 
           {/* Description */}
           <motion.p
-            className="text-slate-400 text-lg max-w-2xl mx-auto"
-            variants={fadeIn("up", "spring", 0.3, 1)}
+            className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed"
+            variants={fadeIn("", "", 0.3, 1)}
             initial="hidden"
-            animate={isInView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
           >
             A timeline of my professional journey and career milestones
           </motion.p>
@@ -285,7 +280,7 @@ const Experience = () => {
           <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 1 }}
           >
             <div className="inline-flex items-center gap-3 text-slate-400 text-sm">

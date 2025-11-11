@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Tilt } from "react-tilt";
 import { motion, useInView } from "framer-motion";
 import { styles } from "../style";
@@ -17,11 +17,45 @@ const staggerContainer = {
   }
 };
 
+// Counter Component for animated numbers
+const Counter = ({ end, duration = 2, label }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const increment = end / (duration * 60); // 60 frames per second
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          setCount(end);
+          clearInterval(timer);
+        } else {
+          setCount(Math.ceil(start));
+        }
+      }, 1000 / 60); // 60 FPS
+
+      return () => clearInterval(timer);
+    }
+  }, [isInView, end, duration]);
+
+  return (
+    <div ref={ref} className="bg-slate-900/50 backdrop-blur-xl rounded-xl p-4 text-center border border-slate-700/50 hover:border-blue-400/30 transition-all duration-300">
+      <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+        {count}+
+      </div>
+      <div className="text-slate-400 text-sm mt-1">{label}</div>
+    </div>
+  );
+};
+
 // Enhanced Service Card with 3D effects
 const ServiceCard = ({ index, title, icon, description }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, {
-    once: false,
+    once: true, // Changed to one-time animation
     amount: 0.3,
   });
 
@@ -118,7 +152,7 @@ const ServiceCard = ({ index, title, icon, description }) => {
 // Enhanced About Section
 const About = () => {
   const aboutRef = useRef(null);
-  const isInView = useInView(aboutRef, { once: false, amount: 0.2 });
+  const isInView = useInView(aboutRef, { once: true, amount: 0.2 }); // Changed to one-time animation
 
   // Add scrollToContact function here in the main About component
   const scrollToContact = () => {
@@ -132,10 +166,10 @@ const About = () => {
   };
 
   const stats = [
-    { number: "50+", label: "Projects Completed" },
-    { number: "3+", label: "Years Experience" },
-    { number: "30+", label: "Happy Clients" },
-    { number: "15+", label: "Technologies" },
+    { number: 20, label: "Projects Completed" },
+    { number: 2, label: "Years Experience" },
+    { number: 15, label: "Happy Clients" },
+    { number: 10, label: "Technologies" },
   ];
 
   return (
@@ -216,7 +250,7 @@ const About = () => {
               </motion.p>
             </div>
 
-            {/* Stats Grid */}
+            {/* Stats Grid with Animated Counters */}
             <motion.div
               variants={fadeIn("up", "spring", 0.7, 1)}
               initial="hidden"
@@ -226,16 +260,16 @@ const About = () => {
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  className="bg-slate-900/50 backdrop-blur-xl rounded-xl p-4 text-center border border-slate-700/50 hover:border-blue-400/30 transition-all duration-300"
                   whileHover={{ y: -2, scale: 1.02 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 + index * 0.1 }}
                 >
-                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                    {stat.number}
-                  </div>
-                  <div className="text-slate-400 text-sm mt-1">{stat.label}</div>
+                  <Counter 
+                    end={stat.number} 
+                    duration={2} 
+                    label={stat.label}
+                  />
                 </motion.div>
               ))}
             </motion.div>
