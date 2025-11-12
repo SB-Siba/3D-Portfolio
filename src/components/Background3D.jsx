@@ -7,6 +7,11 @@ const Background3D = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  
+  // Refs to store Three.js objects for cleanup
+  const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
   useEffect(() => {
     const checkDevice = () => {
@@ -28,27 +33,54 @@ const Background3D = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Enhanced Main Three.js 3D Scene (Background)
+  // Enhanced Main Three.js 3D Scene with better memory management
   useEffect(() => {
     if (!canvasRef.current) return;
 
+    // Clean up previous scene if it exists
+    if (sceneRef.current) {
+      cleanupScene();
+    }
+
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
+    
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ 
       canvas: canvasRef.current,
       alpha: true,
-      antialias: !isMobile, // Disable antialias on mobile for performance
-      powerPreference: 'high-performance'
+      antialias: !isMobile,
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: false // Better performance
     });
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    rendererRef.current = renderer;
     
-    // Optimize pixel ratio for different devices
+    // Set renderer properties
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0); // Transparent background
+    
+    // Optimize pixel ratio
     let pixelRatio = Math.min(window.devicePixelRatio, 2);
-    if (isMobile) pixelRatio = 1; // Lower pixel ratio on mobile
-    if (isTablet) pixelRatio = Math.min(window.devicePixelRatio, 1.5); // Moderate on tablet
+    if (isMobile) pixelRatio = 1;
+    if (isTablet) pixelRatio = Math.min(window.devicePixelRatio, 1.5);
     
     renderer.setPixelRatio(pixelRatio);
+
+    // Handle WebGL context loss
+    const handleContextLost = (event) => {
+      event.preventDefault();
+      console.log('WebGL context lost');
+      cleanupScene();
+    };
+
+    const handleContextRestored = () => {
+      console.log('WebGL context restored');
+      // You might want to reinitialize the scene here
+    };
+
+    canvasRef.current.addEventListener('webglcontextlost', handleContextLost, false);
+    canvasRef.current.addEventListener('webglcontextrestored', handleContextRestored, false);
 
     // Enhanced Lighting
     const ambientLight = new THREE.AmbientLight(0x404040, isMobile ? 2 : 3);
@@ -66,7 +98,7 @@ const Background3D = () => {
     pointLight.position.set(0, 0, 20);
     scene.add(pointLight);
 
-    // Create process-themed shapes - Reduce count on mobile
+    // Create process-themed shapes
     const shapes = [];
     const geometries = [
       new THREE.OctahedronGeometry(0.8, 0),
@@ -109,9 +141,9 @@ const Background3D = () => {
       const material = new THREE.MeshPhongMaterial({
         color: colors[i],
         transparent: true,
-        opacity: isMobile ? 0.6 : 0.7, // Slightly lower opacity on mobile
+        opacity: isMobile ? 0.6 : 0.7,
         wireframe: Math.random() > 0.7,
-        shininess: isMobile ? 80 : 100 // Reduce shininess on mobile
+        shininess: isMobile ? 80 : 100
       });
 
       const mesh = new THREE.Mesh(optimizedGeometry, material);
@@ -132,7 +164,7 @@ const Background3D = () => {
       scene.add(mesh);
     }
 
-    // Enhanced particle system - Reduce particles on mobile/tablet
+    // Enhanced particle system
     const particlesGeometry = new THREE.BufferGeometry();
     const particlesCount = isMobile ? 150 : isTablet ? 400 : 800;
     const posArray = new Float32Array(particlesCount * 3);
@@ -177,38 +209,56 @@ const Background3D = () => {
 
     window.addEventListener('mousemove', handleMouseMove3D);
 
-    // Animation - Slower animation on mobile for better performance
+    // Animation with performance optimization
     const clock = new THREE.Clock();
+    let lastTime = 0;
+    const fpsLimit = 30; // Limit FPS to reduce GPU usage
+    const interval = 1000 / fpsLimit;
 
-    const animate = () => {
-      const elapsedTime = clock.getElapsedTime();
-
-      shapes.forEach((shape, index) => {
-        const speedMultiplier = isMobile ? 0.7 : 1;
+    const animate = (currentTime) => {
+      animationFrameRef.current = requestAnimationFrame(animate);
+      
+      const delta = currentTime - lastTime;
+      
+      if (delta > interval) {
+        lastTime = currentTime - (delta % interval);
         
-        shape.rotation.x += 0.005 * (index % 3 + 1) * speedMultiplier;
-        shape.rotation.y += 0.008 * (index % 2 + 1) * speedMultiplier;
-        shape.rotation.z += 0.003 * (index % 4 + 1) * speedMultiplier;
-        
-        shape.position.y += Math.sin(elapsedTime * 0.5 + index) * 0.005 * speedMultiplier;
-        shape.position.x += Math.cos(elapsedTime * 0.3 + index) * 0.003 * speedMultiplier;
-        
-        shape.rotation.x += mouseY * 0.005 * speedMultiplier;
-        shape.rotation.y += mouseX * 0.005 * speedMultiplier;
-      });
+        const elapsedTime = clock.getElapsedTime();
 
-      particlesMesh.rotation.y = elapsedTime * 0.02 * (isMobile ? 0.7 : 1);
-      particlesMesh.rotation.x = elapsedTime * 0.015 * (isMobile ? 0.7 : 1);
+        shapes.forEach((shape, index) => {
+          const speedMultiplier = isMobile ? 0.7 : 1;
+          
+          shape.rotation.x += 0.005 * (index % 3 + 1) * speedMultiplier;
+          shape.rotation.y += 0.008 * (index % 2 + 1) * speedMultiplier;
+          shape.rotation.z += 0.003 * (index % 4 + 1) * speedMultiplier;
+          
+          shape.position.y += Math.sin(elapsedTime * 0.5 + index) * 0.005 * speedMultiplier;
+          shape.position.x += Math.cos(elapsedTime * 0.3 + index) * 0.003 * speedMultiplier;
+          
+          shape.rotation.x += mouseY * 0.005 * speedMultiplier;
+          shape.rotation.y += mouseX * 0.005 * speedMultiplier;
+        });
 
-      camera.position.x += (mouseX * (isMobile ? 2 : 3) - camera.position.x) * 0.01;
-      camera.position.y += (-mouseY * (isMobile ? 2 : 3) - camera.position.y) * 0.01;
-      camera.lookAt(scene.position);
+        particlesMesh.rotation.y = elapsedTime * 0.02 * (isMobile ? 0.7 : 1);
+        particlesMesh.rotation.x = elapsedTime * 0.015 * (isMobile ? 0.7 : 1);
 
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+        camera.position.x += (mouseX * (isMobile ? 2 : 3) - camera.position.x) * 0.01;
+        camera.position.y += (-mouseY * (isMobile ? 2 : 3) - camera.position.y) * 0.01;
+        camera.lookAt(scene.position);
+
+        // Check if renderer is still valid before rendering
+        if (renderer && renderer.domElement) {
+          try {
+            renderer.render(scene, camera);
+          } catch (error) {
+            console.error('Render error:', error);
+            cleanupScene();
+          }
+        }
+      }
     };
 
-    animate();
+    animationFrameRef.current = requestAnimationFrame(animate);
 
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -218,24 +268,51 @@ const Background3D = () => {
 
     window.addEventListener('resize', handleResize);
 
-    return () => {
+    // Cleanup function
+    const cleanupScene = () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+
       window.removeEventListener('mousemove', handleMouseMove3D);
       window.removeEventListener('resize', handleResize);
-      renderer.dispose();
       
-      // Clean up geometries
+      if (canvasRef.current) {
+        canvasRef.current.removeEventListener('webglcontextlost', handleContextLost);
+        canvasRef.current.removeEventListener('webglcontextrestored', handleContextRestored);
+      }
+
+      if (renderer) {
+        renderer.dispose();
+      }
+
+      // Clean up geometries and materials
       shapes.forEach(shape => {
-        shape.geometry.dispose();
-        shape.material.dispose();
+        if (shape.geometry) shape.geometry.dispose();
+        if (shape.material) {
+          if (Array.isArray(shape.material)) {
+            shape.material.forEach(material => material.dispose());
+          } else {
+            shape.material.dispose();
+          }
+        }
       });
-      particlesGeometry.dispose();
-      particlesMaterial.dispose();
+
+      if (particlesGeometry) particlesGeometry.dispose();
+      if (particlesMaterial) particlesMaterial.dispose();
+
+      // Clear references
+      sceneRef.current = null;
+      rendererRef.current = null;
     };
+
+    return cleanupScene;
   }, [isMobile, isTablet]);
 
   return (
     <div className="fixed inset-0 -z-10">
-      {/* Premium Gradient Background */}
+      {/* Fallback background that will show if WebGL fails */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
       
       {/* Enhanced 3D Background Canvas */}
@@ -244,7 +321,7 @@ const Background3D = () => {
         className="absolute inset-0 w-full h-full"
       />
 
-      {/* Animated Grid Overlay - Simpler on mobile */}
+      {/* Animated Grid Overlay */}
       <div className="absolute inset-0">
         <div 
           className="absolute inset-0 opacity-15"
@@ -259,7 +336,7 @@ const Background3D = () => {
         />
       </div>
 
-      {/* Enhanced Gradient Orbs - Smaller and fewer on mobile */}
+      {/* Enhanced Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{
@@ -288,7 +365,7 @@ const Background3D = () => {
           }}
           className={`absolute bottom-1/3 right-1/3 ${isMobile ? 'w-48 h-48' : 'w-96 h-96'} bg-purple-500/15 rounded-full blur-3xl`}
         />
-        {!isMobile && ( // Hide third orb on mobile for better performance
+        {!isMobile && (
           <motion.div
             animate={{
               x: [0, 15, 0],

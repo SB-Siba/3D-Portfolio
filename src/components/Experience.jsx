@@ -17,7 +17,7 @@ import { textVariant, fadeIn } from "../utils/motion";
 const ExperienceCard = ({ experience, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 }); // Changed to once: true
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <motion.div
@@ -202,10 +202,10 @@ const ExperienceCard = ({ experience, index }) => {
 // Enhanced Main Experience Section
 const Experience = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Changed to once: true
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <div ref={ref} className="relative min-h-screen py-20">
+    <div ref={ref} className="relative py-12">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
@@ -220,10 +220,10 @@ const Experience = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <motion.div
-            className="inline-flex items-center gap-3 mb-4"
+            className="inline-flex items-center gap-3 mb-3"
             whileHover={{ scale: 1.05 }}
           >
             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
@@ -231,23 +231,23 @@ const Experience = () => {
             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
           </motion.div>
           
-          <h2 className={`${styles.sectionHeadText} mb-6`}>
+          <h2 className={`${styles.sectionHeadText} mb-4`}>
             Work <span className="text-cyan-400">Experience</span>
           </h2>
 
           {/* Animated underline */}
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-8"
+            className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-6"
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
           />
 
           {/* Description */}
           <motion.p
             className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed"
-            variants={fadeIn("", "", 0.3, 1)}
+            variants={fadeIn("", "", 0.2, 0.8)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.25 }}
@@ -258,7 +258,7 @@ const Experience = () => {
 
         {/* Enhanced Timeline */}
         <motion.div
-          variants={fadeIn("up", "spring", 0.6, 1)}
+          variants={fadeIn("up", "spring", 0.4, 0.8)}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
           className="relative"
@@ -278,15 +278,15 @@ const Experience = () => {
 
           {/* Timeline End Marker */}
           <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 1 }}
+            className="text-center mt-8"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
           >
-            <div className="inline-flex items-center gap-3 text-slate-400 text-sm">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 text-slate-400 text-sm">
+              <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
               More experiences coming soon...
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+              <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
             </div>
           </motion.div>
         </motion.div>
