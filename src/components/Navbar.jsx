@@ -10,7 +10,7 @@ const Navbar1 = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState(null);
 
-  // Scroll lock effect
+  // Scroll lock effect - Keep the original working version
   useEffect(() => {
     if (toggle) {
       const scrollY = window.scrollY;
@@ -28,6 +28,7 @@ const Navbar1 = () => {
     }
   }, [toggle]);
 
+  // Scroll detection - Use the original working logic
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -50,6 +51,7 @@ const Navbar1 = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Simple navigation handler
   const handleNavClick = (navTitle) => {
     setToggle(false);
     setActive(navTitle);
@@ -127,7 +129,7 @@ const Navbar1 = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        {/* LOGO - UPDATED WITH YOUR TEXT */}
+        {/* LOGO */}
         <motion.div
           className="flex items-center gap-3"
           initial={{ x: -100, opacity: 0 }}
@@ -325,7 +327,7 @@ const Navbar1 = () => {
                     </div>
                   </motion.div>
 
-                  {/* Navigation Links */}
+                  {/* Navigation Links - WORKING VERSION */}
                   <div className="relative z-10 p-6 space-y-3">
                     {navLinks.map((nav, index) => (
                       <motion.div
@@ -338,8 +340,8 @@ const Navbar1 = () => {
                           href={`#${nav.id}`}
                           className={`relative flex items-center gap-4 p-4 rounded-xl cursor-pointer overflow-hidden transition-all duration-300 ${
                             active === nav.title
-                              ? "bg-cyan-400/20 text-cyan-400"
-                              : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                              ? "bg-cyan-400/20 text-cyan-400 border border-cyan-400/30"
+                              : "text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent"
                           }`}
                           onClick={() => handleNavClick(nav.title)}
                         >
@@ -374,7 +376,7 @@ const Navbar1 = () => {
                             />
                           )}
                           
-                          {/* Animated Icon - ALWAYS ANIMATING ON HOVER */}
+                          {/* Animated Icon */}
                           <motion.div
                             className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg ${
                               active === nav.title
@@ -455,7 +457,7 @@ const Navbar1 = () => {
                     ))}
                   </div>
 
-                  {/* Footer - UPDATED WITH YOUR NAME */}
+                  {/* Footer */}
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 p-6 border-t border-cyan-400/20 bg-slate-900/80 backdrop-blur-lg"
                     variants={itemVariants}

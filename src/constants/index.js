@@ -32,6 +32,10 @@ import {
 
 export const navLinks = [
   {
+    id: "home",
+    title: "Home",
+  },
+  {
     id: "about",
     title: "About",
   },
@@ -340,6 +344,18 @@ const projects = [
     image:
       aviation,
     source_code_link: "https://premieraviation.in/",
+  },
+  {
+    name: "Sample Project Placeholder",
+    description:
+      "This is a placeholder project added so the featured projects section can show six items. Replace this entry with your real project details.",
+    tags: [
+      { name: "React", color: "blue-text-gradient" },
+      { name: "Tailwind", color: "cyan-text-gradient" },
+      { name: "Demo", color: "green-text-gradient" },
+    ],
+    image: website,
+    source_code_link: "#",
   },
 ];
 
