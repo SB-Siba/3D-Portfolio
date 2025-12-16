@@ -40,12 +40,12 @@ export const navLinks = [
     title: "About",
   },
   {
-    id: "projects",
-    title: "Projects",
-  },
-  {
     id: "work",
     title: "Work",
+  },
+  {
+    id: "projects",
+    title: "Projects",
   },
   {
     id: "contact",
@@ -160,29 +160,53 @@ const experiences = [
 
 const testimonials = [
   {
-    testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
+    testimonial: "Working with Rick was an absolute pleasure. The 3D portfolio he created exceeded all expectations and helped us secure major clients.",
     name: "Sara Lee",
     designation: "CFO",
     company: "Acme Co",
     image: "https://randomuser.me/api/portraits/women/4.jpg",
+    rating: 5
   },
   {
-    testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
+    testimonial: "Rick's attention to detail is phenomenal. He transformed our boring corporate site into an interactive 3D experience that our customers love.",
     name: "Chris Brown",
     designation: "COO",
     company: "DEF Corp",
     image: "https://randomuser.me/api/portraits/men/5.jpg",
+    rating: 5
   },
   {
-    testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
+    testimonial: "The 3D animations and smooth transitions Rick implemented increased our engagement by 300%. Simply outstanding work!",
     name: "Lisa Wang",
     designation: "CTO",
     company: "456 Enterprises",
     image: "https://randomuser.me/api/portraits/women/6.jpg",
+    rating: 5
   },
+  {
+    testimonial: "As a gaming company, we needed someone who understands 3D and interactivity. Rick delivered beyond our wildest dreams.",
+    name: "Alex Johnson",
+    designation: "Creative Director",
+    company: "Nexus Games",
+    image: "https://randomuser.me/api/portraits/men/7.jpg",
+    rating: 4
+  },
+  {
+    testimonial: "Rick's 3D portfolio design for our architecture firm was revolutionary. Clients can now walk through our designs virtually.",
+    name: "Maria Garcia",
+    designation: "Lead Architect",
+    company: "Urban Design Co",
+    image: "https://randomuser.me/api/portraits/women/8.jpg",
+    rating: 5
+  },
+  {
+    testimonial: "The 3D e-commerce experience Rick built increased our conversion rate by 45%. His work is truly transformative.",
+    name: "David Kim",
+    designation: "E-commerce Manager",
+    company: "StyleHub",
+    image: "https://randomuser.me/api/portraits/men/9.jpg",
+    rating: 5
+  }
 ];
 
 const projects = [

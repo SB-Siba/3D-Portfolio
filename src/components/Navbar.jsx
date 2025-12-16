@@ -10,7 +10,7 @@ const Navbar1 = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState(null);
 
-  // Scroll lock effect - Keep the original working version
+  // Scroll lock effect
   useEffect(() => {
     if (toggle) {
       const scrollY = window.scrollY;
@@ -28,11 +28,11 @@ const Navbar1 = () => {
     }
   }, [toggle]);
 
-  // Scroll detection - Use the original working logic
+  // Scroll detection with responsive spacing
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setScrolled(scrollTop > 50);
+      setScrolled(scrollTop > 20); // Changed from 50 to 20 for earlier background
 
       let currentSection = "";
       navLinks.forEach((nav) => {
@@ -51,13 +51,13 @@ const Navbar1 = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Simple navigation handler
+  // Navigation handler
   const handleNavClick = (navTitle) => {
     setToggle(false);
     setActive(navTitle);
   };
 
-  // Cyberpunk animations
+  // Animation variants
   const sidebarVariants = {
     closed: {
       x: "100%",
@@ -107,7 +107,7 @@ const Navbar1 = () => {
     }
   };
 
-  // Icon animations for each nav item
+  // Icon animations
   const iconAnimations = [
     { emoji: "🚀", hover: { scale: 1.5, rotate: 180 } },
     { emoji: "👨‍💻", hover: { scale: 1.4, rotate: 90 } },
@@ -119,17 +119,17 @@ const Navbar1 = () => {
 
   return (
     <motion.nav
-      className={`${styles.paddingX} w-full flex items-center py-4 fixed top-0 z-50 ${
+      className={`${styles.paddingX} w-full flex items-center fixed top-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? "bg-slate-900/80 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-slate-700/50" 
-          : "bg-transparent"
+          ? "bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-slate-700/30 py-2" 
+          : "bg-transparent py-4"
       }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        {/* LOGO */}
+        {/* LOGO SECTION - Responsive */}
         <motion.div
           className="flex items-center gap-3"
           initial={{ x: -100, opacity: 0 }}
@@ -141,36 +141,70 @@ const Navbar1 = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-sm opacity-75"></div>
+            {/* Logo glow effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
+              animate={{
+                scale: scrolled ? [1, 1.05, 1] : [1, 1.1, 1],
+                opacity: scrolled ? [0.5, 0.8, 0.5] : [0.5, 0.9, 0.5]
+              }}
+              transition={{
+                duration: scrolled ? 2 : 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-sm"
+              animate={{
+                opacity: scrolled ? 0.4 : 0.6
+              }}
+              transition={{ duration: 0.3 }}
+            />
             <img
               src={logo}
               alt="logo"
-              className="w-10 h-10 object-contain relative z-10"
+              className={`relative z-10 object-contain transition-all duration-300 ${
+                scrolled ? "w-8 h-8" : "w-10 h-10"
+              }`}
             />
           </motion.div>
+          
+          {/* Text Section */}
           <div className="flex flex-col">
             <motion.span 
-              className="text-white text-xl font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
+              className={`font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 ${
+                scrolled ? "text-lg" : "text-xl"
+              }`}
               whileHover={{ scale: 1.05 }}
+              animate={{
+                letterSpacing: scrolled ? "0.025em" : "0.05em"
+              }}
+              transition={{ duration: 0.3 }}
             >
               SB SIBA | SIBANANDA BEHERA
             </motion.span>
             <motion.span 
-              className="text-slate-300 text-sm font-medium hidden sm:block"
+              className="text-slate-300 font-medium hidden sm:block transition-all duration-300"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              animate={{ 
+                opacity: 1,
+                fontSize: scrolled ? "0.75rem" : "0.875rem",
+                marginTop: scrolled ? "0.125rem" : "0.25rem"
+              }}
+              transition={{ delay: 0.4, duration: 0.3 }}
             >
               Full Stack Developer
             </motion.span>
           </div>
         </motion.div>
 
-        {/* DESKTOP NAV LINKS */}
+        {/* DESKTOP NAV LINKS - Responsive spacing */}
         <motion.ul
-          className="list-none hidden md:flex flex-row gap-8"
+          className="list-none hidden md:flex flex-row transition-all duration-300"
           initial="hidden"
           animate="visible"
+          style={{ gap: scrolled ? "1.5rem" : "2rem" }}
         >
           {navLinks.map((nav, index) => (
             <motion.li
@@ -181,31 +215,43 @@ const Navbar1 = () => {
             >
               <a
                 href={`#${nav.id}`}
-                className={`relative px-4 py-2 text-[16px] font-medium cursor-pointer transition-all duration-300 ${
+                className={`relative text-[15px] font-medium cursor-pointer transition-all duration-300 flex items-center ${
                   active === nav.title
                     ? "text-cyan-400"
                     : "text-slate-300 hover:text-white"
                 }`}
                 onClick={() => setActive(nav.title)}
+                style={{
+                  padding: scrolled ? "0.375rem 0.75rem" : "0.5rem 1rem"
+                }}
               >
-                {nav.title}
+                {/* Link text with responsive font size */}
+                <motion.span
+                  animate={{
+                    fontSize: scrolled ? "14px" : "16px"
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {nav.title}
+                </motion.span>
                 
-                {/* Animated underline */}
+                {/* Animated underline - responsive height */}
                 <motion.div
-                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 ${
+                  className={`absolute bottom-0 left-0 bg-gradient-to-r from-blue-500 to-cyan-500 ${
                     active === nav.title ? "w-full" : "w-0"
                   }`}
                   animate={{
+                    height: scrolled ? "2px" : "3px",
                     width: hoveredLink === index ? "100%" : active === nav.title ? "100%" : "0%"
                   }}
                   transition={{ duration: 0.3 }}
                 />
                 
-                {/* Hover background effect */}
+                {/* Hover background effect - responsive opacity */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg -z-10"
                   animate={{
-                    opacity: hoveredLink === index ? 1 : 0,
+                    opacity: hoveredLink === index ? (scrolled ? 0.8 : 1) : 0,
                     scale: hoveredLink === index ? 1 : 0.8
                   }}
                   transition={{ duration: 0.3 }}
@@ -215,19 +261,30 @@ const Navbar1 = () => {
           ))}
         </motion.ul>
 
-        {/* CYBERPUNK MOBILE MENU BUTTON */}
+        {/* MOBILE MENU BUTTON - Responsive */}
         <motion.div className="md:hidden flex flex-1 justify-end items-center">
           <motion.button
-            className="relative w-14 h-14 flex items-center justify-center bg-slate-900/80 backdrop-blur-xl rounded-xl border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 group"
+            className={`relative flex items-center justify-center bg-slate-900/80 backdrop-blur-xl rounded-xl border transition-all duration-300 group ${
+              scrolled 
+                ? "w-12 h-12 border-cyan-400/20 hover:border-cyan-400/40" 
+                : "w-14 h-14 border-cyan-400/30 hover:border-cyan-400/60"
+            }`}
             onClick={() => setToggle(!toggle)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Animated border glow */}
+            {/* Animated border glow - responsive intensity */}
             <motion.div
-              className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-20"
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500"
+              animate={{ 
+                rotate: [0, 360],
+                opacity: scrolled ? [0, 0.15, 0] : [0, 0.25, 0]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
             />
             
             <AnimatePresence mode="wait">
@@ -236,7 +293,9 @@ const Navbar1 = () => {
                   key="close"
                   src={close}
                   alt="close"
-                  className="w-7 h-7 object-contain z-10"
+                  className={`z-10 object-contain transition-all duration-300 ${
+                    scrolled ? "w-6 h-6" : "w-7 h-7"
+                  }`}
                   initial={{ rotate: -180, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 180, opacity: 0 }}
@@ -247,7 +306,9 @@ const Navbar1 = () => {
                   key="menu"
                   src={menu}
                   alt="menu"
-                  className="w-7 h-7 object-contain z-10"
+                  className={`z-10 object-contain transition-all duration-300 ${
+                    scrolled ? "w-6 h-6" : "w-7 h-7"
+                  }`}
                   initial={{ rotate: 180, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: -180, opacity: 0 }}
@@ -309,7 +370,17 @@ const Navbar1 = () => {
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
-                        <div className="absolute inset-0 bg-cyan-400 rounded-full blur-md" />
+                        <motion.div
+                          className="absolute inset-0 bg-cyan-400 rounded-full blur-md"
+                          animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0.3, 0.6, 0.3]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity
+                          }}
+                        />
                         <img
                           src={logo}
                           alt="logo"
@@ -323,11 +394,18 @@ const Navbar1 = () => {
                         >
                           SB PORTFOLIO
                         </motion.h2>
+                        <motion.p 
+                          className="text-slate-300 text-sm mt-1"
+                          animate={{ opacity: [0.6, 1, 0.6] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          Navigation
+                        </motion.p>
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Navigation Links - WORKING VERSION */}
+                  {/* Navigation Links */}
                   <div className="relative z-10 p-6 space-y-3">
                     {navLinks.map((nav, index) => (
                       <motion.div

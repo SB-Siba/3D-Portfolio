@@ -6,10 +6,12 @@ import Tech from './Tech';
 import Experience from './Experience';
 import Works from './Works';
 import AllProjects from './AllProjects';
+import Chatbot from './ServiceChatbot';
 import Feedbacks from './Feedbacks';
 import Contact from './Contact';
 import Footer from './Footer';
 import Background3D from './Background3D';
+import ServiceChatbot from './ServiceChatbot';
 
 export {
   Hero,
@@ -19,12 +21,14 @@ export {
   Experience,
   Works,
   AllProjects,
+  Chatbot,
   Feedbacks,
   Contact,
   EarthCanvas, 
   BallCanvas, 
   ComputersCanvas, 
   StarsCanvas,
+  ServiceChatbot,
   Footer,
   Background3D
 }

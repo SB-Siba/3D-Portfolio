@@ -10,6 +10,7 @@ import {
   Tech,
   Works,
   AllProjects,
+  ServiceChatbot, // Changed from Chatbot to ServiceChatbot
   StarsCanvas,
   Footer,
   Background3D,
@@ -231,6 +232,9 @@ const App = () => {
               </motion.div>
             )}
           </AnimatePresence>
+          
+          {/* Service Chatbot - Always visible for lead generation */}
+          <ServiceChatbot />
         </div>
       </div>
     </BrowserRouter>

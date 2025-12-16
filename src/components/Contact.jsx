@@ -28,8 +28,7 @@ const Contact = () => {
       icon: <FaEnvelope className="text-2xl" />,
       title: "Email Me",
       description: "Send me an email anytime",
-      link: "mailto:sbehera0330@gmail.com",
-      linkText: "sbehera0330@gmail.com",
+      link: "mailto:work.sibananda@gmail.com",
       gradient: "from-red-500 to-pink-500",
       bgGradient: "from-red-500/10 to-pink-500/10",
       delay: 0.2
@@ -39,7 +38,6 @@ const Contact = () => {
       title: "Call Me",
       description: "Mon - Fri, 9AM - 6PM",
       link: "tel:+919692199548",
-      linkText: "+91 96921 99548",
       gradient: "from-green-500 to-teal-500",
       bgGradient: "from-green-500/10 to-teal-500/10",
       delay: 0.3
@@ -49,7 +47,6 @@ const Contact = () => {
       title: "LinkedIn",
       description: "Let's connect professionally",
       link: "https://www.linkedin.com/in/sibananda-behera-276274222",
-      linkText: "Connect on LinkedIn",
       gradient: "from-blue-500 to-cyan-500",
       bgGradient: "from-blue-500/10 to-cyan-500/10",
       delay: 0.4
@@ -57,9 +54,8 @@ const Contact = () => {
     {
       icon: <FaMapMarkerAlt className="text-2xl" />,
       title: "Location",
-      description: "Based in Bhubaneswar",
+      description: "Bangalore",
       link: "https://maps.app.goo.gl/Dj3m3HnFsBDUuWUQA",
-      linkText: "View on Map",
       gradient: "from-purple-500 to-indigo-500",
       bgGradient: "from-purple-500/10 to-indigo-500/10",
       delay: 0.5
