@@ -1,42 +1,42 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
-import * as THREE from 'three';
+import React, { useRef, useEffect, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import * as THREE from "three";
 
 // Animation variants
 const slideInFromLeft = {
   hidden: { opacity: 0, x: -100 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     x: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const slideInFromRight = {
   hidden: { opacity: 0, x: 100 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     x: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const slideInFromBottom = {
   hidden: { opacity: 0, y: 50 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const staggerContainer = {
@@ -44,39 +44,39 @@ const staggerContainer = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15
-    }
-  }
+      staggerChildren: 0.15,
+    },
+  },
 };
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 // Add fadeInUp variant that was missing
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const Hero = () => {
   const moleculeCanvasRef = useRef(null);
-  const [activeTech, setActiveTech] = useState('Three.js');
+  const [activeTech, setActiveTech] = useState("Three.js");
   const [activeProcess, setActiveProcess] = useState(0);
   const [processProgress, setProcessProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -89,14 +89,20 @@ const Hero = () => {
   const buttonsRef = useRef(null);
   const rightContentRef = useRef(null);
   const processRef = useRef(null);
-  
+
   // Check if elements are in view - ALL with once: true for one-time animations
   const heroInView = useInView(heroRef, { once: true, amount: 0.1 });
   const nameInView = useInView(nameRef, { once: true, amount: 0.1 });
-  const descriptionInView = useInView(descriptionRef, { once: true, amount: 0.1 });
+  const descriptionInView = useInView(descriptionRef, {
+    once: true,
+    amount: 0.1,
+  });
   const skillsInView = useInView(skillsRef, { once: true, amount: 0.1 });
   const buttonsInView = useInView(buttonsRef, { once: true, amount: 0.1 });
-  const rightContentInView = useInView(rightContentRef, { once: true, amount: 0.1 });
+  const rightContentInView = useInView(rightContentRef, {
+    once: true,
+    amount: 0.1,
+  });
   const processInView = useInView(processRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
@@ -104,19 +110,19 @@ const Hero = () => {
       const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Function to scroll to projects section
   const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects');
+    const projectsSection = document.getElementById("projects");
     if (projectsSection) {
-      projectsSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      projectsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -126,101 +132,112 @@ const Hero = () => {
     {
       id: 0,
       title: "Idea & Research",
-      description: "Market analysis, AI technology research, and project conceptualization",
+      description:
+        "Market analysis, AI technology research, and project conceptualization",
       icon: "💡",
       color: "from-yellow-400 to-orange-500",
       bgColor: "bg-yellow-500/20",
-      borderColor: "border-yellow-500/30"
+      borderColor: "border-yellow-500/30",
     },
     {
       id: 1,
       title: "SRS Documentation",
-      description: "Technical specifications, AI architecture planning, and system design",
+      description:
+        "Technical specifications, AI architecture planning, and system design",
       icon: "📋",
       color: "from-blue-400 to-cyan-500",
       bgColor: "bg-blue-500/20",
-      borderColor: "border-blue-500/30"
+      borderColor: "border-blue-500/30",
     },
     {
       id: 2,
       title: "UI/UX Design",
-      description: "3D interface prototyping, user experience design, and interactive wireframes",
+      description:
+        "3D interface prototyping, user experience design, and interactive wireframes",
       icon: "🎨",
       color: "from-purple-400 to-pink-500",
       bgColor: "bg-purple-500/20",
-      borderColor: "border-purple-500/30"
+      borderColor: "border-purple-500/30",
     },
     {
       id: 3,
       title: "3D Development",
-      description: "Three.js implementation, WebGL optimization, and immersive experiences",
+      description:
+        "Three.js implementation, WebGL optimization, and immersive experiences",
       icon: "🔮",
       color: "from-green-400 to-emerald-500",
       bgColor: "bg-green-500/20",
-      borderColor: "border-green-500/30"
+      borderColor: "border-green-500/30",
     },
     {
       id: 4,
       title: "Frontend Development",
-      description: "React components, modern JavaScript, and responsive interfaces",
+      description:
+        "React components, modern JavaScript, and responsive interfaces",
       icon: "⚛️",
       color: "from-cyan-400 to-blue-500",
       bgColor: "bg-cyan-500/20",
-      borderColor: "border-cyan-500/30"
+      borderColor: "border-cyan-500/30",
     },
     {
       id: 5,
       title: "Backend Development",
-      description: "API development, server architecture, and business logic implementation",
+      description:
+        "API development, server architecture, and business logic implementation",
       icon: "🔧",
       color: "from-orange-400 to-red-500",
       bgColor: "bg-orange-500/20",
-      borderColor: "border-orange-500/30"
+      borderColor: "border-orange-500/30",
     },
     {
       id: 6,
       title: "Database Design",
-      description: "PostgreSQL/MySQL schema design, optimization, and data modeling",
+      description:
+        "PostgreSQL/MySQL schema design, optimization, and data modeling",
       icon: "🗃️",
       color: "from-emerald-400 to-green-500",
       bgColor: "bg-emerald-500/20",
-      borderColor: "border-emerald-500/30"
+      borderColor: "border-emerald-500/30",
     },
     {
       id: 7,
       title: "AI Integration",
-      description: "Machine learning APIs, AI technology implementation, and smart features",
+      description:
+        "Machine learning APIs, AI technology implementation, and smart features",
       icon: "🤖",
       color: "from-indigo-400 to-purple-500",
       bgColor: "bg-indigo-500/20",
-      borderColor: "border-indigo-500/30"
+      borderColor: "border-indigo-500/30",
     },
     {
       id: 8,
       title: "Testing & QA",
-      description: "Unit testing, integration testing, and performance optimization",
+      description:
+        "Unit testing, integration testing, and performance optimization",
       icon: "🧪",
       color: "from-red-400 to-pink-500",
       bgColor: "bg-red-500/20",
-      borderColor: "border-red-500/30"
+      borderColor: "border-red-500/30",
     },
     {
       id: 9,
       title: "Bug Fixing",
-      description: "Debugging, performance optimization, and cross-browser compatibility",
+      description:
+        "Debugging, performance optimization, and cross-browser compatibility",
       icon: "🐛",
       color: "from-amber-400 to-yellow-500",
       bgColor: "bg-amber-500/20",
-      borderColor: "border-amber-500/30"
+      borderColor: "border-amber-500/30",
     },
     {
       id: 10,
       title: "Deployment",
-      description: "CI/CD pipeline, cloud deployment, and production environment setup",
+      description:
+        "CI/CD pipeline, cloud deployment, and production environment setup",
       icon: "🚀",
       color: "from-teal-400 to-cyan-500",
       bgColor: "bg-teal-500/20",
-      borderColor: "border-teal-500/30"
+      borderColor: "border-teal-500/30",
     },
     {
       id: 11,
@@ -229,8 +246,8 @@ const Hero = () => {
       icon: "🏆",
       color: "from-lime-400 to-green-500",
       bgColor: "bg-lime-500/20",
-      borderColor: "border-lime-500/30"
-    }
+      borderColor: "border-lime-500/30",
+    },
   ];
 
   // Auto-rotate through process steps
@@ -246,7 +263,7 @@ const Hero = () => {
   useEffect(() => {
     const targetProgress = (activeProcess / (processSteps.length - 1)) * 100;
     const progressInterval = setInterval(() => {
-      setProcessProgress(prev => {
+      setProcessProgress((prev) => {
         const diff = targetProgress - prev;
         if (Math.abs(diff) < 0.5) return targetProgress;
         return prev + diff * 0.1;
@@ -262,10 +279,10 @@ const Hero = () => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, 400 / 400, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
+    const renderer = new THREE.WebGLRenderer({
       canvas: moleculeCanvasRef.current,
       alpha: true,
-      antialias: !isMobile
+      antialias: !isMobile,
     });
 
     const canvasSize = isMobile ? 300 : 400;
@@ -315,14 +332,14 @@ const Hero = () => {
       color: 0x3b82f6,
       shininess: 100,
       transparent: true,
-      opacity: 0.9
+      opacity: 0.9,
     });
 
     const backboneMaterial2 = new THREE.MeshPhongMaterial({
       color: 0x8b5cf6,
       shininess: 100,
       transparent: true,
-      opacity: 0.9
+      opacity: 0.9,
     });
 
     const backbone1 = new THREE.Mesh(backboneGeometry, backboneMaterial1);
@@ -331,28 +348,33 @@ const Hero = () => {
     dnaGroup.add(backbone1);
     dnaGroup.add(backbone2);
 
-    const basePairGeometry = new THREE.CylinderGeometry(0.03, 0.03, helixRadius * 2, 8);
-    
+    const basePairGeometry = new THREE.CylinderGeometry(
+      0.03,
+      0.03,
+      helixRadius * 2,
+      8
+    );
+
     const basePairMaterials = [
       new THREE.MeshPhongMaterial({ color: 0x10b981 }),
       new THREE.MeshPhongMaterial({ color: 0xf59e0b }),
       new THREE.MeshPhongMaterial({ color: 0xef4444 }),
-      new THREE.MeshPhongMaterial({ color: 0x06b6d4 })
+      new THREE.MeshPhongMaterial({ color: 0x06b6d4 }),
     ];
 
     for (let i = 0; i < basePairs; i++) {
       const t = (i / basePairs) * Math.PI * 2 * helixTurns;
       const height = (i - basePairs / 2) * 0.4;
-      
+
       const basePair = new THREE.Mesh(
-        basePairGeometry, 
+        basePairGeometry,
         basePairMaterials[i % basePairMaterials.length]
       );
-      
+
       basePair.position.set(0, 0, height);
       basePair.rotation.z = t;
       basePair.rotation.x = Math.PI / 2;
-      
+
       dnaGroup.add(basePair);
     }
 
@@ -363,20 +385,20 @@ const Hero = () => {
     const electronMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       emissive: 0x00ffff,
-      emissiveIntensity: 0.5
+      emissiveIntensity: 0.5,
     });
 
     for (let i = 0; i < 8; i++) {
       const electron = new THREE.Mesh(electronGeometry, electronMaterial);
       const angle = (i / 8) * Math.PI * 2;
       const radius = 2.5;
-      
+
       electron.position.set(
         Math.cos(angle) * radius,
         Math.sin(angle) * radius,
         0
       );
-      
+
       electron.userData.initialAngle = angle;
       electron.userData.speed = 2 + Math.random();
       electronGroup.add(electron);
@@ -400,7 +422,7 @@ const Hero = () => {
 
       const deltaMove = {
         x: event.clientX - previousMousePosition.x,
-        y: event.clientY - previousMousePosition.y
+        y: event.clientY - previousMousePosition.y,
       };
 
       dnaGroup.rotation.y += deltaMove.x * 0.01;
@@ -408,13 +430,13 @@ const Hero = () => {
 
       previousMousePosition = {
         x: event.clientX,
-        y: event.clientY
+        y: event.clientY,
       };
     };
 
-    moleculeCanvasRef.current.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('mousemove', handleMouseMove);
+    moleculeCanvasRef.current.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mousemove", handleMouseMove);
 
     const clock = new THREE.Clock();
 
@@ -427,9 +449,11 @@ const Hero = () => {
       }
 
       electronGroup.children.forEach((electron, index) => {
-        const angle = electron.userData.initialAngle + elapsedTime * electron.userData.speed;
+        const angle =
+          electron.userData.initialAngle +
+          elapsedTime * electron.userData.speed;
         const radius = 2.5 + Math.sin(elapsedTime * 2 + index) * 0.3;
-        
+
         electron.position.set(
           Math.cos(angle) * radius,
           Math.sin(angle) * radius,
@@ -451,29 +475,19 @@ const Hero = () => {
       renderer.setSize(newCanvasSize, newCanvasSize);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      moleculeCanvasRef.current?.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
+      moleculeCanvasRef.current?.removeEventListener(
+        "mousedown",
+        handleMouseDown
+      );
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
       renderer.dispose();
     };
   }, [isMobile]);
-
-  const skills = ['Three.js', 'React', 'JavaScript', 'PostgreSQL', 'AI Research', 'WebGL', 'Node.js', 'GitHub'];
-
-  const techDescriptions = {
-    'Three.js': 'Creating immersive 3D web experiences and interactive visualizations',
-    'React': 'Building dynamic, scalable user interfaces with modern frameworks', 
-    'JavaScript': 'Full-stack development with ES6+ features and advanced patterns',
-    'PostgreSQL': 'Designing robust database architectures and optimized queries',
-    'AI Research': 'Exploring machine learning and AI integration in web applications',
-    'WebGL': 'High-performance 3D graphics and real-time rendering',
-    'Node.js': 'Server-side development and API architecture',
-    'GitHub': 'Version control and collaborative development workflows'
-  };
 
   return (
     <div ref={heroRef} className="relative min-h-screen overflow-hidden">
@@ -490,7 +504,9 @@ const Hero = () => {
                 className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-full mb-3 lg:mb-4"
               >
                 <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-blue-300 text-xs lg:text-sm font-mono">Available for Freelance Projects</span>
+                <span className="text-blue-300 text-xs lg:text-sm font-mono">
+                  Available for Freelance Projects
+                </span>
               </motion.div>
 
               {/* Name - Slide from Left */}
@@ -503,26 +519,27 @@ const Hero = () => {
               >
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
                   SIBANANDA
-                  <motion.span 
+                  <motion.span
                     className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-1 lg:mt-2 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl"
-                    animate={{ 
-                      backgroundPosition: ['0%', '100%', '0%'] 
+                    animate={{
+                      backgroundPosition: ["0%", "100%", "0%"],
                     }}
-                    transition={{ 
-                      duration: 4, 
+                    transition={{
+                      duration: 4,
                       repeat: Infinity,
-                      ease: "easeInOut"
+                      ease: "easeInOut",
                     }}
-                    style={{ 
-                      backgroundSize: '300% 100%' 
+                    style={{
+                      backgroundSize: "300% 100%",
                     }}
                   >
                     BEHERA
                   </motion.span>
                 </h1>
-                
+
                 <div className="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed">
-                  <span className="text-blue-400">Full-Stack Developer</span> • 3D Web Specialist • AI Research Enthusiast
+                  <span className="text-blue-400">Full-Stack Developer</span> •
+                  3D Web Specialist • AI Research Enthusiast
                 </div>
               </motion.div>
 
@@ -534,32 +551,24 @@ const Hero = () => {
                 animate={descriptionInView ? "show" : "hidden"}
               >
                 <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed backdrop-blur-sm bg-slate-900/30 p-3 lg:p-4 rounded-xl border border-slate-700/50">
-                  Crafting <span className="text-blue-400">immersive 3D web experiences</span> while pioneering 
-                  <span className="text-purple-400"> AI integration</span> in modern applications. I transform complex 
-                  ideas into <span className="text-cyan-400">interactive digital realities</span> through cutting-edge 
-                  technologies and innovative solutions.
+                  Crafting{" "}
+                  <span className="text-blue-400">
+                    bespoke digital solutions
+                  </span>{" "}
+                  that blend
+                  <span className="text-purple-400">
+                    {" "}
+                    creative innovation
+                  </span>{" "}
+                  with
+                  <span className="text-cyan-400"> technical excellence</span>.
+                  From concept to deployment, I build
+                  <span className="text-green-400">
+                    {" "}
+                    scalable applications
+                  </span>{" "}
+                  that stand out in today's competitive landscape.
                 </p>
-              </motion.div>
-
-              {/* Skills Tags - Staggered One by One */}
-              <motion.div
-                ref={skillsRef}
-                variants={staggerContainer}
-                initial="hidden"
-                animate={skillsInView ? "show" : "hidden"}
-                className="flex flex-wrap gap-1.5 lg:gap-2"
-              >
-                {skills.map((skill, index) => (
-                  <motion.span
-                    key={skill}
-                    variants={scaleIn}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    onHoverStart={() => setActiveTech(skill)}
-                    className="px-2.5 py-1 lg:px-3 lg:py-1.5 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full text-slate-300 text-xs lg:text-sm hover:border-blue-500 hover:bg-blue-500/20 transition-all cursor-pointer"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
               </motion.div>
 
               {/* Buttons - Slide from Bottom */}
@@ -570,7 +579,7 @@ const Hero = () => {
                 animate={buttonsInView ? "show" : "hidden"}
                 className="flex flex-col sm:flex-row gap-2 lg:gap-3 pt-4 lg:pt-6"
               >
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={scrollToProjects}
@@ -591,11 +600,11 @@ const Hero = () => {
             >
               {/* DNA Helix Canvas */}
               <div className="relative w-full max-w-[300px] sm:max-w-[350px] lg:max-w-md aspect-square">
-                <canvas 
-                  ref={moleculeCanvasRef} 
+                <canvas
+                  ref={moleculeCanvasRef}
                   className="w-full h-full cursor-grab active:cursor-grabbing rounded-2xl bg-slate-900/20 backdrop-blur-sm"
                 />
-                
+
                 {/* Current Process Overlay */}
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -605,7 +614,9 @@ const Hero = () => {
                     exit={{ opacity: 0, y: -20 }}
                     className="absolute top-2 lg:top-4 left-1/2 transform -translate-x-1/2 bg-slate-900/80 backdrop-blur-xl rounded-xl p-3 lg:p-4 border border-slate-700/50 min-w-[180px] lg:min-w-[220px] text-center shadow-2xl"
                   >
-                    <div className="text-xs lg:text-sm text-slate-400 mb-1">Current Phase</div>
+                    <div className="text-xs lg:text-sm text-slate-400 mb-1">
+                      Current Phase
+                    </div>
                     <div className="text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                       {processSteps[activeProcess]?.title}
                     </div>
@@ -615,40 +626,28 @@ const Hero = () => {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Tech Description Overlay */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute bottom-2 lg:bottom-4 left-1/2 transform -translate-x-1/2 bg-slate-900/80 backdrop-blur-xl rounded-xl p-2 lg:p-3 border border-slate-700/50 max-w-[240px] lg:max-w-[280px] text-center"
-                >
-                  <div className="text-xs text-slate-400 mb-1">Expertise</div>
-                  <div className="text-xs lg:text-sm text-slate-200 font-medium leading-tight">
-                    {techDescriptions[activeTech]}
-                  </div>
-                </motion.div>
-
                 {/* Floating Process Indicators */}
                 <motion.div
                   animate={{
                     rotate: 360,
-                    scale: [1, 1.1, 1]
+                    scale: [1, 1.1, 1],
                   }}
                   transition={{
                     duration: 8,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "linear",
                   }}
                   className="absolute top-4 lg:top-8 right-4 lg:right-8 w-3 h-3 lg:w-4 lg:h-4 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50"
                 />
                 <motion.div
                   animate={{
                     rotate: -360,
-                    scale: [1.1, 1, 1.1]
+                    scale: [1.1, 1, 1.1],
                   }}
                   transition={{
                     duration: 6,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "linear",
                   }}
                   className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 w-2 h-2 lg:w-3 lg:h-3 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50"
                 />
@@ -686,22 +685,23 @@ const Hero = () => {
             className="mt-12 lg:mt-16 xl:mt-24"
           >
             <div className="text-center mb-6 lg:mb-8">
-              <motion.h2 
+              <motion.h2
                 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 lg:mb-3"
                 variants={fadeInUp}
               >
                 End-to-End Development Process
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className="text-slate-300 text-sm sm:text-base lg:text-lg px-4"
                 variants={fadeInUp}
               >
-                From innovative concept to immersive 3D deployment - transforming ideas into digital excellence
+                From innovative concept to immersive 3D deployment -
+                transforming ideas into digital excellence
               </motion.p>
             </div>
 
             {/* Responsive Process Steps Grid */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-4"
               variants={staggerContainer}
             >
@@ -713,17 +713,17 @@ const Hero = () => {
                   animate={processInView ? "show" : "hidden"}
                   transition={{ delay: index * 0.1 }}
                   className={`p-3 lg:p-4 rounded-xl border backdrop-blur-sm cursor-pointer transition-all ${
-                    activeProcess === index 
-                      ? `${step.bgColor} ${step.borderColor} shadow-lg scale-105 -translate-y-1` 
-                      : 'bg-slate-800/30 border-slate-600/30 hover:border-slate-500/50'
+                    activeProcess === index
+                      ? `${step.bgColor} ${step.borderColor} shadow-lg scale-105 -translate-y-1`
+                      : "bg-slate-800/30 border-slate-600/30 hover:border-slate-500/50"
                   }`}
                   onClick={() => setActiveProcess(index)}
                 >
                   <div className="flex items-center gap-2 lg:gap-3">
                     <motion.div
-                      animate={{ 
+                      animate={{
                         scale: activeProcess === index ? [1, 1.2, 1] : 1,
-                        rotate: activeProcess === index ? [0, 5, -5, 0] : 0
+                        rotate: activeProcess === index ? [0, 5, -5, 0] : 0,
                       }}
                       transition={{ duration: 0.5 }}
                       className="text-xl lg:text-2xl"
@@ -731,11 +731,13 @@ const Hero = () => {
                       {step.icon}
                     </motion.div>
                     <div className="flex-1 min-w-0">
-                      <h3 className={`font-semibold text-sm lg:text-base ${
-                        activeProcess === index 
-                          ? 'text-white' 
-                          : 'text-slate-300'
-                      }`}>
+                      <h3
+                        className={`font-semibold text-sm lg:text-base ${
+                          activeProcess === index
+                            ? "text-white"
+                            : "text-slate-300"
+                        }`}
+                      >
                         {step.title}
                       </h3>
                       <p className="text-xs lg:text-sm text-slate-400 mt-0.5 lg:mt-1 leading-tight">
