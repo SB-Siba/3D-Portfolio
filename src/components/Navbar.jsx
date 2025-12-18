@@ -14,17 +14,17 @@ const Navbar1 = () => {
   useEffect(() => {
     if (toggle) {
       const scrollY = window.scrollY;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
+      document.body.style.width = "100%";
     } else {
       const scrollY = document.body.style.top;
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
     }
   }, [toggle]);
 
@@ -63,8 +63,8 @@ const Navbar1 = () => {
       x: "100%",
       transition: {
         duration: 0.8,
-        ease: [0.76, 0, 0.24, 1]
-      }
+        ease: [0.76, 0, 0.24, 1],
+      },
     },
     open: {
       x: 0,
@@ -72,9 +72,9 @@ const Navbar1 = () => {
         duration: 0.8,
         ease: [0.76, 0, 0.24, 1],
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -82,17 +82,17 @@ const Navbar1 = () => {
       x: 100,
       opacity: 0,
       transition: {
-        duration: 0.4
-      }
+        duration: 0.4,
+      },
     },
     open: {
       x: 0,
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "backOut"
-      }
-    }
+        ease: "backOut",
+      },
+    },
   };
 
   const glowVariants = {
@@ -102,9 +102,9 @@ const Navbar1 = () => {
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   // Icon animations
@@ -114,14 +114,16 @@ const Navbar1 = () => {
     { emoji: "💼", hover: { scale: 1.3, rotate: -180 } },
     { emoji: "🛠️", hover: { scale: 1.6, rotate: 360 } },
     { emoji: "🌟", hover: { scale: 1.5, rotate: 45 } },
-    { emoji: "📞", hover: { scale: 1.4, rotate: -90 } }
+    { emoji: "📞", hover: { scale: 1.4, rotate: -90 } },
   ];
 
   return (
     <motion.nav
-      className={`${styles.paddingX} w-full flex items-center fixed top-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-slate-700/30 py-2" 
+      className={`${
+        styles.paddingX
+      } w-full flex items-center fixed top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-slate-900/20 backdrop-blur-2xl shadow-2xl shadow-cyan-500/10 border-b border-cyan-500/20 py-2"
           : "bg-transparent py-4"
       }`}
       initial={{ y: -100, opacity: 0 }}
@@ -146,18 +148,18 @@ const Navbar1 = () => {
               className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
               animate={{
                 scale: scrolled ? [1, 1.05, 1] : [1, 1.1, 1],
-                opacity: scrolled ? [0.5, 0.8, 0.5] : [0.5, 0.9, 0.5]
+                opacity: scrolled ? [0.5, 0.8, 0.5] : [0.5, 0.9, 0.5],
               }}
               transition={{
                 duration: scrolled ? 2 : 3,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             />
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-sm"
               animate={{
-                opacity: scrolled ? 0.4 : 0.6
+                opacity: scrolled ? 0.4 : 0.6,
               }}
               transition={{ duration: 0.3 }}
             />
@@ -169,28 +171,28 @@ const Navbar1 = () => {
               }`}
             />
           </motion.div>
-          
+
           {/* Text Section */}
           <div className="flex flex-col">
-            <motion.span 
+            <motion.span
               className={`font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 ${
                 scrolled ? "text-lg" : "text-xl"
               }`}
               whileHover={{ scale: 1.05 }}
               animate={{
-                letterSpacing: scrolled ? "0.025em" : "0.05em"
+                letterSpacing: scrolled ? "0.025em" : "0.05em",
               }}
               transition={{ duration: 0.3 }}
             >
               SB SIBA | SIBANANDA BEHERA
             </motion.span>
-            <motion.span 
+            <motion.span
               className="text-slate-300 font-medium hidden sm:block transition-all duration-300"
               initial={{ opacity: 0 }}
-              animate={{ 
+              animate={{
                 opacity: 1,
                 fontSize: scrolled ? "0.75rem" : "0.875rem",
-                marginTop: scrolled ? "0.125rem" : "0.25rem"
+                marginTop: scrolled ? "0.125rem" : "0.25rem",
               }}
               transition={{ delay: 0.4, duration: 0.3 }}
             >
@@ -222,19 +224,19 @@ const Navbar1 = () => {
                 }`}
                 onClick={() => setActive(nav.title)}
                 style={{
-                  padding: scrolled ? "0.375rem 0.75rem" : "0.5rem 1rem"
+                  padding: scrolled ? "0.375rem 0.75rem" : "0.5rem 1rem",
                 }}
               >
                 {/* Link text with responsive font size */}
                 <motion.span
                   animate={{
-                    fontSize: scrolled ? "14px" : "16px"
+                    fontSize: scrolled ? "14px" : "16px",
                   }}
                   transition={{ duration: 0.3 }}
                 >
                   {nav.title}
                 </motion.span>
-                
+
                 {/* Animated underline - responsive height */}
                 <motion.div
                   className={`absolute bottom-0 left-0 bg-gradient-to-r from-blue-500 to-cyan-500 ${
@@ -242,17 +244,22 @@ const Navbar1 = () => {
                   }`}
                   animate={{
                     height: scrolled ? "2px" : "3px",
-                    width: hoveredLink === index ? "100%" : active === nav.title ? "100%" : "0%"
+                    width:
+                      hoveredLink === index
+                        ? "100%"
+                        : active === nav.title
+                        ? "100%"
+                        : "0%",
                   }}
                   transition={{ duration: 0.3 }}
                 />
-                
+
                 {/* Hover background effect - responsive opacity */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg -z-10"
                   animate={{
                     opacity: hoveredLink === index ? (scrolled ? 0.8 : 1) : 0,
-                    scale: hoveredLink === index ? 1 : 0.8
+                    scale: hoveredLink === index ? 1 : 0.8,
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -265,8 +272,8 @@ const Navbar1 = () => {
         <motion.div className="md:hidden flex flex-1 justify-end items-center">
           <motion.button
             className={`relative flex items-center justify-center bg-slate-900/80 backdrop-blur-xl rounded-xl border transition-all duration-300 group ${
-              scrolled 
-                ? "w-12 h-12 border-cyan-400/20 hover:border-cyan-400/40" 
+              scrolled
+                ? "w-12 h-12 border-cyan-400/20 hover:border-cyan-400/40"
                 : "w-14 h-14 border-cyan-400/30 hover:border-cyan-400/60"
             }`}
             onClick={() => setToggle(!toggle)}
@@ -276,17 +283,17 @@ const Navbar1 = () => {
             {/* Animated border glow - responsive intensity */}
             <motion.div
               className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500"
-              animate={{ 
+              animate={{
                 rotate: [0, 360],
-                opacity: scrolled ? [0, 0.15, 0] : [0, 0.25, 0]
+                opacity: scrolled ? [0, 0.15, 0] : [0, 0.25, 0],
               }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity, 
-                ease: "linear" 
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear",
               }}
             />
-            
+
             <AnimatePresence mode="wait">
               {toggle ? (
                 <motion.img
@@ -330,7 +337,7 @@ const Navbar1 = () => {
                   exit={{ opacity: 0 }}
                   onClick={() => setToggle(false)}
                 />
-                
+
                 {/* Sidebar */}
                 <motion.div
                   className="fixed top-0 right-0 h-full w-80 max-w-full bg-slate-900/95 backdrop-blur-2xl border-l border-cyan-400/20 z-50 shadow-2xl shadow-cyan-400/10"
@@ -352,7 +359,7 @@ const Navbar1 = () => {
                       animate="animate"
                       transition={{ delay: 1 }}
                     />
-                    
+
                     {/* Grid Pattern */}
                     <div className="absolute inset-0 opacity-10">
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/5 to-transparent" />
@@ -374,11 +381,11 @@ const Navbar1 = () => {
                           className="absolute inset-0 bg-cyan-400 rounded-full blur-md"
                           animate={{
                             scale: [1, 1.2, 1],
-                            opacity: [0.3, 0.6, 0.3]
+                            opacity: [0.3, 0.6, 0.3],
                           }}
                           transition={{
                             duration: 2,
-                            repeat: Infinity
+                            repeat: Infinity,
                           }}
                         />
                         <img
@@ -388,13 +395,13 @@ const Navbar1 = () => {
                         />
                       </motion.div>
                       <div>
-                        <motion.h2 
+                        <motion.h2
                           className="text-white font-bold text-lg bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
                           whileHover={{ scale: 1.05 }}
                         >
                           SB PORTFOLIO
                         </motion.h2>
-                        <motion.p 
+                        <motion.p
                           className="text-slate-300 text-sm mt-1"
                           animate={{ opacity: [0.6, 1, 0.6] }}
                           transition={{ duration: 2, repeat: Infinity }}
@@ -426,34 +433,34 @@ const Navbar1 = () => {
                           {/* Enhanced Holographic Effect */}
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100"
-                            whileHover={{ 
+                            whileHover={{
                               scale: 1.05,
-                              rotate: [0, 1, -1, 0]
+                              rotate: [0, 1, -1, 0],
                             }}
-                            transition={{ 
+                            transition={{
                               duration: 0.5,
                               rotate: {
                                 duration: 0.3,
-                                repeat: 1
-                              }
+                                repeat: 1,
+                              },
                             }}
                           />
-                          
+
                           {/* Pulse effect on active */}
                           {active === nav.title && (
                             <motion.div
                               className="absolute inset-0 bg-cyan-400/10 rounded-xl"
                               animate={{
                                 opacity: [0.3, 0.6, 0.3],
-                                scale: [1, 1.02, 1]
+                                scale: [1, 1.02, 1],
                               }}
                               transition={{
                                 duration: 2,
-                                repeat: Infinity
+                                repeat: Infinity,
                               }}
                             />
                           )}
-                          
+
                           {/* Animated Icon */}
                           <motion.div
                             className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg ${
@@ -462,18 +469,18 @@ const Navbar1 = () => {
                                 : "bg-slate-700/50 text-slate-300 group-hover:bg-cyan-400/10 group-hover:text-cyan-300"
                             }`}
                             whileHover={iconAnimations[index].hover}
-                            transition={{ 
-                              type: "spring", 
+                            transition={{
+                              type: "spring",
                               stiffness: 400,
-                              damping: 10 
+                              damping: 10,
                             }}
                             animate={{
-                              y: active === nav.title ? [0, -2, 0] : 0
+                              y: active === nav.title ? [0, -2, 0] : 0,
                             }}
                           >
                             {iconAnimations[index].emoji}
                           </motion.div>
-                          
+
                           <span className="font-semibold relative z-10 flex-1">
                             {nav.title}
                           </span>
@@ -490,22 +497,22 @@ const Navbar1 = () => {
                                 className="w-3 h-3 bg-cyan-400 rounded-full"
                                 animate={{
                                   scale: [1, 1.5, 1],
-                                  opacity: [1, 0.7, 1]
+                                  opacity: [1, 0.7, 1],
                                 }}
                                 transition={{
                                   duration: 2,
-                                  repeat: Infinity
+                                  repeat: Infinity,
                                 }}
                               />
                               <motion.div
                                 className="absolute inset-0 bg-cyan-400 rounded-full blur-sm"
                                 animate={{
                                   scale: [1, 2, 1],
-                                  opacity: [0.5, 0, 0.5]
+                                  opacity: [0.5, 0, 0.5],
                                 }}
                                 transition={{
                                   duration: 2,
-                                  repeat: Infinity
+                                  repeat: Infinity,
                                 }}
                               />
                             </motion.div>
@@ -543,12 +550,12 @@ const Navbar1 = () => {
                     <div className="text-center">
                       <motion.p
                         className="text-cyan-400 font-semibold text-lg mb-1"
-                        animate={{ 
+                        animate={{
                           textShadow: [
                             "0 0 5px rgba(34, 211, 238, 0.5)",
-                            "0 0 20px rgba(34, 211, 238, 0.8)", 
-                            "0 0 5px rgba(34, 211, 238, 0.5)"
-                          ]
+                            "0 0 20px rgba(34, 211, 238, 0.8)",
+                            "0 0 5px rgba(34, 211, 238, 0.5)",
+                          ],
                         }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
@@ -563,18 +570,18 @@ const Navbar1 = () => {
                       </motion.p>
                       {/* Animated dots */}
                       <motion.div className="flex justify-center gap-1 mt-2">
-                        {[0, 1, 2].map(dot => (
+                        {[0, 1, 2].map((dot) => (
                           <motion.div
                             key={dot}
                             className="w-1 h-1 bg-cyan-400 rounded-full"
                             animate={{
                               scale: [1, 1.5, 1],
-                              opacity: [0.5, 1, 0.5]
+                              opacity: [0.5, 1, 0.5],
                             }}
                             transition={{
                               duration: 1.5,
                               repeat: Infinity,
-                              delay: dot * 0.2
+                              delay: dot * 0.2,
                             }}
                           />
                         ))}

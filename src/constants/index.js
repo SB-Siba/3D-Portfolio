@@ -1,3 +1,4 @@
+// constants/index.js
 import {
   mobile,
   backend,
@@ -55,21 +56,238 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Website Development",
     icon: web,
+    description: "Complete website creation from initial concept to final deployment. Professional, responsive websites that engage visitors and convert them into customers.",
+    features: [
+      "Custom Design & Development",
+      "E-commerce Integration",
+      "Mobile-First Approach",
+      "SEO Optimization",
+      "Fast Loading Speed",
+      "Ongoing Maintenance"
+    ]
   },
   {
-    title: "React Developer",
-    icon: mobile,
-  },
-  {
-    title: "Python Developer",
+    title: "Business Applications",
     icon: backend,
+    description: "Custom software solutions that streamline your business operations, automate processes, and improve productivity across your organization.",
+    features: [
+      "Custom Software Development",
+      "Workflow Automation",
+      "Database Management",
+      "API Integration",
+      "Cloud Deployment",
+      "Scalable Solutions"
+    ]
   },
   {
-    title: "Video Editor",
-    icon: creator,
+    title: "UI/UX Design",
+    icon: mobile,
+    description: "Creating intuitive, user-friendly interfaces that provide exceptional experiences and drive engagement across all devices.",
+    features: [
+      "User Interface Design",
+      "User Experience Strategy",
+      "Interactive Prototypes",
+      "Responsive Layouts",
+      "User Testing",
+      "Brand Consistency"
+    ]
   },
+  {
+    title: "Digital Solutions",
+    icon: creator,
+    description: "Comprehensive digital services that enhance your online presence and help you connect with your target audience effectively.",
+    features: [
+      "Content Creation",
+      "Digital Marketing Support",
+      "Video Production",
+      "Brand Development",
+      "Social Media Assets",
+      "Performance Analytics"
+    ]
+  }
+];
+
+export const nicheCategories = [
+  {
+    category: "E-commerce & Retail",
+    niches: [
+      "E-commerce stores",
+      "Dropshipping stores",
+      "Amazon sellers",
+      "Print-on-demand shops",
+      "Furniture retailers",
+      "Clothing brands",
+      "Jewelry ecom stores",
+      "Pet supply shops",
+      "Baby product retailers",
+      "Electronics sellers",
+      "Fashion boutiques",
+      "Grocery delivery services",
+      "Meal kit brands",
+      "Supplement sellers",
+      "Beauty product brands",
+      "Etsy/Redbubble SEO listings"
+    ]
+  },
+  {
+    category: "Digital Marketing & Agencies",
+    niches: [
+      "Digital marketing agencies",
+      "Social media agencies",
+      "SEO agencies",
+      "Email marketing agencies",
+      "Performance ad agencies",
+      "Content agencies",
+      "Advertising agencies",
+      "PR firms",
+      "Influencer agencies"
+    ]
+  },
+  {
+    category: "Health & Wellness",
+    niches: [
+      "Healthcare providers",
+      "Fitness coaches",
+      "Nutritionists",
+      "Yoga studios",
+      "Mental health therapists",
+      "Telehealth clinics",
+      "Dental clinics",
+      "Veterinary services",
+      "Pharmacies",
+      "Wellness retreats",
+      "Spa chains",
+      "Gym franchises",
+      "Personal trainers",
+      "Weight loss centers",
+      "Cosmetic surgery practices"
+    ]
+  },
+  {
+    category: "Education & Coaching",
+    niches: [
+      "Online course creators",
+      "Language tutors",
+      "Career coaches",
+      "Edtech startups",
+      "Test prep academies",
+      "Coaching businesses",
+      "Business coaching programs",
+      "Coding bootcamps",
+      "Design schools",
+      "Music schools",
+      "Art academies",
+      "Cooking classes",
+      "Driving schools",
+      "Schools",
+      "Universities"
+    ]
+  },
+  {
+    category: "Professional Services & Finance",
+    niches: [
+      "Law firms",
+      "Accounting firms",
+      "Consulting firms",
+      "Financial advisors",
+      "Insurance agencies",
+      "Mortgage brokers",
+      "Human resources firms",
+      "Recruitment agencies",
+      "Executive search firms",
+      "Payroll services",
+      "Tax preparation services",
+      "Bookkeeping agencies",
+      "Virtual CFO firms"
+    ]
+  },
+  {
+    category: "Real Estate & Construction",
+    niches: [
+      "Real estate agencies",
+      "Interior designers",
+      "Architects",
+      "Construction firms",
+      "Property management",
+      "Home renovation services",
+      "Commercial real estate"
+    ]
+  },
+  {
+    category: "Tech & Software",
+    niches: [
+      "SaaS startups",
+      "App developers",
+      "Fintech apps",
+      "Fintech startups",
+      "Software development firms",
+      "Software consultancies",
+      "Gaming studios",
+      "Tech startups",
+      "B2B SaaS companies",
+      "IT service providers"
+    ]
+  },
+  {
+    category: "Hospitality & Food",
+    niches: [
+      "Restaurants",
+      "Hotels",
+      "Wedding planners",
+      "Event organizers",
+      "Travel agencies",
+      "Tourism boards",
+      "Food delivery brands",
+      "Craft beer breweries",
+      "Coffee roasters",
+      "Organic farms",
+      "Food trucks",
+      "Mobile catering services",
+      "Wedding caterers"
+    ]
+  },
+  {
+    category: "Creative & Media",
+    niches: [
+      "YouTubers",
+      "Podcasters",
+      "Influencers",
+      "Music artists",
+      "Photographers",
+      "Authors",
+      "Book publishers",
+      "Media companies",
+      "Animation houses",
+      "Event production companies"
+    ]
+  },
+  {
+    category: "Non-profits & Sustainability",
+    niches: [
+      "Non-profits",
+      "Sustainability brands",
+      "Nonprofit foundations",
+      "Charity organizations",
+      "Religious institutions",
+      "Community centers",
+      "Waste management services"
+    ]
+  },
+  {
+    category: "Other Services",
+    niches: [
+      "Salons",
+      "Local businesses",
+      "Engineering consultancies",
+      "Automotive dealerships",
+      "Automotive brands",
+      "Taxi services",
+      "Transportation logistics",
+      "Logistics companies"
+    ]
+  }
 ];
 
 const technologies = [
@@ -111,10 +329,10 @@ const experiences = [
     iconBg: "#383E56",
     date: "April 2024 - April 2025",
     points: [
-      "Developing and maintaining backend applications using Python and Django.",
-      "Building RESTful APIs for seamless integration with front-end applications.",
-      "Optimizing database queries and improving system performance.",
-      "Collaborating with cross-functional teams to ensure robust and scalable software solutions.",
+      "Developed and maintained robust web applications using modern frameworks.",
+      "Built secure and scalable APIs for seamless data integration between systems.",
+      "Optimized application performance and improved database efficiency.",
+      "Collaborated with teams to deliver reliable software solutions on schedule.",
     ],
   },
   // {
@@ -213,31 +431,27 @@ const projects = [
   {
     name: "Hospital Job Management",
     description:
-      "A platform for managing job recruitment and employee distribution. Admins can add users, clients, job posts, quotations, and invoices while assigning employees. Candidates can apply for jobs and track their status, while clients can view assigned employees.",
+      "A comprehensive platform for managing healthcare recruitment and staff distribution. Streamlines the process of posting jobs, managing applications, assigning employees to hospitals, and handling client relationships with automated invoicing and reporting.",
     tags: [
       {
-        name: "HTML",
+        name: "Web Development",
         color: "blue-text-gradient",
       },
       {
-        name: "CSS",
+        name: "Database Design",
         color: "green-text-gradient",
       },
       {
-        name: "Bootstrap",
+        name: "Business Automation",
         color: "pink-text-gradient",
       },
       {
-        name: "PostgreSQL",
+        name: "User Management",
         color: "orange-text-gradient",
       },
       {
-        name: "Python",
+        name: "Reporting System",
         color: "cyan-text-gradient",
-      },
-      {
-        name: "Django",
-        color: "magenta-text-gradient",
       },
     ],
     image: carrent,
@@ -246,31 +460,27 @@ const projects = [
   {
     name: "Institute Management System",
     description:
-      "This Institute platform streamlines student, course, and certification management for admins and students. Admins can handle admissions, fees, courses, and certificates efficiently, while students access course details, support, and download approved certificates—all with a user-friendly experience.",
+      "A complete educational platform for managing student enrollment, course administration, fee collection, and certificate generation. Provides separate interfaces for administrators, students, and faculty with automated processes and digital documentation.",
     tags: [
       {
-        name: "HTML",
+        name: "Education Technology",
         color: "orange-text-gradient",
       },
       {
-        name: "CSS",
+        name: "Administrative System",
         color: "indigo-text-gradient",
       },
       {
-        name: "Bootstrap",
+        name: "Digital Certification",
         color: "cyan-text-gradient",
       },
       {
-        name: "PostgreSQL",
+        name: "Student Portal",
         color: "green-text-gradient",
       },
       {
-        name: "Python",
+        name: "Payment Processing",
         color: "blue-text-gradient",
-      },
-      {
-        name: "Django",
-        color: "pink-text-gradient",
       },
     ],
     image: jobit,
@@ -279,30 +489,26 @@ const projects = [
   {
     name: "Horticulture System",
     description:
-      "The CHES Bhubaneswar platform streamlines horticultural management for admins, rooftop gardeners, users, and vendors. Admins oversee users, vendors, and activities, while RTGs track plant growth and receive expert guidance. Users engage with green initiatives, and vendors manage their products. The Green Coin system rewards eco-friendly actions, creating a seamless and sustainable gardening ecosystem.",
+      "An innovative platform for urban gardening and sustainable agriculture management. Connects rooftop gardeners with experts, tracks plant growth, manages vendor products, and implements a reward system for eco-friendly practices through a Green Coin mechanism.",
     tags: [
       {
-        name: "HTML",
+        name: "Sustainability",
         color: "magenta-text-gradient",
       },
       {
-        name: "CSS",
+        name: "Community Platform",
         color: "pink-text-gradient",
       },
       {
-        name: "Bootstrap",
+        name: "Agricultural Tech",
         color: "bronze-text-gradient",
       },
       {
-        name: "PostgreSQL",
+        name: "Gamification",
         color: "blue-text-gradient",
       },
       {
-        name: "Python",
-        color: "indigo-text-gradient",
-      },
-      {
-        name: "Django",
+        name: "Expert Network",
         color: "green-text-gradient",
       },
     ],
@@ -312,71 +518,78 @@ const projects = [
   {
     name: "E-commerce Shopping Platform",
     description:
-      "Developed an eCommerce platform with category-based product listings. Integrated Razorpay for secure online payments (test mode). Built admin functionality to manage products (add/edit/delete). Designed customer-facing pages for browsing and purchasing products. Implemented responsive layouts using HTML and CSS.",
+      "A fully-featured online shopping platform with category management, product listings, secure payment processing, and administrative controls. Includes customer accounts, shopping cart functionality, and order management for seamless online retail operations.",
     tags: [
       {
-        name: "Python",
+        name: "E-commerce",
         color: "blue-text-gradient",
       },
       {
-        name: "Django",
+        name: "Online Retail",
         color: "green-text-gradient",
       },
       {
-        name: "PostgreSQL",
+        name: "Payment Integration",
         color: "pink-text-gradient",
       },
       {
-        name: "HTML",
+        name: "Inventory Management",
         color: "orange-text-gradient",
       },
       {
-        name: "CSS",
+        name: "Customer Experience",
         color: "cyan-text-gradient",
       },
-      {
-        name: "Razorpay",
-        color: "indigo-text-gradient",
-      },
     ],
-    image:
-      ecommerce,
+    image: ecommerce,
     source_code_link: "https://github.com/SB-Siba/E-Commerce_SB",
   },
   {
     name: "Premier Aviation",
     description:
-      "A modern static website for Premier Aviation services built with React and Tailwind CSS. Features responsive design, smooth animations, and optimized performance for aviation services presentation.",
+      "A modern, responsive website for aviation services featuring smooth animations, optimized performance, and professional presentation. Showcases services, company information, and contact details with an engaging user interface.",
     tags: [
       {
-        name: "React",
+        name: "Website Design",
         color: "blue-text-gradient",
       },
       {
-        name: "Tailwind CSS",
+        name: "Responsive Layout",
         color: "cyan-text-gradient",
       },
       {
-        name: "Node.js",
+        name: "Performance Optimization",
         color: "green-text-gradient",
       },
       {
-        name: "JavaScript",
+        name: "Corporate Website",
         color: "yellow-text-gradient",
       },
     ],
-    image:
-      aviation,
+    image: aviation,
     source_code_link: "https://premieraviation.in/",
   },
   {
-    name: "Sample Project Placeholder",
+    name: "Portfolio Website",
     description:
-      "This is a placeholder project added so the featured projects section can show six items. Replace this entry with your real project details.",
+      "A dynamic 3D portfolio website showcasing professional work with interactive elements, smooth animations, and modern design principles. Demonstrates capabilities in creating engaging digital experiences.",
     tags: [
-      { name: "React", color: "blue-text-gradient" },
-      { name: "Tailwind", color: "cyan-text-gradient" },
-      { name: "Demo", color: "green-text-gradient" },
+      { 
+        name: "3D Design", 
+        color: "blue-text-gradient" 
+      },
+      { 
+        name: "Interactive Experience", 
+        color: "cyan-text-gradient" 
+      },
+      { 
+        name: "Portfolio Design", 
+        color: "green-text-gradient" 
+      },
+      { 
+        name: "Modern Web Design", 
+        color: "magenta-text-gradient" 
+      },
     ],
     image: website,
     source_code_link: "#",

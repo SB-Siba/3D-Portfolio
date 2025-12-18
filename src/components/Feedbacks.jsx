@@ -206,7 +206,7 @@ const FeedbacksDesign1 = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4">
         {/* Enhanced Header */}
         <motion.div
           variants={textVariant()}

@@ -12,6 +12,8 @@ import Contact from './Contact';
 import Footer from './Footer';
 import Background3D from './Background3D';
 import ServiceChatbot from './ServiceChatbot';
+import Services from './services';
+import ServicesList from './ServicesList';
 
 export {
   Hero,
@@ -29,6 +31,8 @@ export {
   ComputersCanvas, 
   StarsCanvas,
   ServiceChatbot,
+  Services,
+  ServicesList,
   Footer,
   Background3D
 }
