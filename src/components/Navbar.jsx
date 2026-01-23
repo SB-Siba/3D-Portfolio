@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { styles } from "../style";
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { menu, close } from "../assets";
+import profileImage from "../assets/profile/Profile.jpeg";
 
-const Navbar1 = () => {
+const Navbar = ({ isScrolledDown }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -32,19 +33,7 @@ const Navbar1 = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setScrolled(scrollTop > 20); // Changed from 50 to 20 for earlier background
-
-      let currentSection = "";
-      navLinks.forEach((nav) => {
-        const section = document.getElementById(nav.id);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            currentSection = nav.title;
-          }
-        }
-      });
-      setActive(currentSection);
+      setScrolled(scrollTop > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -119,9 +108,7 @@ const Navbar1 = () => {
 
   return (
     <motion.nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center fixed top-0 z-50 transition-all duration-300 ${
+      className={`${styles.paddingX} w-full flex items-center fixed top-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-slate-900/20 backdrop-blur-2xl shadow-2xl shadow-cyan-500/10 border-b border-cyan-500/20 py-2"
           : "bg-transparent py-4"
@@ -131,74 +118,112 @@ const Navbar1 = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        {/* LOGO SECTION - Responsive */}
+        {/* LOGO SECTION - Only shows hero image and name when scrolled down */}
         <motion.div
           className="flex items-center gap-3"
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {/* Logo glow effect */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
-              animate={{
-                scale: scrolled ? [1, 1.05, 1] : [1, 1.1, 1],
-                opacity: scrolled ? [0.5, 0.8, 0.5] : [0.5, 0.9, 0.5],
-              }}
-              transition={{
-                duration: scrolled ? 2 : 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-sm"
-              animate={{
-                opacity: scrolled ? 0.4 : 0.6,
-              }}
-              transition={{ duration: 0.3 }}
-            />
-            <img
-              src={logo}
-              alt="logo"
-              className={`relative z-10 object-contain transition-all duration-300 ${
-                scrolled ? "w-8 h-8" : "w-10 h-10"
-              }`}
-            />
-          </motion.div>
+          <AnimatePresence mode="wait">
+            {isScrolledDown && (
+              <motion.div
+                key="nav-hero-image"
+                layoutId="hero-image"
+                initial={{ scale: 0, opacity: 0, rotate: -180 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                exit={{ scale: 0, opacity: 0, rotate: 180 }}
+                transition={{
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }}
+                className="relative w-10 h-10 md:w-12 md:h-12"
+              >
+                {/* Outer Glow Ring */}
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  animate={{
+                    boxShadow: [
+                      "0 0 10px rgba(59, 130, 246, 0.3)",
+                      "0 0 20px rgba(139, 92, 246, 0.4)",
+                      "0 0 10px rgba(59, 130, 246, 0.3)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
 
-          {/* Text Section */}
-          <div className="flex flex-col">
-            <motion.span
-              className={`font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 ${
-                scrolled ? "text-lg" : "text-xl"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              animate={{
-                letterSpacing: scrolled ? "0.025em" : "0.05em",
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              SB SIBA | SIBANANDA BEHERA
-            </motion.span>
-            <motion.span
-              className="text-slate-300 font-medium hidden sm:block transition-all duration-300"
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                fontSize: scrolled ? "0.75rem" : "0.875rem",
-                marginTop: scrolled ? "0.125rem" : "0.25rem",
-              }}
-              transition={{ delay: 0.4, duration: 0.3 }}
-            >
-              Full Stack Developer
-            </motion.span>
+                {/* Rotating Border */}
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background:
+                      "conic-gradient(from 0deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)",
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+
+                {/* Image Container */}
+                <div className="absolute inset-1 rounded-full bg-slate-900 overflow-hidden z-10">
+                  <img
+                    src={profileImage}
+                    alt="Sibananda Behera"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = "none";
+                      e.target.parentElement.innerHTML = `
+        <div class="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-600/30 flex items-center justify-center">
+          <div class="text-center">
+            <div class="text-lg md:text-xl">👨‍💻</div>
           </div>
+        </div>
+      `;
+                    }}
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Name in a single line */}
+          <AnimatePresence mode="wait">
+            {isScrolledDown && (
+              <motion.div
+                key="nav-hero-name"
+                layoutId="hero-name"
+                initial={{ x: -20, opacity: 0, scale: 0.8 }}
+                animate={{ x: 0, opacity: 1, scale: 1 }}
+                exit={{ x: -20, opacity: 0, scale: 0.8 }}
+                transition={{
+                  duration: 0.4,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }}
+                className="flex flex-row items-center gap-1"
+              >
+                <motion.span
+                  className="font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent text-base md:text-lg"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  SIBANANDA BEHERA
+                </motion.span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Show nothing when not scrolled down */}
+          {!isScrolledDown && <motion.div className="w-12 h-12" />}
         </motion.div>
 
         {/* DESKTOP NAV LINKS - Responsive spacing */}
@@ -248,8 +273,8 @@ const Navbar1 = () => {
                       hoveredLink === index
                         ? "100%"
                         : active === nav.title
-                        ? "100%"
-                        : "0%",
+                          ? "100%"
+                          : "0%",
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -373,33 +398,65 @@ const Navbar1 = () => {
                   >
                     <div className="flex items-center gap-4">
                       <motion.div
-                        className="relative"
+                        className="relative w-12 h-12"
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
+                        {/* Outer Glow Ring */}
                         <motion.div
-                          className="absolute inset-0 bg-cyan-400 rounded-full blur-md"
+                          className="absolute inset-0 rounded-full"
                           animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.3, 0.6, 0.3],
+                            boxShadow: [
+                              "0 0 10px rgba(59, 130, 246, 0.3)",
+                              "0 0 20px rgba(139, 92, 246, 0.4)",
+                              "0 0 10px rgba(59, 130, 246, 0.3)",
+                            ],
                           }}
                           transition={{
-                            duration: 2,
+                            duration: 3,
                             repeat: Infinity,
+                            ease: "easeInOut",
                           }}
                         />
-                        <img
-                          src={logo}
-                          alt="logo"
-                          className="w-12 h-12 object-contain relative z-10"
+
+                        {/* Rotating Border */}
+                        <motion.div
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            background:
+                              "conic-gradient(from 0deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)",
+                          }}
+                          animate={{ rotate: 360 }}
+                          transition={{
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
                         />
+
+                        {/* Image Container */}
+                        <div className="absolute inset-1 rounded-full bg-slate-900 overflow-hidden z-10">
+                          <img
+                            src={profileImage}
+                            alt="Sibananda Behera"
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+        <div class="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-600/30 flex items-center justify-center">
+          <div class="text-lg">👨‍💻</div>
+        </div>
+      `;
+                            }}
+                          />
+                        </div>
                       </motion.div>
                       <div>
                         <motion.h2
                           className="text-white font-bold text-lg bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
                           whileHover={{ scale: 1.05 }}
                         >
-                          SB PORTFOLIO
+                          SIBANANDA BEHERA
                         </motion.h2>
                         <motion.p
                           className="text-slate-300 text-sm mt-1"
@@ -420,6 +477,7 @@ const Navbar1 = () => {
                         variants={itemVariants}
                         custom={index}
                         className="relative group"
+                        onClick={() => handleNavClick(nav.title)}
                       >
                         <a
                           href={`#${nav.id}`}
@@ -428,7 +486,6 @@ const Navbar1 = () => {
                               ? "bg-cyan-400/20 text-cyan-400 border border-cyan-400/30"
                               : "text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent"
                           }`}
-                          onClick={() => handleNavClick(nav.title)}
                         >
                           {/* Enhanced Holographic Effect */}
                           <motion.div
@@ -485,39 +542,6 @@ const Navbar1 = () => {
                             {nav.title}
                           </span>
 
-                          {/* Enhanced Active Indicator */}
-                          {active === nav.title && (
-                            <motion.div
-                              className="relative"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              transition={{ type: "spring", stiffness: 500 }}
-                            >
-                              <motion.div
-                                className="w-3 h-3 bg-cyan-400 rounded-full"
-                                animate={{
-                                  scale: [1, 1.5, 1],
-                                  opacity: [1, 0.7, 1],
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                }}
-                              />
-                              <motion.div
-                                className="absolute inset-0 bg-cyan-400 rounded-full blur-sm"
-                                animate={{
-                                  scale: [1, 2, 1],
-                                  opacity: [0.5, 0, 0.5],
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                }}
-                              />
-                            </motion.div>
-                          )}
-
                           {/* Hover Arrow */}
                           <motion.div
                             className="text-cyan-400 opacity-0 group-hover:opacity-100"
@@ -568,7 +592,6 @@ const Navbar1 = () => {
                       >
                         Full Stack Developer
                       </motion.p>
-                      {/* Animated dots */}
                       <motion.div className="flex justify-center gap-1 mt-2">
                         {[0, 1, 2].map((dot) => (
                           <motion.div
@@ -598,4 +621,4 @@ const Navbar1 = () => {
   );
 };
 
-export default Navbar1;
+export default Navbar;
