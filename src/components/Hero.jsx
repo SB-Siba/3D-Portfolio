@@ -1070,7 +1070,7 @@ const Hero = ({ onScrollStateChange }) => {
                 variants={slideInFromBottom}
                 initial="hidden"
                 animate={buttonsInView ? "show" : "hidden"}
-                className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-4 lg:pt-6"
+                className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-4 lg:pt-6 sm:justify-start justify-center"
               >
                 <motion.button
                   whileHover={{ scale: 1.05 }}

@@ -51,14 +51,16 @@ const Background3D = () => {
       alpha: true,
       antialias: !isMobile,
       powerPreference: 'high-performance',
-      preserveDrawingBuffer: false // Better performance
+      preserveDrawingBuffer: false, // Better performance
+      failIfMajorPerformanceCaveat: false
     });
 
     rendererRef.current = renderer;
     
     // Set renderer properties
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0); // Transparent background
+    renderer.setClearColor(0x0f172a, 1); // Dark slate background instead of transparent
+    renderer.setClearAlpha(1); // Ensure full opacity
     
     // Optimize pixel ratio
     let pixelRatio = Math.min(window.devicePixelRatio, 2);
@@ -311,14 +313,14 @@ const Background3D = () => {
   }, [isMobile, isTablet]);
 
   return (
-    <div className="fixed inset-0 -z-10">
+    <div className="fixed inset-0 -z-10 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Fallback background that will show if WebGL fails */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 z-0"></div>
       
       {/* Enhanced 3D Background Canvas */}
       <canvas 
         ref={canvasRef} 
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full z-10"
       />
 
       {/* Animated Grid Overlay */}
