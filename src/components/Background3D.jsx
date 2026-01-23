@@ -59,8 +59,8 @@ const Background3D = () => {
     
     // Set renderer properties
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x0f172a, 1); // Dark slate background instead of transparent
-    renderer.setClearAlpha(1); // Ensure full opacity
+    renderer.setClearColor(0x000000, 0); // Transparent background
+    renderer.autoClear = true;
     
     // Optimize pixel ratio
     let pixelRatio = Math.min(window.devicePixelRatio, 2);
@@ -251,6 +251,8 @@ const Background3D = () => {
         // Check if renderer is still valid before rendering
         if (renderer && renderer.domElement) {
           try {
+            // Ensure clear color remains transparent
+            renderer.setClearColor(0x000000, 0);
             renderer.render(scene, camera);
           } catch (error) {
             console.error('Render error:', error);
@@ -313,7 +315,7 @@ const Background3D = () => {
   }, [isMobile, isTablet]);
 
   return (
-    <div className="fixed inset-0 -z-10 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="fixed inset-0 -z-10">
       {/* Fallback background that will show if WebGL fails */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 z-0"></div>
       

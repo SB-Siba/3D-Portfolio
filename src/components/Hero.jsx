@@ -1017,7 +1017,7 @@ const Hero = ({ onScrollStateChange }) => {
             )}
           </motion.div>
 
-          {/* Rest of the component remains the same */}
+          {/* Main Content Grid */}
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             {/* Left Content - Description and Buttons */}
             <div className="space-y-4 lg:space-y-6 order-1 lg:order-1 w-full">
@@ -1126,43 +1126,12 @@ const Hero = ({ onScrollStateChange }) => {
               animate={rightContentInView ? "show" : "hidden"}
               className="relative flex flex-col items-center order-2 lg:order-2 w-full mb-6 lg:mb-0"
             >
-              {/* DNA Helix Canvas */}
-              <div className="relative w-full max-w-[300px] sm:max-w-[350px] lg:max-w-md aspect-square">
+              {/* Enhanced Container with Animated Border and Glow */}
+              <div className="relative w-full max-w-[300px] sm:max-w-[350px] lg:max-w-md">
+                {/* DNA Helix Canvas */}
                 <canvas
                   ref={moleculeCanvasRef}
-                  className="w-full h-full cursor-grab active:cursor-grabbing rounded-2xl bg-slate-900/20 backdrop-blur-sm"
-                />
-
-                {/* Current Process Overlay */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeProcess}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="absolute top-2 lg:top-4 left-1/2 transform -translate-x-1/2 bg-slate-900/80 backdrop-blur-xl rounded-xl p-3 lg:p-4 border border-slate-700/50 min-w-[180px] lg:min-w-[220px] text-center shadow-2xl"
-                  >
-                    <div className="text-xs lg:text-sm text-slate-400 mb-1">
-                      Current Phase
-                    </div>
-                    <div className="text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      {processSteps[activeProcess]?.title}
-                    </div>
-                    <div className="text-xs text-slate-300 mt-1 lg:mt-2 leading-tight">
-                      {processSteps[activeProcess]?.description}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-
-                <motion.div
-                  animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  className="absolute top-4 lg:top-8 right-4 lg:right-8 w-3 h-3 lg:w-4 lg:h-4 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50"
-                />
-                <motion.div
-                  animate={{ rotate: -360, scale: [1.1, 1, 1.1] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                  className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 w-2 h-2 lg:w-3 lg:h-3 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50"
+                  className="w-full h-full cursor-grab active:cursor-grabbing rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 shadow-lg shadow-blue-500/10"
                 />
               </div>
 
@@ -1194,7 +1163,7 @@ const Hero = ({ onScrollStateChange }) => {
             </motion.div>
           </div>
 
-          {/* Process Timeline - Responsive Grid */}
+          {/* Process Steps Section */}
           <motion.div
             ref={processRef}
             variants={fadeInUp}
