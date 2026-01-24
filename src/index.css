@@ -35,29 +35,6 @@ body {
 
 #root {
   width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, #0f172a, #1e293b) !important;
-  background-attachment: fixed;
-}
-
-canvas {
-  background-color: transparent !important;
-  background: none !important;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-/* Ensure body has proper background */
-body {
-  background: #000000 !important;
-}
-
-html {
-  background: #000000 !important;
 }
 
 * {

@@ -43,8 +43,6 @@ const Background3D = () => {
     }
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000); // Solid black background
-    scene.fog = null; // No fog to prevent white appearance
     sceneRef.current = scene;
     
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -53,20 +51,14 @@ const Background3D = () => {
       alpha: true,
       antialias: !isMobile,
       powerPreference: 'high-performance',
-      preserveDrawingBuffer: false,
-      failIfMajorPerformanceCaveat: false,
-      stencil: false,
-      depth: true
+      preserveDrawingBuffer: false // Better performance
     });
 
     rendererRef.current = renderer;
     
-    // Set renderer properties with clear color and state
+    // Set renderer properties
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0); // Transparent background with black clear
-    renderer.autoClear = true;
-    renderer.autoClearColor = true;
-    renderer.autoClearDepth = true;
+    renderer.setClearColor(0x000000, 0); // Transparent background
     
     // Optimize pixel ratio
     let pixelRatio = Math.min(window.devicePixelRatio, 2);
@@ -75,25 +67,16 @@ const Background3D = () => {
     
     renderer.setPixelRatio(pixelRatio);
 
-    // Handle WebGL context loss and restoration
-    let contextLost = false;
-
+    // Handle WebGL context loss
     const handleContextLost = (event) => {
       event.preventDefault();
-      contextLost = true;
-      console.log('WebGL context lost - preserving state');
+      console.log('WebGL context lost');
+      cleanupScene();
     };
 
     const handleContextRestored = () => {
-      console.log('WebGL context restored - reinitializing');
-      contextLost = false;
-      // Force renderer to reinitialize
-      if (renderer) {
-        renderer.setClearColor(0x000000, 0);
-        renderer.autoClear = true;
-        renderer.autoClearColor = true;
-        renderer.autoClearDepth = true;
-      }
+      console.log('WebGL context restored');
+      // You might want to reinitialize the scene here
     };
 
     canvasRef.current.addEventListener('webglcontextlost', handleContextLost, false);
@@ -235,12 +218,6 @@ const Background3D = () => {
     const animate = (currentTime) => {
       animationFrameRef.current = requestAnimationFrame(animate);
       
-      // Always ensure clear color is set
-      if (renderer && !contextLost) {
-        renderer.setClearColor(0x000000, 0);
-        renderer.autoClearColor = true;
-      }
-      
       const delta = currentTime - lastTime;
       
       if (delta > interval) {
@@ -269,16 +246,13 @@ const Background3D = () => {
         camera.position.y += (-mouseY * (isMobile ? 2 : 3) - camera.position.y) * 0.01;
         camera.lookAt(scene.position);
 
-        // Render with additional safety checks
-        if (renderer && renderer.domElement && !contextLost) {
+        // Check if renderer is still valid before rendering
+        if (renderer && renderer.domElement) {
           try {
-            // Ensure clear state before rendering
-            renderer.state.reset();
-            renderer.clear();
             renderer.render(scene, camera);
           } catch (error) {
             console.error('Render error:', error);
-            contextLost = true;
+            cleanupScene();
           }
         }
       }
@@ -337,23 +311,15 @@ const Background3D = () => {
   }, [isMobile, isTablet]);
 
   return (
-    <div className="fixed inset-0 top-0 left-0 w-screen h-screen overflow-hidden" style={{ zIndex: -1 }}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full block"
-        style={{
-          display: 'block',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'transparent',
-          background: 'none'
-        }}
-      />
+    <div className="fixed inset-0 -z-10">
       {/* Fallback background that will show if WebGL fails */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+      
+      {/* Enhanced 3D Background Canvas */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute inset-0 w-full h-full"
+      />
 
       {/* Animated Grid Overlay */}
       <div className="absolute inset-0">
