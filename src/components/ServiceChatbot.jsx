@@ -1065,7 +1065,7 @@ Best regards`;
       </AnimatePresence>
 
       {/* Custom Styles */}
-      <style jsx global>{`
+      <style jsx="true" global="true">{`
         /* Hide scrollbar for Chrome, Safari and Opera */
         .chat-scrollbar::-webkit-scrollbar {
           width: 6px;
