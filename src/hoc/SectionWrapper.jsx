@@ -11,8 +11,7 @@ const SectionWrapper = (Component, idName) =>
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`${styles.padding} max-w-7xl mx-auto relative z-0 w-full`}
-        style={{ overflow: 'hidden' }} // Add this inline style
+        className={`${styles.padding} max-w-7xl mx-auto relative z-0 w-full overflow-hidden-section`}
       >
         <span className="hash-span" id={idName}>
           &nbsp;

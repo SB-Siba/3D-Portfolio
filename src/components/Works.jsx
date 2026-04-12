@@ -66,7 +66,6 @@ const ProjectCard = ({
 
         {/* Border glow effect */}
         <motion.div
-          className="absolute inset-0 rounded-3xl opacity-0"
           animate={{
             opacity: isHovered ? [0, 0.3, 0] : 0,
           }}
@@ -74,10 +73,7 @@ const ProjectCard = ({
             duration: 2,
             repeat: isHovered ? Infinity : 0,
           }}
-          style={{
-            background: "linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4)",
-            filter: "blur(8px)",
-          }}
+          className="absolute inset-0 rounded-3xl opacity-0 project-card-glow"
         />
 
         <div className="relative bg-slate-900/95 backdrop-blur-xl rounded-3xl h-full w-full p-6 flex flex-col justify-between overflow-hidden border border-slate-700/50">

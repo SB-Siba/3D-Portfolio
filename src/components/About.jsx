@@ -72,7 +72,6 @@ const ServiceCard = ({ index, title, icon, description, features = [] }) => {
     >
       {/* Card Container */}
       <motion.div
-        className="relative h-full rounded-2xl overflow-hidden group"
         animate={{
           y: isHovered ? -8 : 0,
           boxShadow: isHovered
@@ -80,33 +79,18 @@ const ServiceCard = ({ index, title, icon, description, features = [] }) => {
             : "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
         }}
         transition={{ duration: 0.3 }}
-        style={{
-          height: "100%",
-          minHeight: "340px", // Reduced from 380px
-        }}
+        className="relative h-full min-h-[340px] rounded-2xl overflow-hidden group"
       >
         {/* Background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
 
           {/* Subtle Grid Lines */}
-          <div className="absolute inset-0">
-            {[...Array(10)].map((_, i) => (
-              <motion.div
-                key={`h-${i}`}
-                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent"
-                style={{ top: `${(i / 10) * 100}%` }}
-                animate={{
-                  opacity: [0.05, 0.15, 0.05],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                }}
-              />
-            ))}
-          </div>
+          <motion.div
+            className="absolute inset-0 service-card-grid"
+            animate={{ opacity: [0.05, 0.15, 0.05] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          />
         </div>
 
         {/* Curved Edge Highlights - Subtle */}

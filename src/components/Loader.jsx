@@ -1,4 +1,5 @@
 import { Html, useProgress } from "@react-three/drei";
+import { motion } from "framer-motion";
 
 const CanvasLoader = () => {
   const { progress } = useProgress();
@@ -6,12 +7,7 @@ const CanvasLoader = () => {
     <Html
       as='div'
       center
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
+      className="flex flex-col items-center justify-center"
     >
       <div className="relative w-20 h-20">
         {/* Outer rotating ring */}
@@ -30,9 +26,9 @@ const CanvasLoader = () => {
       
       {/* Progress bar */}
       <div className="w-32 h-1 bg-gray-700 rounded-full mt-2 overflow-hidden">
-        <div 
+        <motion.div
           className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
-          style={{ width: `${progress}%` }}
+          animate={{ width: `${progress}%` }}
         />
       </div>
     </Html>

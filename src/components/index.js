@@ -14,6 +14,7 @@ import Background3D from './Background3D';
 import ServiceChatbot from './ServiceChatbot';
 import Services from './services';
 import ServicesList from './ServicesList';
+import BookCallPage from './BookCallPage';
 
 
 export {
@@ -34,6 +35,7 @@ export {
   ServiceChatbot,
   Services,
   ServicesList,
+  BookCallPage,
   Footer,
   Background3D
 }

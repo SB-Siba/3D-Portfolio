@@ -16,13 +16,14 @@ import {
   Background3D,
 } from "./components";
 import Pageloader from "./components/Pageloader";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import ServiceDetail from "./components/services";
 import ServicesList from "./components/ServicesList";
 import ServiceInquiryPage from "./components/ServiceInquiryPage";
+import BookCallPage from "./components/BookCallPage";
 
 // Main content component that uses routes
-const MainContent = ({ onLoadingComplete }) => {
+const MainContent = () => {
   const navigate = useNavigate();
   const [isPageReady, setIsPageReady] = useState(false);
 
@@ -194,6 +195,24 @@ const MainContent = ({ onLoadingComplete }) => {
               <Footer />
             </motion.div>
           } />
+
+          {/* Book Call Route */}
+          <Route
+            path="/book-call"
+            element={
+              <motion.div
+                key="book-call"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+                className="min-h-screen"
+              >
+                <BookCallPage />
+              </motion.div>
+            }
+          />
         </Routes>
 
         {/* Service Chatbot - Always visible for lead generation */}
@@ -267,7 +286,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <MainContent onLoadingComplete={handleLoadingComplete} />
+      <MainContent />
     </BrowserRouter>
   );
 };

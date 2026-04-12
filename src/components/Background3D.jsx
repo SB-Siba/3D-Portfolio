@@ -323,16 +323,15 @@ const Background3D = () => {
 
       {/* Animated Grid Overlay */}
       <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0 opacity-15"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: isMobile ? '30px 30px' : '50px 50px',
-            transform: `translate(${mousePosition.x * (isMobile ? 0.005 : 0.008)}px, ${mousePosition.y * (isMobile ? 0.005 : 0.008)}px)`
+        <motion.div
+          className={`absolute inset-0 opacity-15 bg-grid-overlay ${
+            isMobile ? "bg-grid-mobile" : "bg-grid-desktop"
+          }`}
+          animate={{
+            x: mousePosition.x * (isMobile ? 0.005 : 0.008),
+            y: mousePosition.y * (isMobile ? 0.005 : 0.008),
           }}
+          transition={{ type: "tween", duration: 0.2, ease: "linear" }}
         />
       </div>
 
