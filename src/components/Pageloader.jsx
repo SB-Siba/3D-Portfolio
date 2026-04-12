@@ -60,13 +60,36 @@ const Pageloader = ({ onLoadingComplete }) => {
   }, [onLoadingComplete, loadingSteps.length]);
 
   // Responsive values
-  const logoSize = isSmallMobile ? 80 : isMobile ? 100 : isTablet ? 120 : 128;
+  const logoWrapperSizeClass = isSmallMobile
+    ? "w-20 h-20"
+    : isMobile
+    ? "w-[100px] h-[100px]"
+    : isTablet
+    ? "w-[120px] h-[120px]"
+    : "w-32 h-32";
+  const logoTextSizeClass = isSmallMobile
+    ? "text-2xl"
+    : isMobile
+    ? "text-[1.75rem]"
+    : "text-[2rem]";
   const titleSize = isSmallMobile ? 'text-xl' : isMobile ? 'text-2xl' : 'text-3xl';
   const subtitleSize = isSmallMobile ? 'text-xs' : 'text-sm';
   const progressBarWidth = isSmallMobile ? 'w-64' : isMobile ? 'w-72' : 'w-80';
   const containerPadding = isSmallMobile ? 'px-4' : 'px-6';
   const logoMB = isSmallMobile ? 'mb-6' : 'mb-8';
   const textMB = isSmallMobile ? 'mb-6' : 'mb-8';
+  const backgroundOrbSizeClass = isSmallMobile
+    ? "w-48 h-48"
+    : isMobile
+    ? "w-64 h-64"
+    : "w-80 h-80";
+  const ringParticleConfigs = [
+    { position: "left-1/2 top-0 -translate-x-1/2", dx: 0, dy: -1 },
+    { position: "right-0 top-1/2 -translate-y-1/2", dx: 1, dy: 0 },
+    { position: "left-1/2 bottom-0 -translate-x-1/2", dx: 0, dy: 1 },
+    { position: "left-0 top-1/2 -translate-y-1/2", dx: -1, dy: 0 },
+  ];
+  const ringTravelDistance = isSmallMobile ? 15 : 20;
 
   return (
     <AnimatePresence>
@@ -90,8 +113,7 @@ const Pageloader = ({ onLoadingComplete }) => {
                 damping: 15,
                 duration: 1.2 
               }}
-              className={`mx-auto ${logoMB} relative`}
-              style={{ width: logoSize, height: logoSize }}
+              className={`mx-auto ${logoMB} relative ${logoWrapperSizeClass}`}
             >
               {/* Outer Glow Ring */}
               <motion.div
@@ -132,8 +154,7 @@ const Pageloader = ({ onLoadingComplete }) => {
               {/* Inner Content */}
               <div className="absolute inset-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-cyan-400/30">
                 <motion.span 
-                  className="text-cyan-400 font-bold"
-                  style={{ fontSize: isSmallMobile ? '1.5rem' : isMobile ? '1.75rem' : '2rem' }}
+                  className={`text-cyan-400 font-bold ${logoTextSizeClass}`}
                   animate={{
                     scale: [1, 1.1, 1],
                     opacity: [0.8, 1, 0.8],
@@ -149,27 +170,15 @@ const Pageloader = ({ onLoadingComplete }) => {
               </div>
 
               {/* Floating Particles */}
-              {[...Array(4)].map((_, i) => (
+              {ringParticleConfigs.map((particle, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-2 h-2 bg-cyan-400 rounded-full"
-                  style={{
-                    left: `${Math.cos((i * 90 * Math.PI) / 180) * 48}%`,
-                    top: `${Math.sin((i * 90 * Math.PI) / 180) * 48}%`,
-                  }}
+                  className={`absolute w-2 h-2 bg-cyan-400 rounded-full ${particle.position}`}
                   animate={{
                     scale: [0, 1, 0],
                     opacity: [0, 1, 0],
-                    x: [
-                      0, 
-                      Math.cos((i * 90 * Math.PI) / 180) * (isSmallMobile ? 15 : 20),
-                      0
-                    ],
-                    y: [
-                      0,
-                      Math.sin((i * 90 * Math.PI) / 180) * (isSmallMobile ? 15 : 20),
-                      0
-                    ],
+                    x: [0, particle.dx * ringTravelDistance, 0],
+                    y: [0, particle.dy * ringTravelDistance, 0],
                   }}
                   transition={{
                     duration: 3,
@@ -362,12 +371,7 @@ const Pageloader = ({ onLoadingComplete }) => {
           {/* Background Elements - Responsive sizes */}
           <div className="absolute inset-0 -z-10 overflow-hidden">
             <motion.div
-              className="absolute top-1/4 left-1/4 rounded-full blur-3xl"
-              style={{
-                width: isSmallMobile ? '12rem' : isMobile ? '16rem' : '20rem',
-                height: isSmallMobile ? '12rem' : isMobile ? '16rem' : '20rem',
-                background: 'rgba(6, 182, 212, 0.05)'
-              }}
+              className={`absolute top-1/4 left-1/4 rounded-full blur-3xl bg-cyan-500/5 ${backgroundOrbSizeClass}`}
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -379,12 +383,7 @@ const Pageloader = ({ onLoadingComplete }) => {
               }}
             />
             <motion.div
-              className="absolute bottom-1/4 right-1/4 rounded-full blur-3xl"
-              style={{
-                width: isSmallMobile ? '12rem' : isMobile ? '16rem' : '20rem',
-                height: isSmallMobile ? '12rem' : isMobile ? '16rem' : '20rem',
-                background: 'rgba(59, 130, 246, 0.05)'
-              }}
+              className={`absolute bottom-1/4 right-1/4 rounded-full blur-3xl bg-blue-500/5 ${backgroundOrbSizeClass}`}
               animate={{
                 scale: [1.2, 1, 1.2],
                 opacity: [0.6, 0.3, 0.6],

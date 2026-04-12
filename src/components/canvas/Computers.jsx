@@ -48,15 +48,12 @@ const ComputersCanvas = () => {
     <Canvas
       frameloop="demand"
       shadows
+      className="w-full h-full"
       camera={{ 
         position: [20, 3, 5], 
         fov: isMobile ? 20 : 25 
       }}
       gl={{ preserveDrawingBuffer: true }}
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
     >
       <Suspense fallback={null}> {/* No loader */}
         <OrbitControls

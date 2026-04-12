@@ -31,18 +31,7 @@ const ExperienceCard = ({ experience, index }) => {
       <div className="absolute left-6 top-0 w-0.5 h-full bg-gradient-to-b from-blue-500/30 to-purple-500/30 -z-10" />
       
       <VerticalTimelineElement
-        contentStyle={{
-          background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-          color: "#fff",
-          borderRadius: "20px",
-          border: "1px solid rgba(56, 189, 248, 0.1)",
-          boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.3)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-        contentArrowStyle={{ 
-          borderRight: "7px solid #1e293b",
-        }}
+        className="experience-timeline-card"
         date={
           <motion.div
             className="text-slate-300 font-medium text-sm"
@@ -51,12 +40,6 @@ const ExperienceCard = ({ experience, index }) => {
             {experience.date}
           </motion.div>
         }
-        iconStyle={{
-          background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
-          overflow: "hidden",
-          boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
-          border: "2px solid rgba(255, 255, 255, 0.1)",
-        }}
         icon={
           <motion.div 
             className="flex justify-center items-center w-full h-full overflow-hidden rounded-full"
@@ -102,8 +85,7 @@ const ExperienceCard = ({ experience, index }) => {
               {experience.title}
             </motion.h3>
             <motion.p
-              className="text-cyan-300 text-lg font-semibold flex items-center gap-2"
-              style={{ margin: 0 }}
+              className="m-0 text-cyan-300 text-lg font-semibold flex items-center gap-2"
             >
               <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
               {experience.company_name}
@@ -156,7 +138,9 @@ const ExperienceCard = ({ experience, index }) => {
               className="mt-4 space-y-3"
               layout
             >
-              {experience.points.map((point, pointIndex) => (
+              {experience.points
+                .filter((_, pointIndex) => isExpanded || pointIndex < 2)
+                .map((point, pointIndex) => (
                 <motion.li
                   key={`experience-point-${pointIndex}`}
                   className="text-slate-300 text-sm pl-4 relative leading-relaxed"
@@ -165,9 +149,6 @@ const ExperienceCard = ({ experience, index }) => {
                   transition={{ 
                     delay: isExpanded ? pointIndex * 0.1 : 0,
                     duration: 0.4 
-                  }}
-                  style={{
-                    display: isExpanded || pointIndex < 2 ? 'block' : 'none'
                   }}
                 >
                   <div className="absolute left-0 top-2 w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { styles } from "../style";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
@@ -203,10 +204,11 @@ const Navbar = () => {
 
         {/* DESKTOP NAV LINKS - Responsive spacing */}
         <motion.ul
-          className="list-none hidden md:flex flex-row transition-all duration-300"
+          className={`list-none hidden md:flex flex-row transition-all duration-300 ${
+            scrolled ? "gap-6" : "gap-8"
+          }`}
           initial="hidden"
           animate="visible"
-          style={{ gap: scrolled ? "1.5rem" : "2rem" }}
         >
           {navLinks.map((nav, index) => (
             <motion.li
@@ -221,11 +223,8 @@ const Navbar = () => {
                   active === nav.title
                     ? "text-cyan-400"
                     : "text-slate-300 hover:text-white"
-                }`}
+                } ${scrolled ? "px-3 py-1.5" : "px-4 py-2"}`}
                 onClick={() => setActive(nav.title)}
-                style={{
-                  padding: scrolled ? "0.375rem 0.75rem" : "0.5rem 1rem",
-                }}
               >
                 {/* Link text with responsive font size */}
                 <motion.span
@@ -267,6 +266,15 @@ const Navbar = () => {
             </motion.li>
           ))}
         </motion.ul>
+
+        <div className="hidden md:flex items-center">
+          <Link
+            to="/book-call"
+            className="rounded-lg border border-cyan-400/40 bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white transition hover:from-blue-700 hover:to-cyan-600"
+          >
+            Book a Call
+          </Link>
+        </div>
 
         {/* MOBILE MENU BUTTON - Responsive */}
         <motion.div className="md:hidden flex flex-1 justify-end items-center">
@@ -395,6 +403,16 @@ const Navbar = () => {
                         />
                       </motion.div>
                       <div>
+
+                      <motion.div className="relative z-10 px-6 pb-6" variants={itemVariants}>
+                        <Link
+                          to="/book-call"
+                          onClick={() => setToggle(false)}
+                          className="block w-full rounded-xl border border-cyan-400/40 bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-cyan-600"
+                        >
+                          Book a Call
+                        </Link>
+                      </motion.div>
                         <motion.h2
                           className="text-white font-bold text-lg bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
                           whileHover={{ scale: 1.05 }}

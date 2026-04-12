@@ -720,8 +720,8 @@ Best regards`;
         <div className="bg-slate-800/40 rounded-2xl p-4 border border-slate-700/50 backdrop-blur-sm">
           <div className="flex items-center space-x-1">
             <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
-            <div className="w-1.5 h-1.5 bg-magenta-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+            <div className="w-1.5 h-1.5 bg-magenta-400 rounded-full animate-pulse typing-dot-delay-1"></div>
+            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse typing-dot-delay-2"></div>
           </div>
           <p className="text-xs text-cyan-400 mt-2">Assistant is typing...</p>
         </div>
@@ -791,11 +791,7 @@ Best regards`;
         
         {/* Gradient pulse ring */}
         <motion.div
-          className="absolute inset-0 border-2 border-transparent rounded-full"
-          style={{
-            background: 'linear-gradient(45deg, #06b6d4, #ec4899, #3b82f6)',
-            backgroundSize: '200% 200%',
-          }}
+          className="absolute inset-0 border-2 border-transparent rounded-full bg-gradient-to-r from-cyan-500 via-magenta-500 to-blue-500 animate-gradient"
           animate={{
             scale: [1, 1.4, 1],
             opacity: [0.3, 0, 0.3],
@@ -880,10 +876,7 @@ Best regards`;
             </div>
 
             {/* Chat Messages Area */}
-            <div 
-              className="flex-1 overflow-y-auto p-4 pt-6 chat-scrollbar"
-              style={{ height: 'calc(100% - 160px)' }}
-            >
+            <div className="flex-1 overflow-y-auto p-4 pt-6 chat-scrollbar chat-window-height">
               <div className="space-y-4 pb-4">
                 <AnimatePresence>
                   {messages.map((message) => (
@@ -953,8 +946,8 @@ Best regards`;
                                 <div className="mt-2">
                                   <div className="flex items-center space-x-1">
                                     <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
-                                    <div className="w-1.5 h-1.5 bg-magenta-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                                    <div className="w-1.5 h-1.5 bg-magenta-400 rounded-full animate-pulse typing-dot-delay-1"></div>
+                                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse typing-dot-delay-2"></div>
                                   </div>
                                 </div>
                               ) : message.options && message.options.length > 0 && (
@@ -1064,169 +1057,6 @@ Best regards`;
         )}
       </AnimatePresence>
 
-      {/* Custom Styles */}
-      <style jsx="true" global="true">{`
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .chat-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        
-        .chat-scrollbar::-webkit-scrollbar-track {
-          background: rgba(30, 41, 59, 0.3);
-          border-radius: 3px;
-        }
-        
-        .chat-scrollbar::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #06b6d4, #ec4899, #3b82f6);
-          border-radius: 3px;
-        }
-        
-        .chat-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(to bottom, #0891b2, #db2777, #2563eb);
-        }
-        
-        /* Gradient animation */
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        
-        /* Prevent body scroll when chatbot is open */
-        body.no-scroll {
-          overflow: hidden;
-          position: fixed;
-          width: 100%;
-          height: 100%;
-        }
-        
-        /* Typing animation */
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-        
-        .animate-pulse {
-          animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-          .fixed.inset-0 {
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            border-radius: 0 !important;
-            margin: 0 !important;
-          }
-          
-          .message-container .bg-slate-800\/40 {
-            background: rgba(30, 41, 59, 0.8);
-          }
-          
-          .message-container {
-            margin-bottom: 12px;
-          }
-          
-          .p-4 {
-            padding: 12px;
-          }
-          
-          /* Ensure header is properly aligned on mobile */
-          .bg-gradient-to-r.from-cyan-500\/20 {
-            padding: 12px !important;
-          }
-        }
-        
-        /* Desktop optimizations - FIXED for header visibility */
-        @media (min-width: 641px) {
-          .fixed.sm\\:top-24 {
-            top: 96px !important; /* 24 * 4px = 96px - enough space below navbar */
-          }
-          
-          .fixed.sm\\:right-6 {
-            right: 24px !important;
-          }
-          
-          .fixed.sm\\:w-\\[500px\\] {
-            width: 500px !important;
-            max-width: 500px !important;
-          }
-          
-          .fixed.sm\\:h-\\[700px\\] {
-            height: 700px !important;
-            max-height: 700px !important;
-          }
-          
-          .sm\\:rounded-3xl {
-            border-radius: 1.5rem !important;
-          }
-          
-          .chat-scrollbar {
-            padding-right: 4px;
-          }
-          
-          /* Ensure header is visible in desktop */
-          .relative.z-20 {
-            position: relative !important;
-            z-index: 20 !important;
-          }
-        }
-        
-        /* Custom magenta color */
-        .bg-magenta-500 {
-          background-color: #ec4899;
-        }
-        
-        .text-magenta-300 {
-          color: #f472b6;
-        }
-        
-        .border-magenta-400 {
-          border-color: #f472b6;
-        }
-        
-        .bg-magenta-500\/10 {
-          background-color: rgba(236, 72, 153, 0.1);
-        }
-        
-        .border-magenta-500\/30 {
-          border-color: rgba(236, 72, 153, 0.3);
-        }
-        
-        .text-magenta-400 {
-          color: #f472b6;
-        }
-        
-        .from-magenta-500 {
-          --tw-gradient-from: #ec4899;
-          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(236, 72, 153, 0));
-        }
-        
-        .via-magenta-500 {
-          --tw-gradient-stops: var(--tw-gradient-from), #ec4899, var(--tw-gradient-to, rgba(236, 72, 153, 0));
-        }
-        
-        .to-magenta-500 {
-          --tw-gradient-to: #ec4899;
-        }
-        
-        .from-magenta-500\/20 {
-          --tw-gradient-from: rgba(236, 72, 153, 0.2);
-        }
-        
-        .to-magenta-500\/20 {
-          --tw-gradient-to: rgba(236, 72, 153, 0.2);
-        }
-      `}</style>
     </>
   );
 };

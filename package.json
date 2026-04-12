@@ -14,7 +14,6 @@
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.2.2",
     "3d-portfolio": "file:",
-    "axios": "^1.8.2",
     "framer-motion": "^10.18.0",
     "framer-motion-3d": "^10.16.4",
     "lucide-react": "^0.553.0",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { 
   FaGithub, 
@@ -12,6 +12,24 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  const particleConfigs = useMemo(
+    () => [
+      { position: "left-[6%] top-[12%]", duration: 4.2, delay: 0.2 },
+      { position: "left-[14%] top-[68%]", duration: 5.1, delay: 0.8 },
+      { position: "left-[22%] top-[38%]", duration: 4.6, delay: 1.3 },
+      { position: "left-[30%] top-[80%]", duration: 5.8, delay: 0.5 },
+      { position: "left-[40%] top-[22%]", duration: 4.9, delay: 1.1 },
+      { position: "left-[52%] top-[72%]", duration: 6, delay: 0.3 },
+      { position: "left-[60%] top-[44%]", duration: 4.4, delay: 1.6 },
+      { position: "left-[68%] top-[16%]", duration: 5.2, delay: 0.9 },
+      { position: "left-[76%] top-[84%]", duration: 4.8, delay: 1.4 },
+      { position: "left-[84%] top-[34%]", duration: 5.6, delay: 0.7 },
+      { position: "left-[90%] top-[58%]", duration: 4.3, delay: 1.9 },
+      { position: "left-[96%] top-[24%]", duration: 5.4, delay: 1.2 },
+    ],
+    []
+  );
+
   const footerLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
@@ -218,22 +236,18 @@ const Footer = () => {
 
       {/* Floating particles */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {[...Array(12)].map((_, i) => (
+        {particleConfigs.map((particle, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-cyan-400/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
+            className={`absolute w-1 h-1 bg-cyan-400/20 rounded-full ${particle.position}`}
             animate={{
               y: [0, -30, 0],
               opacity: [0.3, 0.8, 0.3],
             }}
             transition={{
-              duration: 4 + Math.random() * 3,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: particle.delay,
             }}
           />
         ))}

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 
 // Animation variants
@@ -75,6 +76,7 @@ const fadeInUp = {
 };
 
 const Hero = () => {
+  const navigate = useNavigate();
   const moleculeCanvasRef = useRef(null);
   const [activeTech, setActiveTech] = useState("Three.js");
   const [activeProcess, setActiveProcess] = useState(0);
@@ -520,7 +522,7 @@ const Hero = () => {
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
                   SIBANANDA
                   <motion.span
-                    className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-1 lg:mt-2 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl"
+                    className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-1 lg:mt-2 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl hero-name-gradient"
                     animate={{
                       backgroundPosition: ["0%", "100%", "0%"],
                     }}
@@ -528,9 +530,6 @@ const Hero = () => {
                       duration: 4,
                       repeat: Infinity,
                       ease: "easeInOut",
-                    }}
-                    style={{
-                      backgroundSize: "300% 100%",
                     }}
                   >
                     BEHERA
@@ -586,6 +585,14 @@ const Hero = () => {
                   className="px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold text-sm lg:text-base hover:from-blue-700 hover:to-purple-700 transition-all border border-blue-500/30 shadow-lg shadow-blue-500/20"
                 >
                   View Projects
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate("/book-call")}
+                  className="px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 border border-cyan-400/40 bg-cyan-500/10 text-cyan-300 rounded-lg font-semibold text-sm lg:text-base hover:bg-cyan-500/20 transition-all"
+                >
+                  Book a Call
                 </motion.button>
               </motion.div>
             </div>

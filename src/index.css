@@ -46,11 +46,116 @@ body {
   color-scheme: dark;
 }
 
+::selection {
+  background: #915eff;
+  color: #ffffff;
+}
+
 /* Rest of your existing CSS remains the same */
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;
   display: block;
+}
+
+.overflow-hidden-section {
+  overflow: hidden;
+}
+
+.project-card-glow {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+  filter: blur(8px);
+}
+
+.hero-name-gradient {
+  background-size: 300% 100%;
+}
+
+.bg-grid-overlay {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px);
+}
+
+.bg-grid-mobile {
+  background-size: 30px 30px;
+}
+
+.bg-grid-desktop {
+  background-size: 50px 50px;
+}
+
+.chat-window-height {
+  height: calc(100% - 160px);
+}
+
+.typing-dot-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.typing-dot-delay-2 {
+  animation-delay: 0.4s;
+}
+
+.chat-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 3px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #ec4899, #3b82f6);
+  border-radius: 3px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #db2777, #2563eb);
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.service-card-grid {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(34, 211, 238, 0.1) 0,
+    rgba(34, 211, 238, 0.1) 1px,
+    transparent 1px,
+    transparent 10%
+  );
+}
+
+.experience-timeline-card .vertical-timeline-element-content {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-timeline-card .vertical-timeline-element-content-arrow {
+  border-right: 7px solid #1e293b;
+}
+
+.experience-timeline-card .vertical-timeline-element-icon {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .black-gradient {
@@ -241,5 +346,17 @@ body {
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
