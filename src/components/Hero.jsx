@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
+import { CursorCard } from "./ui/cursor-card";
 
 // Animation variants
 const slideInFromLeft = {
@@ -62,7 +63,6 @@ const scaleIn = {
   },
 };
 
-// Add fadeInUp variant that was missing
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
   show: {
@@ -542,7 +542,7 @@ const Hero = () => {
                 </div>
               </motion.div>
 
-              {/* Description - Slide from Right */}
+              {/* Description - Slide from Right with CursorCard */}
               <motion.div
                 ref={descriptionRef}
                 variants={slideInFromRight}
@@ -551,21 +551,33 @@ const Hero = () => {
               >
                 <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed backdrop-blur-sm bg-slate-900/30 p-3 lg:p-4 rounded-xl border border-slate-700/50">
                   Crafting{" "}
-                  <span className="text-blue-400">
-                    bespoke digital solutions
-                  </span>{" "}
+                  <CursorCard
+                    image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop"
+                    description="Custom digital solutions tailored to your unique business needs"
+                  >
+                    <span className="text-blue-400">bespoke digital solutions</span>
+                  </CursorCard>{" "}
                   that blend
-                  <span className="text-purple-400">
-                    {" "}
-                    creative innovation
-                  </span>{" "}
+                  <CursorCard
+                    image="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop"
+                    description="Innovative approaches combining art and technology"
+                  >
+                    <span className="text-purple-400"> creative innovation</span>
+                  </CursorCard>{" "}
                   with
-                  <span className="text-cyan-400"> technical excellence</span>.
+                  <CursorCard
+                    image="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop"
+                    description="Precision engineering and robust architecture"
+                  >
+                    <span className="text-cyan-400"> technical excellence</span>
+                  </CursorCard>.
                   From concept to deployment, I build
-                  <span className="text-green-400">
-                    {" "}
-                    scalable applications
-                  </span>{" "}
+                  <CursorCard
+                    image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
+                    description="Enterprise-grade applications that grow with your business"
+                  >
+                    <span className="text-green-400"> scalable applications</span>
+                  </CursorCard>{" "}
                   that stand out in today's competitive landscape.
                 </p>
               </motion.div>
