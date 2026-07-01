@@ -33,7 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setScrolled(scrollTop > 20); // Changed from 50 to 20 for earlier background
+      setScrolled(scrollTop > 20);
 
       let currentSection = "";
       navLinks.forEach((nav) => {
@@ -72,8 +72,8 @@ const Navbar = () => {
       transition: {
         duration: 0.8,
         ease: [0.76, 0, 0.24, 1],
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.08,
+        delayChildren: 0.15,
       },
     },
   };
@@ -83,14 +83,14 @@ const Navbar = () => {
       x: 100,
       opacity: 0,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
       },
     },
     open: {
       x: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: "backOut",
       },
     },
@@ -108,14 +108,14 @@ const Navbar = () => {
     },
   };
 
-  // Icon animations
+  // Icon animations - smaller icons for sidebar
   const iconAnimations = [
-    { emoji: "🚀", hover: { scale: 1.5, rotate: 180 } },
-    { emoji: "👨‍💻", hover: { scale: 1.4, rotate: 90 } },
+    { emoji: "🚀", hover: { scale: 1.4, rotate: 180 } },
+    { emoji: "👨‍💻", hover: { scale: 1.3, rotate: 90 } },
     { emoji: "💼", hover: { scale: 1.3, rotate: -180 } },
-    { emoji: "🛠️", hover: { scale: 1.6, rotate: 360 } },
-    { emoji: "🌟", hover: { scale: 1.5, rotate: 45 } },
-    { emoji: "📞", hover: { scale: 1.4, rotate: -90 } },
+    { emoji: "🛠️", hover: { scale: 1.4, rotate: 360 } },
+    { emoji: "🌟", hover: { scale: 1.3, rotate: 45 } },
+    { emoji: "📞", hover: { scale: 1.3, rotate: -90 } },
   ];
 
   return (
@@ -144,7 +144,6 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Logo glow effect */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
               animate={{
@@ -173,7 +172,6 @@ const Navbar = () => {
             />
           </motion.div>
 
-          {/* Text Section */}
           <div className="flex flex-col">
             <motion.span
               className={`font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 ${
@@ -202,7 +200,7 @@ const Navbar = () => {
           </div>
         </motion.div>
 
-        {/* DESKTOP NAV LINKS - Responsive spacing */}
+        {/* DESKTOP NAV LINKS */}
         <motion.ul
           className={`list-none hidden md:flex flex-row transition-all duration-300 ${
             scrolled ? "gap-6" : "gap-8"
@@ -226,7 +224,6 @@ const Navbar = () => {
                 } ${scrolled ? "px-3 py-1.5" : "px-4 py-2"}`}
                 onClick={() => setActive(nav.title)}
               >
-                {/* Link text with responsive font size */}
                 <motion.span
                   animate={{
                     fontSize: scrolled ? "14px" : "16px",
@@ -236,7 +233,6 @@ const Navbar = () => {
                   {nav.title}
                 </motion.span>
 
-                {/* Animated underline - responsive height */}
                 <motion.div
                   className={`absolute bottom-0 left-0 bg-gradient-to-r from-blue-500 to-cyan-500 ${
                     active === nav.title ? "w-full" : "w-0"
@@ -253,7 +249,6 @@ const Navbar = () => {
                   transition={{ duration: 0.3 }}
                 />
 
-                {/* Hover background effect - responsive opacity */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg -z-10"
                   animate={{
@@ -276,7 +271,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* MOBILE MENU BUTTON - Responsive */}
+        {/* MOBILE MENU BUTTON */}
         <motion.div className="md:hidden flex flex-1 justify-end items-center">
           <motion.button
             className={`relative flex items-center justify-center bg-slate-900/80 backdrop-blur-xl rounded-xl border transition-all duration-300 group ${
@@ -288,7 +283,6 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Animated border glow - responsive intensity */}
             <motion.div
               className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500"
               animate={{
@@ -333,11 +327,10 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.button>
 
-          {/* HOLOGRAPHIC SIDEBAR */}
+          {/* HOLOGRAPHIC SIDEBAR - Redesigned with compact spacing */}
           <AnimatePresence>
             {toggle && (
               <>
-                {/* Backdrop */}
                 <motion.div
                   className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
                   initial={{ opacity: 0 }}
@@ -346,9 +339,8 @@ const Navbar = () => {
                   onClick={() => setToggle(false)}
                 />
 
-                {/* Sidebar */}
                 <motion.div
-                  className="fixed top-0 right-0 h-full w-80 max-w-full bg-slate-900/95 backdrop-blur-2xl border-l border-cyan-400/20 z-50 shadow-2xl shadow-cyan-400/10"
+                  className="fixed top-0 right-0 h-full w-72 max-w-full bg-slate-900/95 backdrop-blur-2xl border-l border-cyan-400/20 z-50 shadow-2xl shadow-cyan-400/10"
                   variants={sidebarVariants}
                   initial="closed"
                   animate="open"
@@ -367,19 +359,17 @@ const Navbar = () => {
                       animate="animate"
                       transition={{ delay: 1 }}
                     />
-
-                    {/* Grid Pattern */}
                     <div className="absolute inset-0 opacity-10">
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/5 to-transparent" />
                     </div>
                   </div>
 
-                  {/* Header */}
+                  {/* Header - Compact */}
                   <motion.div
-                    className="relative z-10 p-6 border-b border-cyan-400/20"
+                    className="relative z-10 px-4 py-3 border-b border-cyan-400/20"
                     variants={itemVariants}
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                       <motion.div
                         className="relative"
                         whileHover={{ scale: 1.1, rotate: 5 }}
@@ -399,28 +389,18 @@ const Navbar = () => {
                         <img
                           src={logo}
                           alt="logo"
-                          className="w-12 h-12 object-contain relative z-10"
+                          className="w-10 h-10 object-contain relative z-10"
                         />
                       </motion.div>
                       <div>
-
-                      <motion.div className="relative z-10 px-6 pb-6" variants={itemVariants}>
-                        <Link
-                          to="/book-call"
-                          onClick={() => setToggle(false)}
-                          className="block w-full rounded-xl border border-cyan-400/40 bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-cyan-600"
-                        >
-                          Book a Call
-                        </Link>
-                      </motion.div>
                         <motion.h2
-                          className="text-white font-bold text-lg bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+                          className="text-white font-bold text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
                           whileHover={{ scale: 1.05 }}
                         >
                           SB PORTFOLIO
                         </motion.h2>
                         <motion.p
-                          className="text-slate-300 text-sm mt-1"
+                          className="text-slate-300 text-xs mt-0.5"
                           animate={{ opacity: [0.6, 1, 0.6] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
@@ -430,8 +410,8 @@ const Navbar = () => {
                     </div>
                   </motion.div>
 
-                  {/* Navigation Links */}
-                  <div className="relative z-10 p-6 space-y-3">
+                  {/* Navigation Links - Compact */}
+                  <div className="relative z-10 px-4 py-2 space-y-1.5 overflow-y-auto" style={{ maxHeight: 'calc(100% - 180px)' }}>
                     {navLinks.map((nav, index) => (
                       <motion.div
                         key={nav.id}
@@ -441,33 +421,31 @@ const Navbar = () => {
                       >
                         <a
                           href={`#${nav.id}`}
-                          className={`relative flex items-center gap-4 p-4 rounded-xl cursor-pointer overflow-hidden transition-all duration-300 ${
+                          className={`relative flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer overflow-hidden transition-all duration-300 ${
                             active === nav.title
                               ? "bg-cyan-400/20 text-cyan-400 border border-cyan-400/30"
                               : "text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent"
                           }`}
                           onClick={() => handleNavClick(nav.title)}
                         >
-                          {/* Enhanced Holographic Effect */}
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100"
                             whileHover={{
-                              scale: 1.05,
+                              scale: 1.03,
                               rotate: [0, 1, -1, 0],
                             }}
                             transition={{
-                              duration: 0.5,
+                              duration: 0.4,
                               rotate: {
-                                duration: 0.3,
+                                duration: 0.2,
                                 repeat: 1,
                               },
                             }}
                           />
 
-                          {/* Pulse effect on active */}
                           {active === nav.title && (
                             <motion.div
-                              className="absolute inset-0 bg-cyan-400/10 rounded-xl"
+                              className="absolute inset-0 bg-cyan-400/10 rounded-lg"
                               animate={{
                                 opacity: [0.3, 0.6, 0.3],
                                 scale: [1, 1.02, 1],
@@ -479,9 +457,9 @@ const Navbar = () => {
                             />
                           )}
 
-                          {/* Animated Icon */}
+                          {/* Smaller Icon */}
                           <motion.div
-                            className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg ${
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${
                               active === nav.title
                                 ? "bg-cyan-400/20 text-cyan-400"
                                 : "bg-slate-700/50 text-slate-300 group-hover:bg-cyan-400/10 group-hover:text-cyan-300"
@@ -499,11 +477,10 @@ const Navbar = () => {
                             {iconAnimations[index].emoji}
                           </motion.div>
 
-                          <span className="font-semibold relative z-10 flex-1">
+                          <span className="font-medium text-sm relative z-10 flex-1">
                             {nav.title}
                           </span>
 
-                          {/* Enhanced Active Indicator */}
                           {active === nav.title && (
                             <motion.div
                               className="relative"
@@ -512,7 +489,7 @@ const Navbar = () => {
                               transition={{ type: "spring", stiffness: 500 }}
                             >
                               <motion.div
-                                className="w-3 h-3 bg-cyan-400 rounded-full"
+                                className="w-2 h-2 bg-cyan-400 rounded-full"
                                 animate={{
                                   scale: [1, 1.5, 1],
                                   opacity: [1, 0.7, 1],
@@ -536,10 +513,9 @@ const Navbar = () => {
                             </motion.div>
                           )}
 
-                          {/* Hover Arrow */}
                           <motion.div
-                            className="text-cyan-400 opacity-0 group-hover:opacity-100"
-                            initial={{ x: -10 }}
+                            className="text-cyan-400 opacity-0 group-hover:opacity-100 text-xs"
+                            initial={{ x: -5 }}
                             whileHover={{ x: 0 }}
                             transition={{ duration: 0.3 }}
                           >
@@ -547,10 +523,9 @@ const Navbar = () => {
                           </motion.div>
                         </a>
 
-                        {/* Enhanced Connection Lines */}
                         {index < navLinks.length - 1 && (
                           <motion.div
-                            className="absolute -bottom-1.5 left-12 w-0.5 h-3 bg-gradient-to-b from-cyan-400/40 to-transparent"
+                            className="absolute -bottom-0.5 left-10 w-0.5 h-2 bg-gradient-to-b from-cyan-400/40 to-transparent"
                             initial={{ scaleY: 0 }}
                             animate={{ scaleY: 1 }}
                             transition={{ delay: 0.5 + index * 0.1 }}
@@ -560,18 +535,32 @@ const Navbar = () => {
                     ))}
                   </div>
 
-                  {/* Footer */}
+                  {/* Book a Call Button - Now before footer */}
+                  <motion.div 
+                    className="relative z-10 px-4 py-2"
+                    variants={itemVariants}
+                  >
+                    <Link
+                      to="/book-call"
+                      onClick={() => setToggle(false)}
+                      className="block w-full rounded-lg border border-cyan-400/40 bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-cyan-600 shadow-lg shadow-cyan-500/20"
+                    >
+                      📞 Book a Call
+                    </Link>
+                  </motion.div>
+
+                  {/* Footer - Compact */}
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 p-6 border-t border-cyan-400/20 bg-slate-900/80 backdrop-blur-lg"
+                    className="absolute bottom-0 left-0 right-0 px-4 py-3 border-t border-cyan-400/20 bg-slate-900/80 backdrop-blur-lg"
                     variants={itemVariants}
                   >
                     <div className="text-center">
                       <motion.p
-                        className="text-cyan-400 font-semibold text-lg mb-1"
+                        className="text-cyan-400 font-semibold text-sm mb-0.5"
                         animate={{
                           textShadow: [
                             "0 0 5px rgba(34, 211, 238, 0.5)",
-                            "0 0 20px rgba(34, 211, 238, 0.8)",
+                            "0 0 15px rgba(34, 211, 238, 0.8)",
                             "0 0 5px rgba(34, 211, 238, 0.5)",
                           ],
                         }}
@@ -580,14 +569,13 @@ const Navbar = () => {
                         SIBANANDA BEHERA
                       </motion.p>
                       <motion.p
-                        className="text-cyan-400/60 text-sm"
+                        className="text-cyan-400/60 text-xs"
                         animate={{ opacity: [0.6, 1, 0.6] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
                         Full Stack Developer
                       </motion.p>
-                      {/* Animated dots */}
-                      <motion.div className="flex justify-center gap-1 mt-2">
+                      <motion.div className="flex justify-center gap-1 mt-1">
                         {[0, 1, 2].map((dot) => (
                           <motion.div
                             key={dot}

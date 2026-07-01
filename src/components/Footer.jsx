@@ -1,15 +1,18 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
-import { 
-  FaGithub, 
-  FaLinkedin, 
-  FaEnvelope, 
-  FaCode, 
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaCode,
   FaHeart,
   FaArrowUp,
   FaMapMarkerAlt,
-  FaPhone
+  FaPhone,
+  FaFacebook,
+  FaInstagram,
 } from "react-icons/fa";
+import SocialFlipButton from "./ui/social-flip-button";
 
 const Footer = () => {
   const particleConfigs = useMemo(
@@ -34,32 +37,57 @@ const Footer = () => {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Projects", href: "#work" },
-    { name: "Contact", href: "#contact" }
+    { name: "Contact", href: "#contact" },
   ];
 
-  const socialLinks = [
-    { 
-      icon: <FaGithub />, 
-      href: "https://github.com/SB-Siba", 
+  // Social items spelling "CONTACT"
+  const socialItems = [
+    {
+      letter: "C",
+      icon: <FaGithub />,
       label: "GitHub",
-      gradient: "from-gray-600 to-gray-800"
+      href: "https://github.com/SB-Siba",
     },
-    { 
-      icon: <FaLinkedin />, 
-      href: "https://linkedin.com/in/sibananda-behera-276274222", 
+    {
+      letter: "O",
+      icon: <FaLinkedin />,
       label: "LinkedIn",
-      gradient: "from-blue-600 to-blue-800"
+      href: "https://linkedin.com/in/sibananda-behera-276274222",
     },
-    { 
-      icon: <FaEnvelope />, 
-      href: "mailto:sbehera0330@gmail.com", 
+    {
+      letter: "N",
+      icon: <FaEnvelope />,
       label: "Email",
-      gradient: "from-red-500 to-pink-600"
-    }
+      href: "mailto:sbehera0330@gmail.com",
+    },
+    {
+      letter: "T",
+      icon: <FaFacebook />,
+      label: "Facebook",
+      href: "https://facebook.com/your-profile",
+    },
+    {
+      letter: "A",
+      icon: <FaInstagram />,
+      label: "Instagram",
+      href: "https://instagram.com/your-profile",
+    },
+    {
+      letter: "C",
+      icon: <FaPhone />,
+      label: "Phone",
+      href: "tel:+919692199548",
+    },
+    {
+      letter: "T",
+      icon: <FaEnvelope />,
+      label: "Email",
+      href: "mailto:sbehera0330@gmail.com",
+    },
   ];
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -78,28 +106,28 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} // Added once: true
+            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <motion.h3 
+            <motion.h3
               className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4"
               whileHover={{ scale: 1.02 }}
             >
               SIBANANDA BEHERA
             </motion.h3>
             <p className="text-slate-300 text-sm leading-relaxed max-w-md mb-6">
-              Full Stack Developer specializing in modern web technologies. 
-              Passionate about creating efficient, scalable, and user-friendly applications 
-              that make a difference.
+              Full Stack Developer specializing in modern web technologies.
+              Passionate about creating efficient, scalable, and user-friendly
+              applications that make a difference.
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-2">
               <div className="flex items-center gap-3 text-slate-400 text-sm">
@@ -117,13 +145,15 @@ const Footer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} // Added once: true
+            viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <h4 className="text-white font-semibold mb-6 text-lg">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-6 text-lg">
+              Quick Links
+            </h4>
             <ul className="space-y-3">
               {footerLinks.map((link, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.3 }}
@@ -144,43 +174,32 @@ const Footer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} // Added once: true
+            viewport={{ once: true }}
             transition={{ delay: 0.6 }}
+            className="min-w-0"
           >
-            <h4 className="text-white font-semibold mb-6 text-lg">Let's Connect</h4>
-            <p className="text-slate-400 text-sm mb-4">
-              Ready to start your next project? Let's talk!
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`p-3 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 hover:border-cyan-400/30 transition-all duration-300 group relative overflow-hidden`}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  title={social.label}
-                >
-                  {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${social.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  <div className="relative text-slate-400 group-hover:text-white transition-colors duration-300">
-                    {social.icon}
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Quick Email CTA */}
-            <motion.a
-              href="mailto:sbehera0330@gmail.com"
-              className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-slate-800/50 rounded-lg text-slate-300 hover:text-cyan-400 transition-all duration-300 border border-slate-700/50 hover:border-cyan-400/30 text-sm"
-              whileHover={{ scale: 1.05 }}
+            <motion.h4 
+              className="text-white font-semibold mb-3 text-lg text-center sm:text-left"
             >
-              <FaEnvelope />
-              Send Quick Email
-            </motion.a>
+              Let's Connect
+            </motion.h4>
+            
+            <motion.p 
+              className="text-slate-400 text-sm mb-4 text-center sm:text-left"
+            >
+              Hover on letters to connect!
+            </motion.p>
+
+            {/* Social Flip Buttons with Attractive Animation */}
+            <div className="w-full overflow-visible flex justify-center sm:justify-start">
+              <SocialFlipButton
+                items={socialItems}
+                className="p-2 gap-0.5 sm:gap-1 md:gap-1.5 flex-nowrap justify-start bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl border border-cyan-500/20"
+                itemClassName="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 flex-shrink-0"
+                frontClassName="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 text-slate-300 hover:border-cyan-400/30 group-hover:text-cyan-400 transition-all text-[8px] sm:text-[10px] md:text-xs"
+                backClassName="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[8px] sm:text-[10px] md:text-xs"
+              />
+            </div>
           </motion.div>
         </div>
 
@@ -188,13 +207,13 @@ const Footer = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }} // Added once: true
+          viewport={{ once: true }}
           transition={{ delay: 0.8 }}
           className="border-t border-slate-700/50 pt-6 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           {/* Tech Stack */}
-          <motion.div 
-            className="flex items-center gap-3 text-slate-400 text-sm"
+          <motion.div
+            className="flex items-center gap-3 text-slate-400 text-sm flex-wrap justify-center"
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex items-center gap-2">
@@ -217,9 +236,10 @@ const Footer = () => {
           {/* Copyright */}
           <div className="flex items-center gap-4 text-sm">
             <span className="text-slate-400">
-              © {new Date().getFullYear()} SIBANANDA BEHERA. All rights reserved.
+              © {new Date().getFullYear()} SIBANANDA BEHERA. All rights
+              reserved.
             </span>
-            
+
             {/* Back to Top Button */}
             <motion.button
               onClick={scrollToTop}
