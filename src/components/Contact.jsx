@@ -80,7 +80,7 @@ const Contact = () => {
     },
     {
       icon: <FaEnvelope className="text-xl" />,
-      link: "mailto:sbehera0330@gmail.com",
+      link: "mailto:work.sibananda@gmail.com",
       gradient: "from-red-500 to-pink-500",
     }
   ];
@@ -228,7 +228,7 @@ const Contact = () => {
               className="text-center mt-8"
             >
               <motion.a
-                href="mailto:sbehera0330@gmail.com"
+                href="mailto:work.sibananda@gmail.com"
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg shadow-cyan-500/25 group"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

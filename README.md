@@ -132,4 +132,4 @@ npm run preview
 - Name: Sibananda Behera
 - GitHub: https://github.com/SB-Siba
 - LinkedIn: https://linkedin.com/in/sibananda-behera-276274222
-- Email: sbehera0330@gmail.com
+- Email: work.sibananda@gmail.com
