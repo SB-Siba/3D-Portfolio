@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { CursorCard } from "./ui/cursor-card";
+import HangingIdCard from "./ui/HangingIdCard";
 
 // Animation variants
 const slideInFromLeft = {
@@ -75,15 +76,48 @@ const fadeInUp = {
   },
 };
 
+// Marquee Tech Stack Items with official icons
+const techStackItems = [
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+  { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+  { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+  { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "Framer Motion", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framer/framer-original.svg" },
+  { 
+    name: "GSAP", 
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z' fill='%2388CE02'/%3E%3Cpath d='M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z' fill='%2388CE02'/%3E%3C/svg%3E"
+  },
+  { 
+    name: "Render", 
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.182c5.422 0 9.818 4.396 9.818 9.818 0 5.422-4.396 9.818-9.818 9.818-5.422 0-9.818-4.396-9.818-9.818 0-5.422 4.396-9.818 9.818-9.818z' fill='%2346E3B7'/%3E%3Cpath d='M12 4.364c-4.218 0-7.636 3.418-7.636 7.636s3.418 7.636 7.636 7.636 7.636-3.418 7.636-7.636-3.418-7.636-7.636-7.636zm0 2.182c3.018 0 5.455 2.437 5.455 5.455s-2.437 5.455-5.455 5.455-5.455-2.437-5.455-5.455 2.437-5.455 5.455-5.455z' fill='%2346E3B7'/%3E%3C/svg%3E"
+  },
+  { 
+    name: "Neon", 
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z' fill='%236C63FF'/%3E%3Cpath d='M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z' fill='%236C63FF'/%3E%3C/svg%3E"
+  },
+  { 
+    name: "Vercel", 
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" 
+  },
+];
+
 const Hero = () => {
   const navigate = useNavigate();
-  const moleculeCanvasRef = useRef(null);
   const [activeTech, setActiveTech] = useState("Three.js");
   const [activeProcess, setActiveProcess] = useState(0);
   const [processProgress, setProcessProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Refs for scroll animations - ALL with once: true
+  // Refs for scroll animations
   const heroRef = useRef(null);
   const nameRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -91,8 +125,9 @@ const Hero = () => {
   const buttonsRef = useRef(null);
   const rightContentRef = useRef(null);
   const processRef = useRef(null);
+  const marqueeRef = useRef(null);
 
-  // Check if elements are in view - ALL with once: true for one-time animations
+  // Check if elements are in view
   const heroInView = useInView(heroRef, { once: true, amount: 0.1 });
   const nameInView = useInView(nameRef, { once: true, amount: 0.1 });
   const descriptionInView = useInView(descriptionRef, {
@@ -106,6 +141,7 @@ const Hero = () => {
     amount: 0.1,
   });
   const processInView = useInView(processRef, { once: true, amount: 0.2 });
+  const marqueeInView = useInView(marqueeRef, { once: true, amount: 0.1 });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -275,226 +311,10 @@ const Hero = () => {
     return () => clearInterval(progressInterval);
   }, [activeProcess, processSteps.length]);
 
-  // DNA Helix Molecular Structure for Right Side
-  useEffect(() => {
-    if (!moleculeCanvasRef.current) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 400 / 400, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({
-      canvas: moleculeCanvasRef.current,
-      alpha: true,
-      antialias: !isMobile,
-    });
-
-    const canvasSize = isMobile ? 300 : 400;
-    renderer.setSize(canvasSize, canvasSize);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
-
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
-    scene.add(ambientLight);
-
-    const directionalLight1 = new THREE.DirectionalLight(0x3b82f6, 1.2);
-    directionalLight1.position.set(10, 5, 5);
-    scene.add(directionalLight1);
-
-    const directionalLight2 = new THREE.DirectionalLight(0x8b5cf6, 0.8);
-    directionalLight2.position.set(-5, 10, 5);
-    scene.add(directionalLight2);
-
-    const pointLight = new THREE.PointLight(0x06b6d4, 1, 50);
-    pointLight.position.set(0, 0, 10);
-    scene.add(pointLight);
-
-    const dnaGroup = new THREE.Group();
-    scene.add(dnaGroup);
-
-    const helixRadius = 1.5;
-    const helixTurns = 4;
-    const segments = 100;
-    const basePairs = 20;
-
-    const backboneGeometry = new THREE.TubeGeometry(
-      new THREE.CatmullRomCurve3(
-        Array.from({ length: segments + 1 }, (_, i) => {
-          const t = (i / segments) * Math.PI * 2 * helixTurns;
-          const x = helixRadius * Math.cos(t);
-          const y = helixRadius * Math.sin(t);
-          const z = (i - segments / 2) * 0.2;
-          return new THREE.Vector3(x, y, z);
-        })
-      ),
-      segments,
-      0.05,
-      8,
-      false
-    );
-
-    const backboneMaterial1 = new THREE.MeshPhongMaterial({
-      color: 0x3b82f6,
-      shininess: 100,
-      transparent: true,
-      opacity: 0.9,
-    });
-
-    const backboneMaterial2 = new THREE.MeshPhongMaterial({
-      color: 0x8b5cf6,
-      shininess: 100,
-      transparent: true,
-      opacity: 0.9,
-    });
-
-    const backbone1 = new THREE.Mesh(backboneGeometry, backboneMaterial1);
-    const backbone2 = new THREE.Mesh(backboneGeometry, backboneMaterial2);
-    backbone2.rotation.y = Math.PI;
-    dnaGroup.add(backbone1);
-    dnaGroup.add(backbone2);
-
-    const basePairGeometry = new THREE.CylinderGeometry(
-      0.03,
-      0.03,
-      helixRadius * 2,
-      8
-    );
-
-    const basePairMaterials = [
-      new THREE.MeshPhongMaterial({ color: 0x10b981 }),
-      new THREE.MeshPhongMaterial({ color: 0xf59e0b }),
-      new THREE.MeshPhongMaterial({ color: 0xef4444 }),
-      new THREE.MeshPhongMaterial({ color: 0x06b6d4 }),
-    ];
-
-    for (let i = 0; i < basePairs; i++) {
-      const t = (i / basePairs) * Math.PI * 2 * helixTurns;
-      const height = (i - basePairs / 2) * 0.4;
-
-      const basePair = new THREE.Mesh(
-        basePairGeometry,
-        basePairMaterials[i % basePairMaterials.length]
-      );
-
-      basePair.position.set(0, 0, height);
-      basePair.rotation.z = t;
-      basePair.rotation.x = Math.PI / 2;
-
-      dnaGroup.add(basePair);
-    }
-
-    const electronGroup = new THREE.Group();
-    dnaGroup.add(electronGroup);
-
-    const electronGeometry = new THREE.SphereGeometry(0.08, 8, 8);
-    const electronMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      emissive: 0x00ffff,
-      emissiveIntensity: 0.5,
-    });
-
-    for (let i = 0; i < 8; i++) {
-      const electron = new THREE.Mesh(electronGeometry, electronMaterial);
-      const angle = (i / 8) * Math.PI * 2;
-      const radius = 2.5;
-
-      electron.position.set(
-        Math.cos(angle) * radius,
-        Math.sin(angle) * radius,
-        0
-      );
-
-      electron.userData.initialAngle = angle;
-      electron.userData.speed = 2 + Math.random();
-      electronGroup.add(electron);
-    }
-
-    camera.position.z = 8;
-
-    let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-
-    const handleMouseDown = () => {
-      isDragging = true;
-    };
-
-    const handleMouseUp = () => {
-      isDragging = false;
-    };
-
-    const handleMouseMove = (event) => {
-      if (!isDragging) return;
-
-      const deltaMove = {
-        x: event.clientX - previousMousePosition.x,
-        y: event.clientY - previousMousePosition.y,
-      };
-
-      dnaGroup.rotation.y += deltaMove.x * 0.01;
-      dnaGroup.rotation.x += deltaMove.y * 0.01;
-
-      previousMousePosition = {
-        x: event.clientX,
-        y: event.clientY,
-      };
-    };
-
-    moleculeCanvasRef.current.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("mousemove", handleMouseMove);
-
-    const clock = new THREE.Clock();
-
-    const animate = () => {
-      const elapsedTime = clock.getElapsedTime();
-
-      if (!isDragging) {
-        dnaGroup.rotation.y = elapsedTime * 0.2;
-        dnaGroup.rotation.x = Math.sin(elapsedTime * 0.1) * 0.1;
-      }
-
-      electronGroup.children.forEach((electron, index) => {
-        const angle =
-          electron.userData.initialAngle +
-          elapsedTime * electron.userData.speed;
-        const radius = 2.5 + Math.sin(elapsedTime * 2 + index) * 0.3;
-
-        electron.position.set(
-          Math.cos(angle) * radius,
-          Math.sin(angle) * radius,
-          Math.sin(elapsedTime * 3 + index) * 0.5
-        );
-      });
-
-      const scale = 1 + Math.sin(elapsedTime * 1.5) * 0.1;
-      dnaGroup.scale.set(scale, scale, scale);
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    const handleResize = () => {
-      const newCanvasSize = window.innerWidth < 768 ? 300 : 400;
-      renderer.setSize(newCanvasSize, newCanvasSize);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      moleculeCanvasRef.current?.removeEventListener(
-        "mousedown",
-        handleMouseDown
-      );
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", handleResize);
-      renderer.dispose();
-    };
-  }, [isMobile]);
-
   return (
     <div ref={heroRef} className="relative min-h-screen overflow-hidden">
       {/* Main Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center pt-16 lg:pt-20 pb-20 lg:pb-32">
+      <div className="relative z-10 w-full min-h-screen flex items-center pt-28 lg:pt-20 pb-20 lg:pb-32">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 lg:py-8">
           {/* Mobile: Stack layout, Desktop: Grid layout */}
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
@@ -503,7 +323,7 @@ const Hero = () => {
               {/* Available Badge */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-full mb-3 lg:mb-4"
+                className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-full mb-3 lg:mb-4 mt-4 lg:mt-6"
               >
                 <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="text-blue-300 text-xs lg:text-sm font-mono">
@@ -511,7 +331,7 @@ const Hero = () => {
                 </span>
               </motion.div>
 
-              {/* Name - Slide from Left */}
+              {/* Name */}
               <motion.div
                 ref={nameRef}
                 variants={slideInFromLeft}
@@ -520,29 +340,29 @@ const Hero = () => {
                 className="mb-2 lg:mb-3"
               >
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                  SIBANANDA
-                  <motion.span
-                    className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-1 lg:mt-2 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl hero-name-gradient"
-                    animate={{
-                      backgroundPosition: ["0%", "100%", "0%"],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    BEHERA
-                  </motion.span>
+                  Hi, I'm
                 </h1>
+                <motion.span
+                  className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-1 lg:mt-2 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold hero-name-gradient"
+                  animate={{
+                    backgroundPosition: ["0%", "100%", "0%"],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  SIBANANDA BEHERA
+                </motion.span>
 
-                <div className="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed">
+                <div className="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed mt-2">
                   <span className="text-blue-400">Full-Stack Developer</span> •
-                  3D Web Specialist • AI Research Enthusiast
+                  AI Research Enthusiast
                 </div>
               </motion.div>
 
-              {/* Description - Slide from Right with CursorCard */}
+              {/* Description */}
               <motion.div
                 ref={descriptionRef}
                 variants={slideInFromRight}
@@ -557,151 +377,131 @@ const Hero = () => {
                   >
                     <span className="text-blue-400">bespoke digital solutions</span>
                   </CursorCard>{" "}
-                  that blend
+                  that blend{" "}
                   <CursorCard
                     image="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop"
                     description="Innovative approaches combining art and technology"
                   >
-                    <span className="text-purple-400"> creative innovation</span>
+                    <span className="text-purple-400">creative innovation</span>
                   </CursorCard>{" "}
-                  with
+                  with{" "}
                   <CursorCard
                     image="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop"
                     description="Precision engineering and robust architecture"
                   >
-                    <span className="text-cyan-400"> technical excellence</span>
-                  </CursorCard>.
-                  From concept to deployment, I build
+                    <span className="text-cyan-400">technical excellence</span>
+                  </CursorCard>
+                  . From concept to deployment, I build{" "}
                   <CursorCard
                     image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
                     description="Enterprise-grade applications that grow with your business"
                   >
-                    <span className="text-green-400"> scalable applications</span>
+                    <span className="text-green-400">scalable applications</span>
                   </CursorCard>{" "}
                   that stand out in today's competitive landscape.
                 </p>
               </motion.div>
 
-              {/* Buttons - Slide from Bottom */}
+              {/* Buttons - Only View Projects */}
               <motion.div
                 ref={buttonsRef}
                 variants={slideInFromBottom}
                 initial="hidden"
                 animate={buttonsInView ? "show" : "hidden"}
-                className="flex flex-col sm:flex-row gap-2 lg:gap-3 pt-4 lg:pt-6"
+                className="flex flex-wrap items-center gap-3 lg:gap-4 pt-4 lg:pt-6"
               >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={scrollToProjects}
-                  className="px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold text-sm lg:text-base hover:from-blue-700 hover:to-purple-700 transition-all border border-blue-500/30 shadow-lg shadow-blue-500/20"
+                  className="px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold text-sm lg:text-base hover:from-blue-700 hover:to-purple-700 transition-all border border-blue-500/30 shadow-lg shadow-blue-500/20 flex items-center gap-2"
                 >
                   View Projects
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => navigate("/book-call")}
-                  className="px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 border border-cyan-400/40 bg-cyan-500/10 text-cyan-300 rounded-lg font-semibold text-sm lg:text-base hover:bg-cyan-500/20 transition-all"
-                >
-                  Book a Call
                 </motion.button>
               </motion.div>
             </div>
 
-            {/* Right Content - DNA Helix Structure - Slide from Right */}
+            {/* Right Content - Hanging ID Card */}
             <motion.div
               ref={rightContentRef}
               variants={slideInFromRight}
               initial="hidden"
               animate={rightContentInView ? "show" : "hidden"}
-              className="relative flex flex-col items-center order-2 lg:order-2 w-full mb-6 lg:mb-0"
+              className="relative flex flex-col items-center order-2 lg:order-2 w-full"
             >
-              {/* DNA Helix Canvas */}
-              <div className="relative w-full max-w-[300px] sm:max-w-[350px] lg:max-w-md aspect-square">
-                <canvas
-                  ref={moleculeCanvasRef}
-                  className="w-full h-full cursor-grab active:cursor-grabbing rounded-2xl bg-slate-900/20 backdrop-blur-sm"
-                />
-
-                {/* Current Process Overlay */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeProcess}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="absolute top-2 lg:top-4 left-1/2 transform -translate-x-1/2 bg-slate-900/80 backdrop-blur-xl rounded-xl p-3 lg:p-4 border border-slate-700/50 min-w-[180px] lg:min-w-[220px] text-center shadow-2xl"
-                  >
-                    <div className="text-xs lg:text-sm text-slate-400 mb-1">
-                      Current Phase
-                    </div>
-                    <div className="text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      {processSteps[activeProcess]?.title}
-                    </div>
-                    <div className="text-xs text-slate-300 mt-1 lg:mt-2 leading-tight">
-                      {processSteps[activeProcess]?.description}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Floating Process Indicators */}
-                <motion.div
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute top-4 lg:top-8 right-4 lg:right-8 w-3 h-3 lg:w-4 lg:h-4 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50"
-                />
-                <motion.div
-                  animate={{
-                    rotate: -360,
-                    scale: [1.1, 1, 1.1],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 w-2 h-2 lg:w-3 lg:h-3 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50"
-                />
-              </div>
-
-              {/* Process Progress */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-                className="w-full max-w-[300px] sm:max-w-[350px] lg:max-w-md mt-3 lg:mt-4"
-              >
-                <div className="flex justify-between text-slate-400 text-xs lg:text-sm mb-1 lg:mb-2">
-                  <span>Project Progress</span>
-                  <span>{Math.round(processProgress)}%</span>
-                </div>
-                <div className="w-full bg-slate-700/50 rounded-full h-1.5 lg:h-2">
-                  <motion.div
-                    className="h-1.5 lg:h-2 rounded-full bg-gradient-to-r from-blue-500 to-green-500"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${processProgress}%` }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </div>
-              </motion.div>
+              <HangingIdCard
+                name="SIBANANDA BEHERA"
+                role="Full-Stack Developer"
+                badgeId="SB-2024-PRO"
+                accentColor="#8b5cf6"
+                ropeLength={75}
+                ropeColor="#27272a"
+                cardWidth="w-72 sm:w-80 md:w-84"
+              />
             </motion.div>
           </div>
 
-          {/* Process Timeline - Responsive Grid */}
+          {/* Marquee Section - Infinite Scrolling */}
+          <motion.div
+            ref={marqueeRef}
+            variants={fadeInUp}
+            initial="hidden"
+            animate={marqueeInView ? "show" : "hidden"}
+            className="mt-12 lg:mt-16"
+          >
+            <div className="relative overflow-hidden py-3 lg:py-4 bg-slate-900/20 backdrop-blur-sm rounded-full border border-slate-700/30">
+              <motion.div
+                className="flex items-center gap-8 lg:gap-12 whitespace-nowrap"
+                animate={{
+                  x: ["0%", "-100%"],
+                }}
+                transition={{
+                  duration: 35,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                {/* Quadruple the items for seamless infinite loop */}
+                {[...techStackItems, ...techStackItems, ...techStackItems, ...techStackItems].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors flex-shrink-0"
+                  >
+                    {item.icon.startsWith('data:') ? (
+                      <img 
+                        src={item.icon} 
+                        alt={item.name}
+                        className="w-5 h-5 lg:w-6 lg:h-6 object-contain"
+                        style={{ filter: 'brightness(0.9) saturate(1.2)' }}
+                      />
+                    ) : (
+                      <img 
+                        src={item.icon} 
+                        alt={item.name}
+                        className="w-5 h-5 lg:w-6 lg:h-6 object-contain"
+                        style={{ filter: 'brightness(0.9) saturate(1.2)' }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <span className="text-xs sm:text-sm lg:text-base font-medium">{item.name}</span>
+                    {index < techStackItems.length * 4 - 1 && (
+                      <span className="text-slate-600 ml-2 lg:ml-4">•</span>
+                    )}
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Process Timeline */}
           <motion.div
             ref={processRef}
             variants={fadeInUp}
             initial="hidden"
             animate={processInView ? "show" : "hidden"}
-            className="mt-12 lg:mt-16 xl:mt-24"
+            className="mt-8 lg:mt-12"
           >
             <div className="text-center mb-6 lg:mb-8">
               <motion.h2
@@ -719,7 +519,7 @@ const Hero = () => {
               </motion.p>
             </div>
 
-            {/* Responsive Process Steps Grid */}
+            {/* Process Steps Grid */}
             <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-4"
               variants={staggerContainer}
@@ -778,7 +578,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Enhanced Scroll Indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

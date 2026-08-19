@@ -58,19 +58,19 @@ const Footer = () => {
       letter: "N",
       icon: <FaEnvelope />,
       label: "Email",
-      href: "mailto:sbehera0330@gmail.com",
+      href: "mailto:work.sibananda@gmail.com",
     },
     {
       letter: "T",
       icon: <FaFacebook />,
       label: "Facebook",
-      href: "https://facebook.com/your-profile",
+      href: "https://www.facebook.com/profile.php?id=61586618153449",
     },
     {
       letter: "A",
       icon: <FaInstagram />,
       label: "Instagram",
-      href: "https://instagram.com/your-profile",
+      href: "https://www.instagram.com/siba_0330?igsh=NTFiMmp3dHZzdHBk&igsi=NTFiMmp3dHZzdHBk",
     },
     {
       letter: "C",
@@ -82,7 +82,7 @@ const Footer = () => {
       letter: "T",
       icon: <FaEnvelope />,
       label: "Email",
-      href: "mailto:sbehera0330@gmail.com",
+      href: "mailto:work.sibananda@gmail.com",
     },
   ];
 

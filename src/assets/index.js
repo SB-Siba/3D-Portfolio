@@ -23,6 +23,9 @@ import threejs from "./tech/threejs.svg";
 import python from "./tech/python.png";
 import website from "./tech/website.png";
 
+// NOTE: These imports are removed because we're using CDN URLs in constants/index.js
+// No need to import django, postgresql, mysql, vercel, framer, render, neon, gsap
+
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
