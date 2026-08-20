@@ -15,6 +15,7 @@ import ServiceChatbot from './ServiceChatbot';
 import Services from './services';
 import ServicesList from './ServicesList';
 import BookCallPage from './BookCallPage';
+import ErrorPage from "./ErrorPage";
 
 
 export {
@@ -37,5 +38,6 @@ export {
   ServicesList,
   BookCallPage,
   Footer,
-  Background3D
+  Background3D,
+  ErrorPage,
 }

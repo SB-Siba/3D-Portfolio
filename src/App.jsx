@@ -14,13 +14,13 @@ import {
   StarsCanvas,
   Footer,
   Background3D,
+  ErrorPage,
 } from "./components";
 import Pageloader from "./components/Pageloader";
 import { motion } from "framer-motion";
 import ServiceDetail from "./components/services";
 import ServicesList from "./components/ServicesList";
 import ServiceInquiryPage from "./components/ServiceInquiryPage";
-import BookCallPage from "./components/BookCallPage";
 
 // Main content component that uses routes
 const MainContent = () => {
@@ -28,7 +28,6 @@ const MainContent = () => {
   const [isPageReady, setIsPageReady] = useState(false);
 
   useEffect(() => {
-    // Set a small delay to ensure smooth transition
     const timer = setTimeout(() => {
       setIsPageReady(true);
     }, 100);
@@ -36,14 +35,12 @@ const MainContent = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle view changes for projects
   const handleViewAllProjects = () => {
     navigate("/all-projects");
   };
 
   const handleBackToHome = () => {
     navigate("/");
-    // Scroll to projects section when coming back
     setTimeout(() => {
       const projectsSection = document.getElementById("projects");
       if (projectsSection) {
@@ -56,7 +53,6 @@ const MainContent = () => {
     handleViewAllProjects();
   };
 
-  // Page variants for animations
   const pageVariants = {
     initial: {
       opacity: 0,
@@ -88,17 +84,14 @@ const MainContent = () => {
 
   return (
     <div className="relative z-0 bg-primary">
-      {/* Background for all pages - Fixed positioning */}
       <div className="fixed inset-0 -z-10">
         <Background3D />
       </div>
 
-      {/* Main content */}
       <div className="relative z-10">
         <Navbar />
 
         <Routes>
-          {/* Service Detail Page Route */}
           <Route path="/services/:serviceId" element={
             <motion.div
               key="service-detail"
@@ -113,7 +106,6 @@ const MainContent = () => {
             </motion.div>
           } />
           
-          {/* Service Inquiry Page Route */}
           <Route path="/services/:serviceId/inquiry" element={
             <motion.div
               key="service-inquiry"
@@ -128,7 +120,6 @@ const MainContent = () => {
             </motion.div>
           } />
           
-          {/* Services List Page Route */}
           <Route path="/services" element={
             <motion.div
               key="services-list"
@@ -143,7 +134,6 @@ const MainContent = () => {
             </motion.div>
           } />
 
-          {/* All Projects Page Route */}
           <Route path="/all-projects" element={
             <motion.div
               key="all-projects"
@@ -158,7 +148,6 @@ const MainContent = () => {
             </motion.div>
           } />
 
-          {/* Home Page Route */}
           <Route path="/" element={
             <motion.div
               key="home"
@@ -196,26 +185,22 @@ const MainContent = () => {
             </motion.div>
           } />
 
-          {/* Book Call Route */}
-          <Route
-            path="/book-call"
-            element={
-              <motion.div
-                key="book-call"
-                variants={pageVariants}
-                initial="initial"
-                animate="in"
-                exit="out"
-                transition={pageTransition}
-                className="min-h-screen"
-              >
-                <BookCallPage />
-              </motion.div>
-            }
-          />
+          {/* 404 Error Page - Catch all unmatched routes */}
+          <Route path="*" element={
+            <motion.div
+              key="error"
+              variants={pageVariants}
+              initial="initial"
+              animate="in"
+              exit="out"
+              transition={pageTransition}
+              className="min-h-screen"
+            >
+              <ErrorPage />
+            </motion.div>
+          } />
         </Routes>
 
-        {/* Service Chatbot - Always visible for lead generation */}
         <ServiceChatbot />
       </div>
     </div>
@@ -226,16 +211,13 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isClient, setIsClient] = useState(false);
 
-  // Fix for SSR - only render loader on client side
   useEffect(() => {
     setIsClient(true);
     
-    // Check if user has already seen the loader
     const checkLoaderStatus = () => {
       try {
         const visited = localStorage.getItem("portfolioVisited");
         if (visited === "true") {
-          // User has visited before, skip loader
           setIsLoading(false);
           return true;
         }
@@ -249,7 +231,6 @@ const App = () => {
       return;
     }
 
-    // Show loader for first-time visitors
     const timer = setTimeout(() => {
       setIsLoading(false);
       try {
@@ -257,7 +238,7 @@ const App = () => {
       } catch (e) {
         console.error("Error setting localStorage:", e);
       }
-    }, 3000); // 3 second loader for first visit
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -271,7 +252,6 @@ const App = () => {
     setIsLoading(false);
   };
 
-  // Don't render anything during SSR
   if (!isClient) {
     return (
       <div className="fixed inset-0 bg-slate-900 flex items-center justify-center">
