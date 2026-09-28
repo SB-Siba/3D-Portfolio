@@ -23,20 +23,19 @@ import threejs from "./tech/threejs.svg";
 import python from "./tech/python.png";
 import website from "./tech/website.png";
 
-// NOTE: These imports are removed because we're using CDN URLs in constants/index.js
-// No need to import django, postgresql, mysql, vercel, framer, render, neon, gsap
-
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 import techavia from "./company/techavia.png";
+import klubVentures from "./company/klub-ventures.png";
 
 import carrent from "./Hospital.jpeg";
 import jobit from "./Institute.jpeg";
 import tripguide from "./RTG.jpeg";
 import aviation from "./aviation.jpeg";
 import ecommerce from "./ecommerce.png";
+import siba from "./siba.jpg";
 
 export {
   logo,
@@ -65,6 +64,7 @@ export {
   starbucks,
   tesla,
   techavia,
+  klubVentures,
   carrent,
   jobit,
   tripguide,
@@ -72,4 +72,5 @@ export {
   website,
   aviation,
   ecommerce,
+  siba,
 };

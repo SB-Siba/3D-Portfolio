@@ -13,87 +13,77 @@ import {
   tesla,
   shopify,
   techavia,
+  klubVentures,     // ✅ camelCase — no hyphen
   carrent,
   jobit,
   tripguide,
 } from "../assets";
 
 export const navLinks = [
-  {
-    id: "home",
-    title: "Home",
-  },
-  {
-    id: "about",
-    title: "About",
-  },
-  {
-    id: "work",
-    title: "Work",
-  },
-  {
-    id: "projects",
-    title: "Projects",
-  },
-  {
-    id: "contact",
-    title: "Contact",
-  },
+  { id: "home", title: "Home" },
+  { id: "about", title: "About" },
+  { id: "work", title: "Work" },
+  { id: "projects", title: "Projects" },
+  { id: "contact", title: "Contact" },
 ];
 
 const services = [
   {
     title: "Website Development",
     icon: web,
-    description: "Complete website creation from initial concept to final deployment. Professional, responsive websites that engage visitors and convert them into customers.",
+    description:
+      "Complete website creation from initial concept to final deployment. Professional, responsive websites that engage visitors and convert them into customers.",
     features: [
       "Custom Design & Development",
       "E-commerce Integration",
       "Mobile-First Approach",
       "SEO Optimization",
       "Fast Loading Speed",
-      "Ongoing Maintenance"
-    ]
+      "Ongoing Maintenance",
+    ],
   },
   {
     title: "Business Applications",
     icon: backend,
-    description: "Custom software solutions that streamline your business operations, automate processes, and improve productivity across your organization.",
+    description:
+      "Custom software solutions that streamline your business operations, automate processes, and improve productivity across your organization.",
     features: [
       "Custom Software Development",
       "Workflow Automation",
       "Database Management",
       "API Integration",
       "Cloud Deployment",
-      "Scalable Solutions"
-    ]
+      "Scalable Solutions",
+    ],
   },
   {
     title: "UI/UX Design",
     icon: mobile,
-    description: "Creating intuitive, user-friendly interfaces that provide exceptional experiences and drive engagement across all devices.",
+    description:
+      "Creating intuitive, user-friendly interfaces that provide exceptional experiences and drive engagement across all devices.",
     features: [
       "User Interface Design",
       "User Experience Strategy",
       "Interactive Prototypes",
       "Responsive Layouts",
       "User Testing",
-      "Brand Consistency"
-    ]
+      "Brand Consistency",
+    ],
   },
   {
     title: "Digital Solutions",
     icon: creator,
-    description: "Comprehensive digital services that enhance your online presence and help you connect with your target audience effectively.",
+    description:
+      "Comprehensive digital services that enhance your online presence and help you connect with your target audience effectively.",
     features: [
       "Content Creation",
       "Digital Marketing Support",
       "Video Production",
       "Brand Development",
       "Social Media Assets",
-      "Performance Analytics"
-    ]
-  }
+      "Performance Analytics",
+    ],
+  },
 ];
 
 export const nicheCategories = [
@@ -115,8 +105,8 @@ export const nicheCategories = [
       "Meal kit brands",
       "Supplement sellers",
       "Beauty product brands",
-      "Etsy/Redbubble SEO listings"
-    ]
+      "Etsy/Redbubble SEO listings",
+    ],
   },
   {
     category: "Digital Marketing & Agencies",
@@ -129,8 +119,8 @@ export const nicheCategories = [
       "Content agencies",
       "Advertising agencies",
       "PR firms",
-      "Influencer agencies"
-    ]
+      "Influencer agencies",
+    ],
   },
   {
     category: "Health & Wellness",
@@ -149,8 +139,8 @@ export const nicheCategories = [
       "Gym franchises",
       "Personal trainers",
       "Weight loss centers",
-      "Cosmetic surgery practices"
-    ]
+      "Cosmetic surgery practices",
+    ],
   },
   {
     category: "Education & Coaching",
@@ -169,8 +159,8 @@ export const nicheCategories = [
       "Cooking classes",
       "Driving schools",
       "Schools",
-      "Universities"
-    ]
+      "Universities",
+    ],
   },
   {
     category: "Professional Services & Finance",
@@ -187,8 +177,8 @@ export const nicheCategories = [
       "Payroll services",
       "Tax preparation services",
       "Bookkeeping agencies",
-      "Virtual CFO firms"
-    ]
+      "Virtual CFO firms",
+    ],
   },
   {
     category: "Real Estate & Construction",
@@ -199,8 +189,8 @@ export const nicheCategories = [
       "Construction firms",
       "Property management",
       "Home renovation services",
-      "Commercial real estate"
-    ]
+      "Commercial real estate",
+    ],
   },
   {
     category: "Tech & Software",
@@ -214,8 +204,8 @@ export const nicheCategories = [
       "Gaming studios",
       "Tech startups",
       "B2B SaaS companies",
-      "IT service providers"
-    ]
+      "IT service providers",
+    ],
   },
   {
     category: "Hospitality & Food",
@@ -232,8 +222,8 @@ export const nicheCategories = [
       "Organic farms",
       "Food trucks",
       "Mobile catering services",
-      "Wedding caterers"
-    ]
+      "Wedding caterers",
+    ],
   },
   {
     category: "Creative & Media",
@@ -247,8 +237,8 @@ export const nicheCategories = [
       "Book publishers",
       "Media companies",
       "Animation houses",
-      "Event production companies"
-    ]
+      "Event production companies",
+    ],
   },
   {
     category: "Non-profits & Sustainability",
@@ -259,8 +249,8 @@ export const nicheCategories = [
       "Charity organizations",
       "Religious institutions",
       "Community centers",
-      "Waste management services"
-    ]
+      "Waste management services",
+    ],
   },
   {
     category: "Other Services",
@@ -272,12 +262,11 @@ export const nicheCategories = [
       "Automotive brands",
       "Taxi services",
       "Transportation logistics",
-      "Logistics companies"
-    ]
-  }
+      "Logistics companies",
+    ],
+  },
 ];
 
-// Tech Stack Items for Hero Section Marquee - ONLY WORKING ICONS
 export const techStackItems = [
   { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
   { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
@@ -299,168 +288,133 @@ export const techStackItems = [
   { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
 ];
 
-// Technologies for Tech Component - ONLY WORKING ICONS
 const technologies = [
-  {
-    name: "HTML 5",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-  },
-  {
-    name: "CSS 3",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-  },
-  {
-    name: "JavaScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "React JS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "Next.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
-  {
-    name: "Django",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-  },
-  {
-    name: "PostgreSQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "MySQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-  },
-  {
-    name: "MongoDB",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    name: "Three.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg",
-  },
-  {
-    name: "Git",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  },
-  {
-    name: "GitHub",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  },
-  {
-    name: "Docker",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  },
-  {
-    name: "Vercel",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
-  },
-  // These use emoji fallbacks since Devicon icons don't exist or don't work
+  { name: "HTML 5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+  { name: "CSS 3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "React JS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
+  { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+  { name: "Three.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+  { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+  { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
   {
     name: "Framer Motion",
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='4' fill='%23005FFF'/%3E%3Cpath d='M12 6L8 10L12 14L16 10L12 6Z' fill='white'/%3E%3Cpath d='M8 14L12 18L16 14' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='4' fill='%23005FFF'/%3E%3Cpath d='M12 6L8 10L12 14L16 10L12 6Z' fill='white'/%3E%3Cpath d='M8 14L12 18L16 14' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E",
   },
   {
     name: "GSAP",
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%2388CE02'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E"
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%2388CE02'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E",
   },
   {
     name: "Render",
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%2346E3B7'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E"
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%2346E3B7'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E",
   },
   {
     name: "Neon",
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%236C63FF'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E"
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%236C63FF'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E",
   },
   {
     name: "TagMango",
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23FF6B35'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E"
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23FF6B35'/%3E%3Cpath d='M12 6L16 12L12 18L8 12L12 6Z' fill='white'/%3E%3C/svg%3E",
   },
 ];
 
 const experiences = [
   {
-    title: "Python Developer",
-    company_name: "Techavia IT Solutions Pvt.Ltd",
+    title: "Full Stack Developer",
+    company_name: "Klub Ventures",
+    icon: klubVentures,     // ✅ fixed — was klub-Ventures
+    iconBg: "#1e3a5f",
+    date: "February 2026 - Present",
+    technologies: ["React", "Node.js", "Express", "MySQL", "PostgreSQL", "Git"],
+    points: [
+      "Designing and shipping end-to-end features across React, Node.js, and Express in a production environment.",
+      "Building and optimizing relational data models in MySQL and PostgreSQL, including schema design, indexing, and complex queries.",
+      "Developing RESTful APIs and integrating them with modern, responsive React frontends.",
+      "Collaborating through Git-based workflows — branching, code reviews, and CI-friendly commit practices.",
+    ],
+  },
+  {
+    title: "Full Stack Developer (Python / Django)",
+    company_name: "Techavia IT Solutions Pvt. Ltd",
     icon: techavia,
     iconBg: "#383E56",
     date: "April 2024 - April 2025",
+    technologies: ["Python", "Django", "PostgreSQL", "HTML", "CSS", "Bootstrap"],
     points: [
-      "Developed and maintained robust web applications using modern frameworks.",
-      "Built secure and scalable APIs for seamless data integration between systems.",
-      "Optimized application performance and improved database efficiency.",
-      "Collaborated with teams to deliver reliable software solutions on schedule.",
+      "Progressed from backend development to full-stack delivery across Django, PostgreSQL, HTML, CSS, and Bootstrap.",
+      "Designed and built secure REST APIs powering data-heavy web applications used in production.",
+      "Modeled and optimized PostgreSQL schemas, improving query performance and data integrity across core modules.",
+      "Owned features end-to-end — from database design through server-side logic to responsive front-end interfaces.",
     ],
   },
 ];
 
 const testimonials = [
   {
-    testimonial: "Working with Rick was an absolute pleasure. The 3D portfolio he created exceeded all expectations and helped us secure major clients.",
+    testimonial:
+      "Working with Rick was an absolute pleasure. The 3D portfolio he created exceeded all expectations and helped us secure major clients.",
     name: "Sara Lee",
     designation: "CFO",
     company: "Acme Co",
     image: "https://randomuser.me/api/portraits/women/4.jpg",
-    rating: 5
+    rating: 5,
   },
   {
-    testimonial: "Rick's attention to detail is phenomenal. He transformed our boring corporate site into an interactive 3D experience that our customers love.",
+    testimonial:
+      "Rick's attention to detail is phenomenal. He transformed our boring corporate site into an interactive 3D experience that our customers love.",
     name: "Chris Brown",
     designation: "COO",
     company: "DEF Corp",
     image: "https://randomuser.me/api/portraits/men/5.jpg",
-    rating: 5
+    rating: 5,
   },
   {
-    testimonial: "The 3D animations and smooth transitions Rick implemented increased our engagement by 300%. Simply outstanding work!",
+    testimonial:
+      "The 3D animations and smooth transitions Rick implemented increased our engagement by 300%. Simply outstanding work!",
     name: "Lisa Wang",
     designation: "CTO",
     company: "456 Enterprises",
     image: "https://randomuser.me/api/portraits/women/6.jpg",
-    rating: 5
+    rating: 5,
   },
   {
-    testimonial: "As a gaming company, we needed someone who understands 3D and interactivity. Rick delivered beyond our wildest dreams.",
+    testimonial:
+      "As a gaming company, we needed someone who understands 3D and interactivity. Rick delivered beyond our wildest dreams.",
     name: "Alex Johnson",
     designation: "Creative Director",
     company: "Nexus Games",
     image: "https://randomuser.me/api/portraits/men/7.jpg",
-    rating: 4
+    rating: 4,
   },
   {
-    testimonial: "Rick's 3D portfolio design for our architecture firm was revolutionary. Clients can now walk through our designs virtually.",
+    testimonial:
+      "Rick's 3D portfolio design for our architecture firm was revolutionary. Clients can now walk through our designs virtually.",
     name: "Maria Garcia",
     designation: "Lead Architect",
     company: "Urban Design Co",
     image: "https://randomuser.me/api/portraits/women/8.jpg",
-    rating: 5
+    rating: 5,
   },
   {
-    testimonial: "The 3D e-commerce experience Rick built increased our conversion rate by 45%. His work is truly transformative.",
+    testimonial:
+      "The 3D e-commerce experience Rick built increased our conversion rate by 45%. His work is truly transformative.",
     name: "David Kim",
     designation: "E-commerce Manager",
     company: "StyleHub",
     image: "https://randomuser.me/api/portraits/men/9.jpg",
-    rating: 5
-  }
+    rating: 5,
+  },
 ];
 
 const projects = [
@@ -469,26 +423,11 @@ const projects = [
     description:
       "A comprehensive platform for managing healthcare recruitment and staff distribution. Streamlines the process of posting jobs, managing applications, assigning employees to hospitals, and handling client relationships with automated invoicing and reporting.",
     tags: [
-      {
-        name: "Web Development",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Database Design",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Business Automation",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "User Management",
-        color: "orange-text-gradient",
-      },
-      {
-        name: "Reporting System",
-        color: "cyan-text-gradient",
-      },
+      { name: "Web Development", color: "blue-text-gradient" },
+      { name: "Database Design", color: "green-text-gradient" },
+      { name: "Business Automation", color: "pink-text-gradient" },
+      { name: "User Management", color: "orange-text-gradient" },
+      { name: "Reporting System", color: "cyan-text-gradient" },
     ],
     image: carrent,
     source_code_link: "https://github.com/SB-Siba/job-management",
@@ -498,26 +437,11 @@ const projects = [
     description:
       "A complete educational platform for managing student enrollment, course administration, fee collection, and certificate generation. Provides separate interfaces for administrators, students, and faculty with automated processes and digital documentation.",
     tags: [
-      {
-        name: "Education Technology",
-        color: "orange-text-gradient",
-      },
-      {
-        name: "Administrative System",
-        color: "indigo-text-gradient",
-      },
-      {
-        name: "Digital Certification",
-        color: "cyan-text-gradient",
-      },
-      {
-        name: "Student Portal",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Payment Processing",
-        color: "blue-text-gradient",
-      },
+      { name: "Education Technology", color: "orange-text-gradient" },
+      { name: "Administrative System", color: "indigo-text-gradient" },
+      { name: "Digital Certification", color: "cyan-text-gradient" },
+      { name: "Student Portal", color: "green-text-gradient" },
+      { name: "Payment Processing", color: "blue-text-gradient" },
     ],
     image: jobit,
     source_code_link: "https://github.com/SB-Siba/institute_management",
@@ -527,26 +451,11 @@ const projects = [
     description:
       "An innovative platform for urban gardening and sustainable agriculture management. Connects rooftop gardeners with experts, tracks plant growth, manages vendor products, and implements a reward system for eco-friendly practices through a Green Coin mechanism.",
     tags: [
-      {
-        name: "Sustainability",
-        color: "magenta-text-gradient",
-      },
-      {
-        name: "Community Platform",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Agricultural Tech",
-        color: "bronze-text-gradient",
-      },
-      {
-        name: "Gamification",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Expert Network",
-        color: "green-text-gradient",
-      },
+      { name: "Sustainability", color: "magenta-text-gradient" },
+      { name: "Community Platform", color: "pink-text-gradient" },
+      { name: "Agricultural Tech", color: "bronze-text-gradient" },
+      { name: "Gamification", color: "blue-text-gradient" },
+      { name: "Expert Network", color: "green-text-gradient" },
     ],
     image: tripguide,
     source_code_link: "https://github.com/SB-Siba/CHES",
@@ -556,26 +465,11 @@ const projects = [
     description:
       "A fully-featured online shopping platform with category management, product listings, secure payment processing, and administrative controls. Includes customer accounts, shopping cart functionality, and order management for seamless online retail operations.",
     tags: [
-      {
-        name: "E-commerce",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Online Retail",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Payment Integration",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Inventory Management",
-        color: "orange-text-gradient",
-      },
-      {
-        name: "Customer Experience",
-        color: "cyan-text-gradient",
-      },
+      { name: "E-commerce", color: "blue-text-gradient" },
+      { name: "Online Retail", color: "green-text-gradient" },
+      { name: "Payment Integration", color: "pink-text-gradient" },
+      { name: "Inventory Management", color: "orange-text-gradient" },
+      { name: "Customer Experience", color: "cyan-text-gradient" },
     ],
     image: ecommerce,
     source_code_link: "https://github.com/SB-Siba/E-Commerce_SB",
@@ -585,22 +479,10 @@ const projects = [
     description:
       "A modern, responsive website for aviation services featuring smooth animations, optimized performance, and professional presentation. Showcases services, company information, and contact details with an engaging user interface.",
     tags: [
-      {
-        name: "Website Design",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Responsive Layout",
-        color: "cyan-text-gradient",
-      },
-      {
-        name: "Performance Optimization",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Corporate Website",
-        color: "yellow-text-gradient",
-      },
+      { name: "Website Design", color: "blue-text-gradient" },
+      { name: "Responsive Layout", color: "cyan-text-gradient" },
+      { name: "Performance Optimization", color: "green-text-gradient" },
+      { name: "Corporate Website", color: "yellow-text-gradient" },
     ],
     image: aviation,
     source_code_link: "https://premieraviation.in/",
@@ -610,22 +492,10 @@ const projects = [
     description:
       "A dynamic 3D portfolio website showcasing professional work with interactive elements, smooth animations, and modern design principles. Demonstrates capabilities in creating engaging digital experiences.",
     tags: [
-      { 
-        name: "3D Design", 
-        color: "blue-text-gradient" 
-      },
-      { 
-        name: "Interactive Experience", 
-        color: "cyan-text-gradient" 
-      },
-      { 
-        name: "Portfolio Design", 
-        color: "green-text-gradient" 
-      },
-      { 
-        name: "Modern Web Design", 
-        color: "magenta-text-gradient" 
-      },
+      { name: "3D Design", color: "blue-text-gradient" },
+      { name: "Interactive Experience", color: "cyan-text-gradient" },
+      { name: "Portfolio Design", color: "green-text-gradient" },
+      { name: "Modern Web Design", color: "magenta-text-gradient" },
     ],
     image: website,
     source_code_link: "#",

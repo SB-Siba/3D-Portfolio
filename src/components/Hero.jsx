@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { CursorCard } from "./ui/cursor-card";
@@ -35,28 +35,6 @@ const slideInFromBottom = {
   show: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  show: {
-    opacity: 1,
-    scale: 1,
     transition: {
       duration: 0.6,
       ease: "easeOut",
@@ -112,19 +90,14 @@ const techStackItems = [
 
 const Hero = () => {
   const navigate = useNavigate();
-  const [activeTech, setActiveTech] = useState("Three.js");
-  const [activeProcess, setActiveProcess] = useState(0);
-  const [processProgress, setProcessProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   // Refs for scroll animations
   const heroRef = useRef(null);
   const nameRef = useRef(null);
   const descriptionRef = useRef(null);
-  const skillsRef = useRef(null);
   const buttonsRef = useRef(null);
   const rightContentRef = useRef(null);
-  const processRef = useRef(null);
   const marqueeRef = useRef(null);
 
   // Check if elements are in view
@@ -134,13 +107,11 @@ const Hero = () => {
     once: true,
     amount: 0.1,
   });
-  const skillsInView = useInView(skillsRef, { once: true, amount: 0.1 });
   const buttonsInView = useInView(buttonsRef, { once: true, amount: 0.1 });
   const rightContentInView = useInView(rightContentRef, {
     once: true,
     amount: 0.1,
   });
-  const processInView = useInView(processRef, { once: true, amount: 0.2 });
   const marqueeInView = useInView(marqueeRef, { once: true, amount: 0.1 });
 
   useEffect(() => {
@@ -164,152 +135,6 @@ const Hero = () => {
       });
     }
   };
-
-  // Process steps with descriptions and icons
-  const processSteps = [
-    {
-      id: 0,
-      title: "Idea & Research",
-      description:
-        "Market analysis, AI technology research, and project conceptualization",
-      icon: "💡",
-      color: "from-yellow-400 to-orange-500",
-      bgColor: "bg-yellow-500/20",
-      borderColor: "border-yellow-500/30",
-    },
-    {
-      id: 1,
-      title: "SRS Documentation",
-      description:
-        "Technical specifications, AI architecture planning, and system design",
-      icon: "📋",
-      color: "from-blue-400 to-cyan-500",
-      bgColor: "bg-blue-500/20",
-      borderColor: "border-blue-500/30",
-    },
-    {
-      id: 2,
-      title: "UI/UX Design",
-      description:
-        "3D interface prototyping, user experience design, and interactive wireframes",
-      icon: "🎨",
-      color: "from-purple-400 to-pink-500",
-      bgColor: "bg-purple-500/20",
-      borderColor: "border-purple-500/30",
-    },
-    {
-      id: 3,
-      title: "3D Development",
-      description:
-        "Three.js implementation, WebGL optimization, and immersive experiences",
-      icon: "🔮",
-      color: "from-green-400 to-emerald-500",
-      bgColor: "bg-green-500/20",
-      borderColor: "border-green-500/30",
-    },
-    {
-      id: 4,
-      title: "Frontend Development",
-      description:
-        "React components, modern JavaScript, and responsive interfaces",
-      icon: "⚛️",
-      color: "from-cyan-400 to-blue-500",
-      bgColor: "bg-cyan-500/20",
-      borderColor: "border-cyan-500/30",
-    },
-    {
-      id: 5,
-      title: "Backend Development",
-      description:
-        "API development, server architecture, and business logic implementation",
-      icon: "🔧",
-      color: "from-orange-400 to-red-500",
-      bgColor: "bg-orange-500/20",
-      borderColor: "border-orange-500/30",
-    },
-    {
-      id: 6,
-      title: "Database Design",
-      description:
-        "PostgreSQL/MySQL schema design, optimization, and data modeling",
-      icon: "🗃️",
-      color: "from-emerald-400 to-green-500",
-      bgColor: "bg-emerald-500/20",
-      borderColor: "border-emerald-500/30",
-    },
-    {
-      id: 7,
-      title: "AI Integration",
-      description:
-        "Machine learning APIs, AI technology implementation, and smart features",
-      icon: "🤖",
-      color: "from-indigo-400 to-purple-500",
-      bgColor: "bg-indigo-500/20",
-      borderColor: "border-indigo-500/30",
-    },
-    {
-      id: 8,
-      title: "Testing & QA",
-      description:
-        "Unit testing, integration testing, and performance optimization",
-      icon: "🧪",
-      color: "from-red-400 to-pink-500",
-      bgColor: "bg-red-500/20",
-      borderColor: "border-red-500/30",
-    },
-    {
-      id: 9,
-      title: "Bug Fixing",
-      description:
-        "Debugging, performance optimization, and cross-browser compatibility",
-      icon: "🐛",
-      color: "from-amber-400 to-yellow-500",
-      bgColor: "bg-amber-500/20",
-      borderColor: "border-amber-500/30",
-    },
-    {
-      id: 10,
-      title: "Deployment",
-      description:
-        "CI/CD pipeline, cloud deployment, and production environment setup",
-      icon: "🚀",
-      color: "from-teal-400 to-cyan-500",
-      bgColor: "bg-teal-500/20",
-      borderColor: "border-teal-500/30",
-    },
-    {
-      id: 11,
-      title: "Production Ready",
-      description: "Monitoring, maintenance, and continuous improvement",
-      icon: "🏆",
-      color: "from-lime-400 to-green-500",
-      bgColor: "bg-lime-500/20",
-      borderColor: "border-lime-500/30",
-    },
-  ];
-
-  // Auto-rotate through process steps
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveProcess((prev) => (prev + 1) % processSteps.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [processSteps.length]);
-
-  // Smooth progress animation
-  useEffect(() => {
-    const targetProgress = (activeProcess / (processSteps.length - 1)) * 100;
-    const progressInterval = setInterval(() => {
-      setProcessProgress((prev) => {
-        const diff = targetProgress - prev;
-        if (Math.abs(diff) < 0.5) return targetProgress;
-        return prev + diff * 0.1;
-      });
-    }, 50);
-
-    return () => clearInterval(progressInterval);
-  }, [activeProcess, processSteps.length]);
 
   return (
     <div ref={heroRef} className="relative min-h-screen overflow-hidden">
@@ -402,7 +227,7 @@ const Hero = () => {
                 </p>
               </motion.div>
 
-              {/* Buttons - Only View Projects */}
+              {/* Buttons */}
               <motion.div
                 ref={buttonsRef}
                 variants={slideInFromBottom}
@@ -461,7 +286,6 @@ const Hero = () => {
                   ease: "linear",
                 }}
               >
-                {/* Quadruple the items for seamless infinite loop */}
                 {[...techStackItems, ...techStackItems, ...techStackItems, ...techStackItems].map((item, index) => (
                   <div
                     key={index}
@@ -493,87 +317,6 @@ const Hero = () => {
                 ))}
               </motion.div>
             </div>
-          </motion.div>
-
-          {/* Process Timeline */}
-          <motion.div
-            ref={processRef}
-            variants={fadeInUp}
-            initial="hidden"
-            animate={processInView ? "show" : "hidden"}
-            className="mt-8 lg:mt-12"
-          >
-            <div className="text-center mb-6 lg:mb-8">
-              <motion.h2
-                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 lg:mb-3"
-                variants={fadeInUp}
-              >
-                End-to-End Development Process
-              </motion.h2>
-              <motion.p
-                className="text-slate-300 text-sm sm:text-base lg:text-lg px-4"
-                variants={fadeInUp}
-              >
-                From innovative concept to immersive 3D deployment -
-                transforming ideas into digital excellence
-              </motion.p>
-            </div>
-
-            {/* Process Steps Grid */}
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-4"
-              variants={staggerContainer}
-            >
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={step.id}
-                  variants={scaleIn}
-                  initial="hidden"
-                  animate={processInView ? "show" : "hidden"}
-                  transition={{ delay: index * 0.1 }}
-                  className={`p-3 lg:p-4 rounded-xl border backdrop-blur-sm cursor-pointer transition-all ${
-                    activeProcess === index
-                      ? `${step.bgColor} ${step.borderColor} shadow-lg scale-105 -translate-y-1`
-                      : "bg-slate-800/30 border-slate-600/30 hover:border-slate-500/50"
-                  }`}
-                  onClick={() => setActiveProcess(index)}
-                >
-                  <div className="flex items-center gap-2 lg:gap-3">
-                    <motion.div
-                      animate={{
-                        scale: activeProcess === index ? [1, 1.2, 1] : 1,
-                        rotate: activeProcess === index ? [0, 5, -5, 0] : 0,
-                      }}
-                      transition={{ duration: 0.5 }}
-                      className="text-xl lg:text-2xl"
-                    >
-                      {step.icon}
-                    </motion.div>
-                    <div className="flex-1 min-w-0">
-                      <h3
-                        className={`font-semibold text-sm lg:text-base ${
-                          activeProcess === index
-                            ? "text-white"
-                            : "text-slate-300"
-                        }`}
-                      >
-                        {step.title}
-                      </h3>
-                      <p className="text-xs lg:text-sm text-slate-400 mt-0.5 lg:mt-1 leading-tight">
-                        {step.description}
-                      </p>
-                    </div>
-                    {activeProcess === index && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-green-400 rounded-full flex-shrink-0"
-                      />
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
         </div>
       </div>
