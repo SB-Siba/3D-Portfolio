@@ -3,6 +3,7 @@ import Hero from './Hero';
 import Navbar from './Navbar';
 import About from './About';
 import Tech from './Tech';
+import GitHubActivity from './GitHubActivity';
 import Experience from './Experience';
 import Works from './Works';
 import AllProjects from './AllProjects';
@@ -16,22 +17,23 @@ import Services from './services';
 import ServicesList from './ServicesList';
 import BookCallPage from './BookCallPage';
 import ErrorPage from "./ErrorPage";
-
+import Process from "./Process";
 
 export {
   Hero,
   Navbar,
   About,
   Tech,
+  GitHubActivity,
   Experience,
   Works,
   AllProjects,
   Chatbot,
   Feedbacks,
   Contact,
-  EarthCanvas, 
-  BallCanvas, 
-  ComputersCanvas, 
+  EarthCanvas,
+  BallCanvas,
+  ComputersCanvas,
   StarsCanvas,
   ServiceChatbot,
   Services,
@@ -40,4 +42,5 @@ export {
   Footer,
   Background3D,
   ErrorPage,
-}
+  Process,
+};

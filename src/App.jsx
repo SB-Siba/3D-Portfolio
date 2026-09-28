@@ -8,6 +8,7 @@ import {
   Hero,
   Navbar,
   Tech,
+  GitHubActivity,
   Works,
   AllProjects,
   ServiceChatbot,
@@ -15,6 +16,7 @@ import {
   Footer,
   Background3D,
   ErrorPage,
+  Process,
 } from "./components";
 import Pageloader from "./components/Pageloader";
 import { motion } from "framer-motion";
@@ -31,7 +33,7 @@ const MainContent = () => {
     const timer = setTimeout(() => {
       setIsPageReady(true);
     }, 100);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -92,113 +94,138 @@ const MainContent = () => {
         <Navbar />
 
         <Routes>
-          <Route path="/services/:serviceId" element={
-            <motion.div
-              key="service-detail"
-              variants={pageVariants}
-              initial="initial"
-              animate="in"
-              exit="out"
-              transition={pageTransition}
-              className="min-h-screen"
-            >
-              <ServiceDetail />
-            </motion.div>
-          } />
-          
-          <Route path="/services/:serviceId/inquiry" element={
-            <motion.div
-              key="service-inquiry"
-              variants={pageVariants}
-              initial="initial"
-              animate="in"
-              exit="out"
-              transition={pageTransition}
-              className="min-h-screen"
-            >
-              <ServiceInquiryPage />
-            </motion.div>
-          } />
-          
-          <Route path="/services" element={
-            <motion.div
-              key="services-list"
-              variants={pageVariants}
-              initial="initial"
-              animate="in"
-              exit="out"
-              transition={pageTransition}
-              className="min-h-screen"
-            >
-              <ServicesList />
-            </motion.div>
-          } />
+          <Route
+            path="/services/:serviceId"
+            element={
+              <motion.div
+                key="service-detail"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+                className="min-h-screen"
+              >
+                <ServiceDetail />
+              </motion.div>
+            }
+          />
 
-          <Route path="/all-projects" element={
-            <motion.div
-              key="all-projects"
-              variants={pageVariants}
-              initial="initial"
-              animate="in"
-              exit="out"
-              transition={pageTransition}
-              className="min-h-screen"
-            >
-              <AllProjects onBack={handleBackToHome} />
-            </motion.div>
-          } />
+          <Route
+            path="/services/:serviceId/inquiry"
+            element={
+              <motion.div
+                key="service-inquiry"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+                className="min-h-screen"
+              >
+                <ServiceInquiryPage />
+              </motion.div>
+            }
+          />
 
-          <Route path="/" element={
-            <motion.div
-              key="home"
-              variants={pageVariants}
-              initial="initial"
-              animate="in"
-              exit="out"
-              transition={pageTransition}
-            >
-              <section id="home" className="relative">
-                <Hero />
-              </section>
-              <section id="about" className="relative">
-                <About />
-              </section>
-              <section id="work" className="relative">
-                <Experience />
-              </section>
-              <section id="tech" className="relative">
-                <Tech />
-              </section>
-              <section id="projects" className="relative">
-                <Works onViewAllProjects={safeHandleViewAllProjects} />
-              </section>
-              <section id="testimonials" className="relative">
-                <Feedbacks />
-              </section>
-              <section id="contact" className="relative">
-                <div className="relative z-0">
-                  <Contact />
-                  <StarsCanvas />
-                </div>
-              </section>
-              <Footer />
-            </motion.div>
-          } />
+          <Route
+            path="/services"
+            element={
+              <motion.div
+                key="services-list"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+                className="min-h-screen"
+              >
+                <ServicesList />
+              </motion.div>
+            }
+          />
+
+          <Route
+            path="/all-projects"
+            element={
+              <motion.div
+                key="all-projects"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+                className="min-h-screen"
+              >
+                <AllProjects onBack={handleBackToHome} />
+              </motion.div>
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <motion.div
+                key="home"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+              >
+                <section id="home" className="relative">
+                  <Hero />
+                </section>
+                {/* Add Process section here */}
+                <section id="process" className="relative">
+                  <Process />
+                </section>
+                <section id="about" className="relative">
+                  <About />
+                </section>
+                <section id="work" className="relative">
+                  <Experience />
+                </section>
+                <section id="tech" className="relative">
+                  <Tech />
+                </section>
+                <section id="github" className="relative">
+                  <GitHubActivity />
+                </section>
+                <section id="projects" className="relative">
+                  <Works onViewAllProjects={safeHandleViewAllProjects} />
+                </section>
+                <section id="testimonials" className="relative">
+                  <Feedbacks />
+                </section>
+                <section id="contact" className="relative">
+                  <div className="relative z-0">
+                    <Contact />
+                    <StarsCanvas />
+                  </div>
+                </section>
+                <Footer />
+              </motion.div>
+            }
+          />
 
           {/* 404 Error Page - Catch all unmatched routes */}
-          <Route path="*" element={
-            <motion.div
-              key="error"
-              variants={pageVariants}
-              initial="initial"
-              animate="in"
-              exit="out"
-              transition={pageTransition}
-              className="min-h-screen"
-            >
-              <ErrorPage />
-            </motion.div>
-          } />
+          <Route
+            path="*"
+            element={
+              <motion.div
+                key="error"
+                variants={pageVariants}
+                initial="initial"
+                animate="in"
+                exit="out"
+                transition={pageTransition}
+                className="min-h-screen"
+              >
+                <ErrorPage />
+              </motion.div>
+            }
+          />
         </Routes>
 
         <ServiceChatbot />
@@ -208,12 +235,21 @@ const MainContent = () => {
 };
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Skip the loader entirely during prerender (headless Chrome)
+    if (
+      typeof navigator !== "undefined" &&
+      /HeadlessChrome/.test(navigator.userAgent)
+    ) {
+      return false;
+    }
+    return true;
+  });
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    
+
     const checkLoaderStatus = () => {
       try {
         const visited = localStorage.getItem("portfolioVisited");

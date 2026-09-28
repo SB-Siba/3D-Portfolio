@@ -361,3 +361,33 @@ body.no-scroll {
   }
 }
 
+/* Custom scrollbar for GitHub contribution graph */
+.github-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.github-scroll::-webkit-scrollbar-track {
+  background: #161b22;
+  border-radius: 4px;
+}
+
+.github-scroll::-webkit-scrollbar-thumb {
+  background: #2ea043;
+  border-radius: 4px;
+}
+
+.github-scroll::-webkit-scrollbar-thumb:hover {
+  background: #39d353;
+}
+
+/* Firefox */
+.github-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #2ea043 #161b22;
+}
+
+/* Spacing between experience cards */
+.vertical-timeline-element {
+  margin: 1.5rem 0 !important;
+}
